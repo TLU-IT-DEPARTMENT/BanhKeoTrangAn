@@ -16,5 +16,9 @@ class PagesController extends Controller{
     public function admin_index(){
         
     }
+    public function default_index(){
+        
+    }
+    
 }
 

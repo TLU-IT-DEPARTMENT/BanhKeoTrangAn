@@ -13,9 +13,11 @@ class Router {
     public function __construct($uri) {
         $this->uri = urldecode(trim($uri, '/'));
 
-        // Get default
+        // Thanh sua
+        $uri_routes = explode('/', $uri);
+        
         $routes = Config::get('routes');
-        $this->route = Config::get('default_route');
+        $this->route = Config::get($uri_routes[2].'_route');
         $this->method_prefix = isset($routes[$this->route]) ? $routes[$this->route] : '';
         $this->language = Config::get('default_language');
         $this->controller = Config::get('default_controller');
