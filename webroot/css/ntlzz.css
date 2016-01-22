@@ -1,0 +1,24 @@
+.input-group .i .form-control{
+	
+	margin-top: 4px;
+	margin-left: 650px;
+	width: 500px;
+}
+.input-group .ii .form-control{
+	
+	margin-top: 4px;
+	margin-left: 800px;
+	width: 500px;
+}
+.input-group .i .input-group-btn .btn .btn-default .btn-lg{
+	padding-top: 4px;
+}
+
+.slide-bar {
+
+	position:absolute;
+    left:0; top:102px; bottom: 0;
+    width: 178px;
+
+
+}
