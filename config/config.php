@@ -5,7 +5,7 @@ Config::set('site_name', 'Bánh Kẹo Tràng An');
 Config::set('languages', array('en', 'vn'));
 
 Config::set('routes',array(
-    'default' => 'default_',
+    'default' => '',
     'admin' => 'admin_',
 ));
 

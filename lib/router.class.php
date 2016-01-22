@@ -23,12 +23,14 @@ class Router {
         $this->controller = Config::get('default_controller');
         $this->action = Config::get('default_action');
 
+       
         $uri_parts = explode('?', $this->uri);
 
         // Get path like controller/action/param1/param2/.../
         $path = $uri_parts[0];
-        $path_parts = explode('/', $path);
 
+        $path_parts = explode('/', $path);
+        
 
         if (count($path_parts)) {
             array_shift($path_parts);
