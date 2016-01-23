@@ -9,10 +9,10 @@ class HomeController extends Controller {
     }
 
     public function index() {
-        echo "test";
+        
     }
 
-    public function admin_index(){
-        Router::redirect('home/admin_index');
+    public function admin_login(){
+        
     }
 }

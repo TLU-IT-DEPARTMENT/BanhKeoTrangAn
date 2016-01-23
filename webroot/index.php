@@ -3,7 +3,7 @@
 define('DS', DIRECTORY_SEPARATOR); // dau ' / '
 define('ROOT', dirname(dirname(__FILE__))); // thu muc cha
 define('VIEWS_PATH', ROOT . DS . 'views');
-
+define('WEBROOT_PATH', 'http://localhost:8080/BanhKeoTrangAn/webroot');
 
 //$uri = $_SERVER['REQUEST_URI'];
 //print_r($uri);

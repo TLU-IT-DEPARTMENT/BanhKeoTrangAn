@@ -10,9 +10,6 @@ Config::set('routes',array(
 ));
 
 Config::set('admin_route', 'admin');
-
-
-
 Config::set('default_route', 'default');
 Config::set('default_language', 'en');
 Config::set('default_controller', 'pages');

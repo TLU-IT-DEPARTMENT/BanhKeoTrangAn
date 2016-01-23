@@ -13,10 +13,12 @@ class PagesController extends Controller{
             $this->data['content']= "here will be a page with '{$alias}' alias";
         }
     }
-    public function admin_index(){
+
+    public function default_index(){
         
     }
-    public function default_index(){
+    
+    public function admin_index(){
         
     }
     

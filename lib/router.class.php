@@ -15,7 +15,7 @@ class Router {
 
         // Thanh sua
         $uri_routes = explode('/', $uri);
-        
+
         $routes = Config::get('routes');
         $this->route = Config::get($uri_routes[2].'_route');
         $this->method_prefix = isset($routes[$this->route]) ? $routes[$this->route] : '';

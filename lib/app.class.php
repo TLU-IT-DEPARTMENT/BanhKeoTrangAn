@@ -11,7 +11,6 @@ class App {
 
     public static function run($uri) {
         self::$router = new Router($uri);
-
         Lang::load(self::$router->getLanguage());
 
 
@@ -32,9 +31,12 @@ class App {
             throw new Exception('Method ' . $controller_method . ' of class ' . $controller_class . ' does not exist.');
         }
 
+        // $layout se load len trang chinh trong view
+        
         $layout = self::$router->getRoute();
-        $layout_path = VIEWS_PATH . DS . $layout . '.html';
+        $layout_path = VIEWS_PATH . DS . $layout . '.php';
         $layout_view_object = new View(compact('content'), $layout_path);
+        
         echo $layout_view_object->render();
     }
 
