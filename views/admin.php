@@ -248,14 +248,14 @@
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="<?= WEBROOT_PATH ?>/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">LoiNT</span>
+                                    <span class="hidden-xs"><?=Session::get('Name') ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
                                         <img src="<?= WEBROOT_PATH ?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                         <p>
-                                            LoiNT - Web Developer
+                                            <?=Session::get('Name') ?> - Web Developer
                                             <small>Member since Nov. 2016</small>
                                         </p>
                                     </li>
@@ -276,9 +276,11 @@
                                         <div class="pull-left">
                                             <a href="#" class="btn btn-default btn-flat">Profile</a>
                                         </div>
+                                        <?php if(Session::get("Name")) { ?>
                                         <div class="pull-right">
-                                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                            <a href="<?=ADMIN_ROOT?>/user/logout" name="sign-out" id="sign-out" class="btn btn-default btn-flat">Sign out</a>
                                         </div>
+                                        <?php } ?>
                                     </li>
                                 </ul>
                             </li>
@@ -300,7 +302,7 @@
                             <img src="<?= WEBROOT_PATH ?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>LoiNT</p>
+                            <p><?=Session::get('Name') ?></p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
