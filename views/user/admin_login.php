@@ -14,7 +14,11 @@
 <link rel="stylesheet" href="<?= WEBROOT_PATH ?>/dist/css/AdminLTE.min.css">
 <!-- iCheck -->
 <link rel="stylesheet" href="<?= WEBROOT_PATH ?>/plugins/iCheck/square/blue.css">
-
+<style>
+    .login-page,.register-page {
+        background:#ecf0f5 !important;
+    }
+</style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -25,19 +29,25 @@
 <div  class="hold-transition login-page">
     <div id="loginform" class="login-box">
         <div class="login-logo">
-            <a href="<?= WEBROOT_PATH ?>/index2.html"><b>Admin</b>LTE</a>
+            <a href="#"><b>Admin</b>LTE</a>
         </div><!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>
-            <form action="<?= WEBROOT_PATH ?>/index2.html" method="post">
+            <form action="" method="post">
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="text" class="form-control" name="username" placeholder="UserName">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
+                <div class="col-xs-6">
+                    <button type="submit" name="submit" id="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div><!-- /.col -->
+                <div class="col-xs-6">
+                    <input id="temp" class="hide"></input>
+                </div><!-- /.col -->
                 <div class="row">
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
@@ -46,12 +56,11 @@
                             </label>
                         </div>
                     </div><!-- /.col -->
-                    <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                    </div><!-- /.col -->
+
                 </div>
             </form>
-
+           
+            ?>
             <div class="social-auth-links text-center">
                 <p>- OR -</p>
                 <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
@@ -59,7 +68,7 @@
             </div><!-- /.social-auth-links -->
 
             <a href="#">I forgot my password</a><br>
-            <a href="register.html" class="text-center">Register a new membership</a>
+            <a href="<?= ROOT_PATH ?>/views/user/resgiter.php" class="text-center">Register a new membership</a>
 
         </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
@@ -71,32 +80,5 @@
 <script src="<?= WEBROOT_PATH ?>/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="<?= WEBROOT_PATH ?>/plugins/iCheck/icheck.min.js"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
 
-</script>
-<script>
-    $(document).ready(function () {
-
-        showpopup();
-    });
-
-    function showpopup()
-    {
-        $("#loginform").fadeIn();
-        $("#loginform").css({"visibility": "visible", "display": "block"});
-    }
-
-    function hidepopup()
-    {
-        $("#loginform").fadeOut();
-        $("#loginform").css({"visibility": "hidden", "display": "none"});
-    }
-</script>
 

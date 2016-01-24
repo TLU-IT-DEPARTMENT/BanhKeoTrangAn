@@ -22,8 +22,8 @@ class Router {
         $this->language = Config::get('default_language');
         $this->controller = Config::get('default_controller');
         $this->action = Config::get('default_action');
-
        
+   
         $uri_parts = explode('?', $this->uri);
 
         // Get path like controller/action/param1/param2/.../
@@ -77,7 +77,7 @@ class Router {
     public function getParams() {
         return $this->params;
     }
-
+    //default or admin
     public function getRoute() {
         return $this->route;
     }

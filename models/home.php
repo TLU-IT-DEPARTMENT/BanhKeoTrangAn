@@ -2,7 +2,7 @@
 
 class Home extends Model {
 
-    public function test() {
+    public function getList() {
         $sql = "select * from user ";
         return $this->db->query($sql);
     }

@@ -20,4 +20,4 @@ Config::set('db.user', 'root');
 Config::set('db.password', '');
 Config::set('db.db_name', 'banhkeotrangan');
 
-Config::set('salt', '');
+Config::set('salt', 'jd7sj3sdkd964he7e');

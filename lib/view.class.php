@@ -14,10 +14,12 @@ class View {
         }
         $this->path = $path;
         $this->data = $data;
+      
     }
-
+    // include view
     protected static function getDefaultViewPath() {
         $router = App::getRouter();
+        
         if (!$router) {
             return false;
         }

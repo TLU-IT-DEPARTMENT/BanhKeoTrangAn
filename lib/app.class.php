@@ -11,6 +11,7 @@ class App {
 
     public static function run($uri) {
         self::$router = new Router($uri);
+
         Lang::load(self::$router->getLanguage());
 
 
@@ -19,9 +20,16 @@ class App {
         $controller_class = ucfirst(self::$router->getController()) . 'Controller';
         $controller_method = strtolower(self::$router->getMethodPrefix() . self::$router->getAction());
 
+        $layout = self::$router->getRoute();
+        if ($layout == 'admin' && Session::get('role') != 1) {
+            if($controller_method != 'admin_login'){
+                Router::redirect("admin/user/login");
+            }
+        }
         // Calling controller method
 
         $controller_object = new $controller_class();
+
         if (method_exists($controller_object, $controller_method)) {
             // Controller's action may return a view path
             $view_path = $controller_object->$controller_method();
@@ -32,11 +40,9 @@ class App {
         }
 
         // $layout se load len trang chinh trong view
-        
-        $layout = self::$router->getRoute();
         $layout_path = VIEWS_PATH . DS . $layout . '.php';
         $layout_view_object = new View(compact('content'), $layout_path);
-        
+
         echo $layout_view_object->render();
     }
 

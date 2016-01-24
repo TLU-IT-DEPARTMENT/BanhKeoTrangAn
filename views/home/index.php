@@ -13,8 +13,18 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>Thanh va Loi</div>
-        <?= $data['content'] ?>
-        <div>aloalo</div>
+        <?php
+        foreach($this->data['content'] as $row){  
+        ?>
+        <table>
+            <tr>
+                <td><?=$row['Name'] ?></td>
+                <td><?=$row['Password'] ?></td>
+                <td><?=$row['Fullname'] ?></td>
+                <td><?=$row['Status'] ?></td>
+            </tr>
+        </table>
+        <?php }
+        ?>
     </body>
 </html>

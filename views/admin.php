@@ -416,8 +416,9 @@
                             </div>
                         </div><!-- ./col -->
                     </div><!-- /.row -->
-
-                    <?= $data['content'] ?>  
+                    <div id="loginform">
+                        <?= $data['content'] ?>  
+                    </div>
                     <!-- Main row -->
 
                 </section><!-- /.content -->
@@ -604,6 +605,17 @@
         <script>
             $.widget.bridge('uibutton', $.ui.button);
         </script>
+       
+       
+       <?php
+       // if (Session::get('role') == 1) { //member login
+       //     echo '<script>';
+       //     echo '    $(document).ready(function () {';
+       //     echo '         $(".main-header,.content-header,.row,.main-footer,.control-sidebar,.main-sidebar").hide();';
+       //     echo '    }); ';
+       //     echo' </script>';
+       // }
+        ?> 
         <!-- Bootstrap 3.3.5 -->
         <script src="<?= WEBROOT_PATH ?>/bootstrap/js/bootstrap.min.js"></script>
         <!-- Morris.js charts -->
