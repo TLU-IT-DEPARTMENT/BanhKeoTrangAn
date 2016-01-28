@@ -1,6 +1,7 @@
 <?php
 
 require_once(ROOT . DS . 'config' . DS . 'config.php');
+require_once(ROOT . DS . 'lib' . DS . 'common.class.php');
 
 function __autoload($class_name) {
     $lib_path = ROOT . DS . 'lib' . DS . strtolower($class_name) . '.class.php';

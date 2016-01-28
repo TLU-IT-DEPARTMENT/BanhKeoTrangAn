@@ -58,9 +58,17 @@
             <li><a href=""><i class="fa fa-circle-o"></i> Carts</a></li>
         </ul>
     </li>
-    <li class="active treeview">
-        <a href="">
+    <li class="active treeview" >
+        <a href="<?= ADMIN_ROOT ?>/user/list">
             <i class="fa fa-users"></i> <span>Users</span> </i>
         </a>
     </li>
+    
+    <li class="active treeview" >
+        <a href="<?= ADMIN_ROOT ?>/pages/statistic">
+            <i class="fa fa-bar-chart "></i> <span>Statistic</span> </i>
+        </a>
+    </li>
 </ul>
+
+
