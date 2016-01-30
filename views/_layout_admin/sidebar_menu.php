@@ -14,7 +14,7 @@
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-circle-o"></i> Catagories<i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Catagories</a></li>
+                    <li><a href="<?= ADMIN_ROOT ?>/category/list"><i class="fa fa-circle-o"></i>Catagories</a></li>
                 </ul>
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o"></i>Catagories Posts</a></li>
