@@ -1,9 +1,11 @@
 <style>
     .createuser{
-        margin-left: 980px !important;
+        margin-left: 90% !important;
         color:black;
     }
-
+    .center{
+        text-align: center;
+    }
 </style>
 
 <div class="row">
@@ -35,8 +37,8 @@
                         </thead>
 
                         <?php
+                        $i = ($this->data['currentPage'] - 1) *5 + 1;
                         foreach ($this->data['lstUsers'] as $row) {
-                            $i = 1;
                             ?>
                             <tbody>
                                 <tr>
@@ -45,7 +47,14 @@
                                     <td><?= $row['Name']; ?></td>
                                     <td><?= $row['Password']; ?></td>
                                     <td><?= $row['Fullname']; ?></td>
-                                    <td><?php if($row['Gender'] == 0)echo 'Male'; elseif($row['Gender'] == 1) echo 'Female'; else echo 'Other'; ?></td>
+                                    <td><?php
+                                        if ($row['Gender'] == 0)
+                                            echo 'Male';
+                                        elseif ($row['Gender'] == 1)
+                                            echo 'Female';
+                                        else
+                                            echo 'Other';
+                                        ?></td>
                                     <td><?= $row['Birthday']; ?></td>
                                     <td><?= $row['Address']; ?></td>
                                     <td><?= $row['Email']; ?></td>
@@ -63,3 +72,14 @@
     </div><!-- /.col -->
 </div><!-- /.row -->
 
+<div class="c-gray-box center">
+    <ul class="pagination">
+        <li class="<?= $this->data['currentPage'] < 2 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/user/list?page=" . ($this->data['currentPage'] - 1); ?> ">&laquo;</a></li>
+        <?php
+        foreach ($this->data['paging'] as $page) {
+            echo "<li class='" . ($this->data['currentPage'] == $page ? "active" : "") . "'><a href='" . ADMIN_ROOT . "/user/list?page=$page" . "'>$page</a></li>";
+        }
+        ?>
+        <li class="<?= $this->data['currentPage'] > $this->data['currentPage'] - 1 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/user/list?page=" . ($this->data['currentPage'] + 1); ?>">&raquo;</a></li>
+    </ul>
+</div>

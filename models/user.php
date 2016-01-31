@@ -76,6 +76,18 @@ class User extends Model {
         return $this->db->query($sql);
     }
 
+    public function countAllUser() {
+        $sql = "select count(*) as count from user";
+        $result = $this->db->query($sql);
+        return $result[0]['count'];
+    }
+
+    public function paginate($page, $size) {
+        $start = ($page - 1) * $size ;
+        $sql = "select * from user limit {$start},{$size} ";
+        return $this->db->query($sql);
+    }
+
     public function getUserID() {
         return $this->UserID;
     }

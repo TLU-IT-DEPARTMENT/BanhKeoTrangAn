@@ -1,3 +1,4 @@
+
 <ul class="sidebar-menu">
     <li class="header">MAIN NAVIGATION</li>
     <li class="active treeview">
@@ -59,7 +60,7 @@
         </ul>
     </li>
     <li class="active treeview" >
-        <a href="<?= ADMIN_ROOT ?>/user/list">
+        <a href="<?= ADMIN_ROOT ?>/user/list?page=1">
             <i class="fa fa-users"></i> <span>Users</span> </i>
         </a>
     </li>
