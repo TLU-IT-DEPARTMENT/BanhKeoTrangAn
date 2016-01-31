@@ -1,9 +1,11 @@
 <style>
     .createcategory{
-        margin-left: 980px !important;
+        margin-left: 90% !important;
         color:black;
     }
-
+    .center{
+        text-align: center;
+    }
 </style>
 
 <div class="row">
@@ -19,11 +21,11 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>IDCategory</th>
-                                <th>IDCategoryParent</th>
+                                <th>ID Category</th>
+                                <th>Category Parent</th>
                                 <th>Name</th>
                                 <th>Slug</th>
-                                <th>OrderCategory</th>
+                                <th>Order Category</th>
                                 <th>Description</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -38,7 +40,12 @@
                                 <tr>
                                     <td><?= $i++; ?></td>
                                     <td><?= $row['IDCategory']; ?></td>
-                                    <td><?= $row['IDCategoryParent']; ?></td>
+                                    <?php
+                                    $aCategory = new Category();
+                                    $CategoryParent = $aCategory->selectByIDCategory($row['IDCategoryParent']);
+                                    $CategoryParentName = $CategoryParent[0]['Name'];
+                                    ?>
+                                    <td><?= $CategoryParentName; ?></td>
                                     <td><?= $row['Name']; ?></td>
                                     <td><?= $row['Slug']; ?></td>
                                     <td><?= $row['OrderCategory']; ?></td>
@@ -55,5 +62,16 @@
     </div><!-- /.col -->
 </div><!-- /.row -->
 
+<div class="c-gray-box center">
+    <ul class="pagination">
+        <li class="<?= $this->data['currentPage'] < 2 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/category/list/page/" . ($this->data['currentPage'] - 1); ?> ">&laquo;</a></li>
+        <?php
+        foreach ($this->data['paging'] as $page) {
+            echo "<li class='" . ($this->data['currentPage'] == $page ? "active" : "") . "'><a href='" . ADMIN_ROOT . "/category/list/page/$page" . "'>$page</a></li>";
+        }
+        ?>
+        <li class="<?= $this->data['currentPage'] > $this->data['currentPage'] - 1 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/category/list/page/" . ($this->data['currentPage'] + 1); ?>">&raquo;</a></li>
+    </ul>
+</div>
 
 

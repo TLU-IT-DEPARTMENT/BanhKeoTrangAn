@@ -19,8 +19,12 @@ class Category extends Model {
     }
 
     public function selectByIDCategory($IDCategory) {
-        $query = "select * from category where IDCategory = {$IDCategory}";
-        return $this->db->query($query);
+        if ($IDCategory == null) {
+            return null;
+        } else {
+            $query = "select * from category where IDCategory = {$IDCategory}";
+            return $this->db->query($query);
+        }
     }
 
     public function selectByIDCategoryParent($IDCategoryParent) {
@@ -39,7 +43,34 @@ class Category extends Model {
     }
 
     public function update($data, $r) {
-        
+        if ($r != 0) {
+            $query = "update category set IDCategoryParent = {$data['IDCategoryParent']}, Name = '{$data['Name']}', Slug = '{$data['Slug']}',"
+                    . "OrderCategory = {$data['OrderCategory']}, Description = '{$data['Description']}' where IDCategory = {$data['IDCategory']}";
+            return $this->db->query($query);
+        } else {
+            throw new Exception("failed to update category");
+        }
+    }
+    
+    public function delete($data, $r){
+        if ($r != 0) {
+            $query = "delete from category where IDCategory = {$data}";
+            return $this->db->query($query);
+        } else {
+            throw new Exception("failed to delete category");
+        }
+    }
+    
+    public function countAllCategory() {
+        $sql = "select count(*) as count from category";
+        $result = $this->db->query($sql);
+        return $result[0]['count'];
+    }
+
+    public function paginate($page, $size) {
+        $start = ($page - 1) * $size ;
+        $sql = "select * from category limit {$start},{$size} ";
+        return $this->db->query($sql);
     }
 
     public function getIDCategory() {
