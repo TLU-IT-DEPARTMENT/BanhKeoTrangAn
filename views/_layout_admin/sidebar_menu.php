@@ -27,7 +27,7 @@
             <li><a href=""><i class="fa fa-circle-o"></i> Products</a></li>
         </ul>
         <ul class="treeview-menu">
-            <li><a href="<?= ADMIN_ROOT ?>/post/list?page=1"><i class="fa fa-circle-o"></i> Posts</a></li>
+            <li><a href="<?= ADMIN_ROOT ?>/post/list/page/1"><i class="fa fa-circle-o"></i> Posts</a></li>
         </ul>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-circle-o"></i> Tags<i class="fa fa-angle-left pull-right"></i></a>
