@@ -8,7 +8,7 @@ class UserController extends Controller {
     }
 
     public function admin_list() {
-        $currentPage = $_GET['page'];
+        $currentPage = $this->params[1];
         if(!$currentPage){
             $currentPage = 1;
         }
@@ -77,7 +77,7 @@ class UserController extends Controller {
 
             $isAdd = $this->model->add($data, $r);
             if ($isAdd) {
-                Router::redirect(ADMIN_ROOT . "/user/list?page=1");
+                Router::redirect(ADMIN_ROOT . "/user/list/page/1");
             }
         }
     }
@@ -128,7 +128,7 @@ class UserController extends Controller {
 
             $isAdd = $this->model->edit($data, $r);
             if ($isAdd) {
-                Router::redirect(ADMIN_ROOT . "/user/list?page=1");
+                Router::redirect(ADMIN_ROOT . "/user/list/page/1");
             }
         }
     }
@@ -136,7 +136,7 @@ class UserController extends Controller {
         $id = $this->params[0];
         $isDelete = $this->model->delete($id);
         if($isDelete){
-            Router::redirect(ADMIN_ROOT . "/user/list?page=1");
+            Router::redirect(ADMIN_ROOT . "/user/list/page/1");
         }
         else{
             Session::setFlash("unable to delete user");

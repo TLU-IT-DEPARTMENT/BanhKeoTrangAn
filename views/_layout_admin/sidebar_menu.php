@@ -60,7 +60,7 @@
         </ul>
     </li>
     <li class="active treeview" >
-        <a href="<?= ADMIN_ROOT ?>/user/list?page=1">
+        <a href="<?= ADMIN_ROOT ?>/user/list/page/1">
             <i class="fa fa-users"></i> <span>Users</span> </i>
         </a>
     </li>

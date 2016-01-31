@@ -74,12 +74,12 @@
 
 <div class="c-gray-box center">
     <ul class="pagination">
-        <li class="<?= $this->data['currentPage'] < 2 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/user/list?page=" . ($this->data['currentPage'] - 1); ?> ">&laquo;</a></li>
+        <li class="<?= $this->data['currentPage'] < 2 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/user/list/page/" . ($this->data['currentPage'] - 1); ?> ">&laquo;</a></li>
         <?php
         foreach ($this->data['paging'] as $page) {
-            echo "<li class='" . ($this->data['currentPage'] == $page ? "active" : "") . "'><a href='" . ADMIN_ROOT . "/user/list?page=$page" . "'>$page</a></li>";
+            echo "<li class='" . ($this->data['currentPage'] == $page ? "active" : "") . "'><a href='" . ADMIN_ROOT . "/user/list/page/$page" . "'>$page</a></li>";
         }
         ?>
-        <li class="<?= $this->data['currentPage'] > $this->data['currentPage'] - 1 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/user/list?page=" . ($this->data['currentPage'] + 1); ?>">&raquo;</a></li>
+        <li class="<?= $this->data['currentPage'] > $this->data['currentPage'] - 1 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/user/list/page/" . ($this->data['currentPage'] + 1); ?>">&raquo;</a></li>
     </ul>
 </div>
