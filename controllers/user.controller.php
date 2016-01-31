@@ -8,7 +8,31 @@ class UserController extends Controller {
     }
 
     public function admin_list() {
-        $this->data['lstUsers'] = $this->model->selectAll();
+        $currentPage = $_GET['page'];
+        if(!$currentPage){
+            $currentPage = 1;
+        }
+        $maxSize = 5;
+        $maxShowPaging = 10;
+        $countUsers = intval($this->model->countAllUser());
+        $totalPage = ceil($countUsers / $maxSize);
+        $paging = array();
+        $i = 1;
+        if ($currentPage >= $maxShowPaging) {
+            do {
+                $i = $i + $maxShowPaging - 1;
+            } while ($i + $maxShowPaging - 1 <= $currentPage);
+        }
+        for (; $i <= $totalPage; $i++) {
+            if (count($paging) >= $maxShowPaging) {
+                break;
+            }
+            $paging[] = $i;
+        }
+        $this->data['totalPage'] = $totalPage;
+        $this->data['paging'] = $paging;
+        $this->data['lstUsers'] = $this->model->paginate($currentPage,$maxSize);
+        $this->data['currentPage'] = $currentPage;
     }
 
     public function admin_add() {
@@ -53,7 +77,7 @@ class UserController extends Controller {
 
             $isAdd = $this->model->add($data, $r);
             if ($isAdd) {
-                Router::redirect(ADMIN_ROOT . "/user/list");
+                Router::redirect(ADMIN_ROOT . "/user/list?page=1");
             }
         }
     }
@@ -104,7 +128,7 @@ class UserController extends Controller {
 
             $isAdd = $this->model->edit($data, $r);
             if ($isAdd) {
-                Router::redirect(ADMIN_ROOT . "/user/list");
+                Router::redirect(ADMIN_ROOT . "/user/list?page=1");
             }
         }
     }
@@ -112,7 +136,7 @@ class UserController extends Controller {
         $id = $this->params[0];
         $isDelete = $this->model->delete($id);
         if($isDelete){
-            Router::redirect(ADMIN_ROOT . "/user/list");
+            Router::redirect(ADMIN_ROOT . "/user/list?page=1");
         }
         else{
             Session::setFlash("unable to delete user");
