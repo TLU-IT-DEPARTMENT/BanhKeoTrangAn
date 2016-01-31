@@ -6,9 +6,12 @@
     .login-page,.register-page {
         background:#ecf0f5 !important;
     }
+    .wrapper{
+        background:#ecf0f5 !important;
+    }
 </style>
 
-<div  class="hold-transition login-page">
+<div class="hold-transition login-page" center>
     <div id="loginform" class="login-box">
         <div class="login-logo">
             <a href="#"><b>Admin</b>LTE</a>
@@ -34,7 +37,8 @@
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
                             <label>
-                                <input type="checkbox"> Remember Me
+                                <input type="checkbox" style="margin-left: auto;"> 
+                                <span style="margin-left: 20px;">Remember Me</span>
                             </label>
                         </div>
                     </div><!-- /.col -->
