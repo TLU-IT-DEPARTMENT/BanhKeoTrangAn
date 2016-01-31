@@ -12,7 +12,7 @@ class User extends Model {
     var $Email;
     var $PhoneNumber;
     var $Status;
-    
+
     public function __construct() {
         parent::__construct();
     }
@@ -26,23 +26,56 @@ class User extends Model {
         }
         return false;
     }
-    public function selectAll(){
+
+    public function selectByName($Name) {
+        $Name = $this->db->escape($Name);
+        $sql = "select * from user where Name = '{$Name}'limit 1";
+        $result = $this->db->query($sql);
+        if (isset($result[0])) {
+            return true;
+        }
+        return false;
+    }
+
+    public function selectAll() {
         $sql = "select * from user";
         return $this->db->query($sql);
     }
-    public function add($data,$r){
-        if($r != 0){
-             $sql = "insert into user(Name,Password,Fullname,Gender,Birthday,Address,Email,PhoneNumber,Status) values("
-               . "'{$data['Name']}','{$data['Password']}','{$data['Fullname']}','{$data['Gender']}','{$data['Birthday']}','{$data['Address']}',"
-               . "'{$data['Email']}','{$data['PhoneNumber']}','{$data['Status']}')";
-      
-        return $this->db->query($sql);    
-        }
-        else{
-            throw new Exception("failed to add user");
-        } 
+
+    public function selectByID($id) {
+        $sql = "select * from user where IDUser = '{$id}' ";
+        return $this->db->query($sql);
     }
-    
+
+    public function add($data, $r) {
+        if ($r != 0) {
+            $sql = "insert into user(Name,Password,Fullname,Gender,Birthday,Address,Email,PhoneNumber,Status) values("
+                    . "'{$data['Name']}','{$data['Password']}','{$data['Fullname']}','{$data['Gender']}','{$data['Birthday']}','{$data['Address']}',"
+                    . "'{$data['Email']}','{$data['PhoneNumber']}','{$data['Status']}')";
+
+            return $this->db->query($sql);
+        } else {
+            throw new Exception("failed to add user");
+        }
+    }
+
+    public function edit($data, $r) {
+        if ($r != 0) {
+            $sql = "update user set Name = '{$data['Name']}' , Password = '{$data['Password']}', Fullname = '{$data['Fullname']}', Gender = '{$data['Gender']}',"
+                    . "Birthday = '{$data['Birthday']}', Address = '{$data['Address']}', Email = '{$data['Email']}', PhoneNumber = '{$data['PhoneNumber']}', Status = '{$data['Status']}' "
+                    . "where IDUser = '{$data['id']}' ";
+
+            return $this->db->query($sql);
+        } else {
+            throw new Exception("failed to edit user");
+        }
+    }
+
+    public function delete($id) {
+        $sql = "delete from user where IDUser = '{$id}' ";
+        return $this->db->query($sql);
+    }
+
     public function getUserID() {
         return $this->UserID;
     }
@@ -122,6 +155,5 @@ class User extends Model {
     public function setStatus($Status) {
         $this->Status = $Status;
     }
-
 
 }
