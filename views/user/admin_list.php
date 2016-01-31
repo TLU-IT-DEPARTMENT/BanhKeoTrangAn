@@ -45,7 +45,7 @@
                                     <td><?= $row['Name']; ?></td>
                                     <td><?= $row['Password']; ?></td>
                                     <td><?= $row['Fullname']; ?></td>
-                                    <td><?= $row['Gender']; ?></td>
+                                    <td><?php if($row['Gender'] == 0)echo 'Male'; elseif($row['Gender'] == 1) echo 'Female'; else echo 'Other'; ?></td>
                                     <td><?= $row['Birthday']; ?></td>
                                     <td><?= $row['Address']; ?></td>
                                     <td><?= $row['Email']; ?></td>

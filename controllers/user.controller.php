@@ -29,6 +29,12 @@ class UserController extends Controller {
             if (!$Email) {
                 $r = 0;
             }
+//            $Name = $this->model->selectByName($Name);
+//            if($Name){
+//                // Name exist
+//                $error = "Name exist";
+//                $r = 0;
+//            }
             $PhoneNumber = $_POST['PhoneNumber'];
             $Status = $_POST['Status'];
 
@@ -49,6 +55,67 @@ class UserController extends Controller {
             if ($isAdd) {
                 Router::redirect(ADMIN_ROOT . "/user/list");
             }
+        }
+    }
+
+    public function admin_edit() {
+        $data = array();
+        $r = 1;
+        $id = $this->params[0];
+        $this->data['user'] = $this->model->selectByID($id);
+
+        if ($_POST) {
+            $Name = $_POST['Name'];
+            $Name = validateName($Name);
+            if (!$Name) {
+                $r = 0;
+            }
+//            $Name = $this->model->selectByName($Name);
+//            if($Name){
+//                // Name exist
+//                $error = "Name exist";
+//                $r = 0;
+//            }
+            $Password = md5(Config::get('salt') . $_POST['Password']);
+            $Fullname = $_POST['Fullname'];
+            $Gender = $_POST['Gender'];
+            $Birthday = $_POST['Birthday'];
+            $Address = $_POST['Address'];
+            $Email = validateEmail($_POST['Email']);
+            if (!$Email) {
+                $r = 0;
+            }
+            $PhoneNumber = $_POST['PhoneNumber'];
+            $Status = $_POST['Status'];
+
+            $data = array(
+                'id' => $id,
+                'Name' => $Name,
+                'Password' => $Password,
+                'Fullname' => $Fullname,
+                'Gender' => $Gender,
+                'Birthday' => $Birthday,
+                'Address' => $Address,
+                'Email' => $Email,
+                'PhoneNumber' => $PhoneNumber,
+                'Status' => $Status,
+                'r' => $r
+            );
+
+            $isAdd = $this->model->edit($data, $r);
+            if ($isAdd) {
+                Router::redirect(ADMIN_ROOT . "/user/list");
+            }
+        }
+    }
+    public function admin_delete(){
+        $id = $this->params[0];
+        $isDelete = $this->model->delete($id);
+        if($isDelete){
+            Router::redirect(ADMIN_ROOT . "/user/list");
+        }
+        else{
+            Session::setFlash("unable to delete user");
         }
     }
 
