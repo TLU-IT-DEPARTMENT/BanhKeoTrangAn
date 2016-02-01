@@ -13,11 +13,10 @@
             <span>Catalog</span><i class="fa fa-angle-left pull-right"></i>
         </a>
        
+            </li>
+        </ul>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-circle-o"></i> Products<i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Product</a></li>
-                </ul>
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o"></i>Kind Of Product</a></li>
                 </ul>
