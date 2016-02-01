@@ -19,7 +19,6 @@
                 </ul>
 
             </li>
-
         </ul>
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-circle-o"></i> Products<i class="fa fa-angle-left pull-right"></i></a>
