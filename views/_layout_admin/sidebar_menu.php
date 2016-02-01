@@ -14,10 +14,14 @@
         </a>
        
         <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i> Products</a><i class="fa fa-angle-left pull-right"></i>
+            <li><a href=""><i class="fa fa-circle-o"></i> Product<i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Kind Of Product</a></li>
+                    <li><a href="<?= ADMIN_ROOT ?>/product/list/page/1"><i class="fa fa-circle-o"></i>Product</a></li>
                 </ul>
+                 <ul class="treeview-menu">
+                    <li><a href="<?= ADMIN_ROOT ?>/kindofproduct/list/page/1"><i class="fa fa-circle-o"></i>Kind Of Product</a></li>
+                </ul>
+               
             </li>
         </ul>
         <ul class="treeview-menu">
