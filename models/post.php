@@ -17,7 +17,11 @@ class Post extends Model {
         $query = "select * from post ";
         return $this->db->query($query);
     }
-
+    public function selectByID($id){
+        $query = "select * from post where IDPost = '{$id}' ";
+        $id = $this->db->query($query);
+        return $id[0];
+    }
     public function countAllPost() {
         $query = "select count(*) as count from post";
         $result = $this->db->query($query);
@@ -41,8 +45,8 @@ class Post extends Model {
 
     public function update($data, $r) {
         if ($r != 0) {
-            $sql = "update post set Title = '{$data['Title']}' , Content = '{$data['Content']}', Fullname = '{$data['Fullname']}', Slug = '{$data['Slug']}',"
-                    . "Image = '{$data['Image']}', PostTime = '{$data['PostTime']}' "
+            $sql = "update post set Title = '{$data['Title']}' , Content = '{$data['Content']}', Slug = '{$data['Slug']}',"
+                    . "Image = '{$data['Image']}', PostTime = NOW() "
                     . "where IDPost = '{$data['id']}' ";
 
             return $this->db->query($sql);

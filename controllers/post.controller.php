@@ -35,7 +35,6 @@ class PostController extends Controller {
         $this->data['currentPage'] = $currentPage;
     }
 
-   
     public function admin_add() {
         $data = array();
         $r = 1;
@@ -49,7 +48,7 @@ class PostController extends Controller {
                 $file_name = $_FILES["uploadedimage"]["name"];
                 $temp_name = $_FILES["uploadedimage"]["tmp_name"];
                 $imgtype = $_FILES["uploadedimage"]["type"];
-                $target_path =  "./img/upload/";
+                $target_path = "./img/upload/";
                 $file_path = "./img/upload/" . $file_name;
                 move_uploaded_file($temp_name, $file_path);
                 $Image = $file_name;
@@ -60,6 +59,7 @@ class PostController extends Controller {
                 'Content' => $Content,
                 'Slug' => $Slug,
                 'Image' => $Image,
+                'r' => $r,
             );
 
             $isAdded = $this->model->insert($data, $r);
@@ -69,4 +69,52 @@ class PostController extends Controller {
         }
     }
 
+    public function admin_edit() {
+        $id = $this->params[0];
+        $post = $this->model->selectByID($id);
+        $this->data['post'] = $post;
+
+        $data = array();
+        $r = 1;
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method == "POST") {
+            $Title = $_POST['Title'];
+            $Content = $_POST['Content'];
+            $Slug = $_POST['Slug'];
+            $Image = $post['Image'];
+            if (!empty($_FILES["uploadedimage"]["name"])) {
+                $file_name = $_FILES["uploadedimage"]["name"];
+                $temp_name = $_FILES["uploadedimage"]["tmp_name"];
+                $imgtype = $_FILES["uploadedimage"]["type"];
+                $target_path = "./img/upload/";
+                $file_path = "./img/upload/" . $file_name;
+                move_uploaded_file($temp_name, $file_path);
+                $Image = $file_name;
+            }
+
+            $data = array(
+                'id' => $id,
+                'Title' => $Title,
+                'Content' => $Content,
+                'Slug' => $Slug,
+                'Image' => $Image,
+                'r' => $r,
+            );
+
+            $isAdded = $this->model->update($data, $r);
+            if ($isAdded) {
+                Router::redirect(ADMIN_ROOT . "/post/list/page/1");
+            }
+        }
+    }
+    public function admin_delete(){
+        $id = $this->params[0];
+        $isDelete = $this->model->delete($id);
+        if($isDelete){
+            Router::redirect(ADMIN_ROOT . "/post/list/page/1");
+        }
+        else{
+            Session::setFlash("unable to delete user");
+        }
+    }
 }

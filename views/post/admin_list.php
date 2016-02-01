@@ -7,8 +7,14 @@
         text-align: center;
     }
     #image-content{
-        width: 80px;
+        width: 120px;
         height: 80px;
+    }
+    td {
+        text-align: center !important;
+    }
+    th {
+        text-align: center !important;
     }
 </style>
 
