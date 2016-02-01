@@ -34,8 +34,8 @@ class Category extends Model {
 
     public function insert($data, $r) {
         if ($r != 0) {
-            $query = "insert into category(IDCategoryParent, Name, Slug, OrderCategory, Description) values ({$data['IDCategoryParent']},"
-                    . "'{$data['Name']}', '{$data['Slug']}', '{$data['OrderCategory']}', '{$data['Description']}')";
+            $query = "insert into category(IDCategoryParent, Name, Slug, OrderCategory, Description, Status) values ({$data['IDCategoryParent']},"
+                    . "'{$data['Name']}', '{$data['Slug']}', '{$data['OrderCategory']}', '{$data['Description']}', {$data['Status']})";
             return $this->db->query($query);
         } else {
             throw new Exception("failed to add category");
@@ -45,7 +45,7 @@ class Category extends Model {
     public function update($data, $r) {
         if ($r != 0) {
             $query = "update category set IDCategoryParent = {$data['IDCategoryParent']}, Name = '{$data['Name']}', Slug = '{$data['Slug']}',"
-                    . "OrderCategory = {$data['OrderCategory']}, Description = '{$data['Description']}' where IDCategory = {$data['IDCategory']}";
+                    . "OrderCategory = {$data['OrderCategory']}, Description = '{$data['Description']}', Status = {$data['Status']} where IDCategory = {$data['IDCategory']}";
             return $this->db->query($query);
         } else {
             throw new Exception("failed to update category");

@@ -36,7 +36,7 @@ class Post extends Model {
 
     public function insert($data, $r) {
         if ($r != 0) {
-            $query = "insert into post(Title,Content,Slug,Image,PostTime) values ('{$data['Title']}','{$data['Content']}','{$data['Slug']}','{$data['Image']}',NOW())";
+            $query = "insert into post(Title,Content,Slug,Image,PostTime,Status) values ('{$data['Title']}','{$data['Content']}','{$data['Slug']}','{$data['Image']}',NOW(),{$data['Status']})";
             return $this->db->query($query);
         } else {
             throw new Exception("failed to insert post");
@@ -46,7 +46,7 @@ class Post extends Model {
     public function update($data, $r) {
         if ($r != 0) {
             $sql = "update post set Title = '{$data['Title']}' , Content = '{$data['Content']}', Slug = '{$data['Slug']}',"
-                    . "Image = '{$data['Image']}', PostTime = NOW() "
+                    . "Image = '{$data['Image']}', PostTime = NOW(), Status = {$data['Status']} "
                     . "where IDPost = '{$data['id']}' ";
 
             return $this->db->query($sql);

@@ -15,7 +15,7 @@
         <div class="form-group">
             <label for="">Category Parent</label>
             <select class="form-control" id="categoryParent" name="IDCategoryParent">
-                <option value="null">NULL</option>>
+                <option value="null">NULL</option>
                 <?php
                 foreach ($this->data['listCategory'] as $row) {?>
                 <option value = "<?= $row['IDCategory']?>" <?php if($this->data['category'][0]['IDCategoryParent'] == $row['IDCategory']) echo 'selected' ?>> <?= $row['Name']?></option>
@@ -35,9 +35,16 @@
             <label for="">Description</label>
             <textarea class="form-control" rows="5" id="dataInput" placeholder="Description" name="Description"><?=$this->data['category'][0]['Description']?></textarea>
         </div>
+        <div class="form-group">
+            <label for="">Status</label>
+            <select class="form-control" id="categoryStatus" name="Status">
+                <option value="enable">Enable</option>
+                <option value="disable">Disable</option>
+            </select>
+        </div>
     </div><!-- /.box-body -->
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+        <button type="submit" class="btn btn-primary" name="submit">Save</button>
     </div>
 </form>

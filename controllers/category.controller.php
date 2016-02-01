@@ -44,12 +44,14 @@ class CategoryController extends Controller {
             $Slug = $_POST['Slug'];
             $OrderCategory = $_POST['OrderCategory'];
             $Desription = $_POST['Description'];
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
             $data = array(
                 'Name' => $Name,
                 'IDCategoryParent' => $IDCategoryParent,
                 'Slug' => $Slug,
                 'OrderCategory' => $OrderCategory,
-                'Description' => $Desription
+                'Description' => $Desription,
+                'Status' => $Status
             );
 
             $isAdd = $this->model->insert($data, $r);
@@ -70,13 +72,15 @@ class CategoryController extends Controller {
             $Slug = $_POST['Slug'];
             $OrderCategory = $_POST['OrderCategory'];
             $Desription = $_POST['Description'];
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
             $data = array(
                 'IDCategory' => $IDCategory,
                 'IDCategoryParent' => $IDCategoryParent,
                 'Name' => $Name,
                 'Slug' => $Slug,
                 'OrderCategory' => $OrderCategory,
-                'Description' => $Desription
+                'Description' => $Desription,
+                'Status' => $Status
             );
 
             $isAdd = $this->model->update($data, $r);

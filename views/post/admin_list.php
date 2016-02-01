@@ -37,6 +37,7 @@
                                 <th>Slug</th>
                                 <th>Image</th>
                                 <th>PostTime</th>
+                                <th>Status</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -55,6 +56,7 @@
                                     <td><?= $row['Slug']; ?></td>
                                     <td><img id="image-content" src="<?= WEBROOT_PATH?>/img/upload/<?= $row['Image']; ?>"></td>
                                     <td><?= $row['PostTime']; ?></td>
+                                    <td><?= $row['Status'] == 1? 'Enable' : 'Disable'; ?></td>
                                     <td><a href="<?= ADMIN_ROOT ?>/post/edit/<?= $row['IDPost']; ?>"><i class="fa fa-pencil"></i></a></td>
                                     <td><a onclick="return confirm('Do you want delete this record?');" href="<?= ADMIN_ROOT ?>/post/delete/<?= $row['IDPost']; ?>"><i class="fa fa-trash"></i></a></td>
                                 </tr>

@@ -53,12 +53,14 @@ class PostController extends Controller {
                 move_uploaded_file($temp_name, $file_path);
                 $Image = $file_name;
             }
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
 
             $data = array(
                 'Title' => $Title,
                 'Content' => $Content,
                 'Slug' => $Slug,
                 'Image' => $Image,
+                'Status' => $Status,
                 'r' => $r,
             );
 
@@ -91,6 +93,7 @@ class PostController extends Controller {
                 move_uploaded_file($temp_name, $file_path);
                 $Image = $file_name;
             }
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
 
             $data = array(
                 'id' => $id,
@@ -98,6 +101,7 @@ class PostController extends Controller {
                 'Content' => $Content,
                 'Slug' => $Slug,
                 'Image' => $Image,
+                'Status' => $Status,
                 'r' => $r,
             );
 

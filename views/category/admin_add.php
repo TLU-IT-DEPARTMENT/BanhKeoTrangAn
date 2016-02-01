@@ -35,6 +35,13 @@
             <label for="">Description</label>
             <textarea class="form-control" rows="5" id="dataInput" placeholder="Description" name="Description"></textarea>
         </div>
+        <div class="form-group">
+            <label for="">Status</label>
+            <select class="form-control" id="postStatus" name="Status">
+                <option value="enable">Enable</option>
+                <option value="disable">Disable</option>
+            </select>
+        </div>
     </div><!-- /.box-body -->
 
     <div class="box-footer">

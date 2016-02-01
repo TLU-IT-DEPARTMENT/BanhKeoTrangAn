@@ -23,6 +23,13 @@
             <label for="exampleInputFile">Upload Image</label>
             <input type="file" name="uploadedimage" id="exampleInputFile">
         </div>
+        <div class="form-group">
+            <label for="">Status</label>
+            <select class="form-control" id="postStatus" name="Status">
+                <option value="enable">Enable</option>
+                <option value="disable">Disable</option>
+            </select>
+        </div>
     </div><!-- /.box-body -->
 
     <div class="box-footer">
