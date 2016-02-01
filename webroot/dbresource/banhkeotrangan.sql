@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2016 at 05:44 PM
+-- Generation Time: Feb 01, 2016 at 07:05 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `kindofproduct` (
   `IDKindOfProductParent` int(11) DEFAULT NULL,
   `Name` varchar(50) DEFAULT NULL,
   `Slug` varchar(255) DEFAULT NULL,
+  `OrderKindOfProduct` int(11) DEFAULT NULL,
   `Description` varchar(255) DEFAULT NULL,
   `Status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
