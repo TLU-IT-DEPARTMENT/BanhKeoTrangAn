@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2016 at 07:05 PM
+-- Generation Time: Feb 01, 2016 at 07:31 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -87,7 +87,17 @@ CREATE TABLE IF NOT EXISTS `kindofproduct` (
   `OrderKindOfProduct` int(11) DEFAULT NULL,
   `Description` varchar(255) DEFAULT NULL,
   `Status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kindofproduct`
+--
+
+INSERT INTO `kindofproduct` (`IDKindOfProduct`, `IDKindOfProductParent`, `Name`, `Slug`, `OrderKindOfProduct`, `Description`, `Status`) VALUES
+(1, NULL, 'Bánh Tết', 'banh-tet', 1, 'Bánh Tết - Xuân Bính Thân', 0),
+(2, 1, 'Bánh hộp thiếc', 'banh-hop-thiec', 1, 'Bánh hộp thiếc rất ngon', 1),
+(3, 2, 'Bánh hộp thiếc vuông', 'banh-hop-thiec-vuong', 1, 'Bánh hộp thiếc vuông - hộp hình vuông', 1),
+(4, 2, 'Bánh hộp thiếc tròn', 'banh-hop-thiec-tron', 2, 'Bánh hộp thiếc tròn - hình tròn', 0);
 
 -- --------------------------------------------------------
 
@@ -353,7 +363,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `kindofproduct`
 --
 ALTER TABLE `kindofproduct`
-  MODIFY `IDKindOfProduct` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDKindOfProduct` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `post`
 --
