@@ -1,5 +1,5 @@
 <style>
-    .createuser{
+    .createpost{
         margin-left: 90% !important;
         color:black;
     }
@@ -23,7 +23,7 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Posts List</h3>
-                <a href="<?= ADMIN_ROOT ?>/post/add" class="createuser"><i class="fa fa-plus fa-2x"></i></a>
+                <a href="<?= ADMIN_ROOT ?>/post/add" class="createpost"><i class="fa fa-plus fa-2x"></i></a>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="table-responsive">
@@ -50,8 +50,8 @@
                                 <tr>
                                     <td><?= $i++; ?></td>
                                     <td><?= $row['IDPost']; ?></td>
-                                    <td><?= $row['Title']; ?></td>
-                                    <td><?= $row['Content']; ?></td>
+                                    <td><?= substr($row['Title'], 0, 200); ?></td>
+                                    <td><?= substr($row['Content'], 0, 200); ?></td>
                                     <td><?= $row['Slug']; ?></td>
                                     <td><img id="image-content" src="<?= WEBROOT_PATH?>/img/upload/<?= $row['Image']; ?>"></td>
                                     <td><?= $row['PostTime']; ?></td>

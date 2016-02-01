@@ -6,6 +6,12 @@
     .center{
         text-align: center;
     }
+    td {
+        text-align: center !important;
+    }
+    th {
+        text-align: center !important;
+    }
 </style>
 
 <div class="row">
@@ -44,9 +50,9 @@
                                 <tr>
                                     <td><?= $i++; ?></td>
                                     <td><?= $row['IDUser']; ?></td>
-                                    <td><?= $row['Name']; ?></td>
-                                    <td><?= $row['Password']; ?></td>
-                                    <td><?= $row['Fullname']; ?></td>
+                                    <td><?= substr($row['Name'], 0, 200); ?></td>
+                                    <td><?= substr($row['Password'], 0, 200); ?></td>
+                                    <td><?= substr($row['Fullname'], 0, 200); ?></td>
                                     <td><?php
                                         if ($row['Gender'] == 0)
                                             echo 'Male';
@@ -56,7 +62,7 @@
                                             echo 'Other';
                                         ?></td>
                                     <td><?= $row['Birthday']; ?></td>
-                                    <td><?= $row['Address']; ?></td>
+                                    <td><?= substr($row['Address'], 0, 200); ?></td>
                                     <td><?= $row['Email']; ?></td>
                                     <td><?= $row['PhoneNumber']; ?></td>
                                     <td><?= $row['Status'] == 1 ? 'Admin' : 'Member'; ?></td>

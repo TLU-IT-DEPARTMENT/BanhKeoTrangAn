@@ -6,6 +6,12 @@
     .center{
         text-align: center;
     }
+    td {
+        text-align: center !important;
+    }
+    th {
+        text-align: center !important;
+    }
 </style>
 
 <div class="row">
@@ -33,8 +39,8 @@
                         </thead>
 
                         <?php
+                        $i = ($this->data['currentPage'] - 1) *5 + 1;
                         foreach ($this->data['listCategory'] as $row) {
-                            $i = 1;
                             ?>
                             <tbody>
                                 <tr>
@@ -46,10 +52,10 @@
                                     $CategoryParentName = $CategoryParent[0]['Name'];
                                     ?>
                                     <td><?= $CategoryParentName; ?></td>
-                                    <td><?= $row['Name']; ?></td>
-                                    <td><?= $row['Slug']; ?></td>
+                                    <td><?= substr($row['Name'], 0, 200); ?></td>
+                                    <td><?= substr($row['Slug'], 0, 200); ?></td>
                                     <td><?= $row['OrderCategory']; ?></td>
-                                    <td><?= $row['Description']; ?></td>
+                                    <td><?= substr($row['Description'], 0, 200); ?></td>
                                     <td><a href="<?= ADMIN_ROOT ?>/category/edit/<?= $row['IDCategory']; ?>"><i class="fa fa-pencil"></i></a></td>
                                     <td><a onclick="return confirm('Do you want delete this record?');" href="<?= ADMIN_ROOT ?>/category/delete/<?= $row['IDCategory']; ?>"><i class="fa fa-trash"></i></a></td>
                                 </tr>
