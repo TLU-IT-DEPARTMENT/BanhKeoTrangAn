@@ -37,6 +37,8 @@ class Post extends Model {
     public function insert($data, $r) {
         if ($r != 0) {
             $query = "insert into post(Title,Content,Slug,Image,PostTime,Status) values ('{$data['Title']}','{$data['Content']}','{$data['Slug']}','{$data['Image']}',NOW(),{$data['Status']})";
+            $this->db->query($query);
+            $query =  "select LAST_INSERT_ID() as LastPost";
             return $this->db->query($query);
         } else {
             throw new Exception("failed to insert post");

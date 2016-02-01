@@ -20,6 +20,14 @@
             <textarea class="form-control ckeditor" rows="10" id="dataInput" placeholder="Content" name="Content"></textarea>
         </div>
         <div class="form-group">
+            <label for="">Tags</label><br>
+                <?php foreach ($this->data['listTag'] as $row) {?>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="inlineCheckbox" name="Tags[]" value="<?= $row['IDTag']; ?>"> <?= $row['Name']; ?>
+                </label>
+                <?php }?>
+        </div>
+        <div class="form-group">
             <label for="exampleInputFile">Upload Image</label>
             <input type="file" name="uploadedimage" id="exampleInputFile">
         </div>

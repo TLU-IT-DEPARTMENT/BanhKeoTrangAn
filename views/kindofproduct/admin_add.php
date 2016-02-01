@@ -37,7 +37,7 @@
         </div>
         <div class="form-group">
             <label for="">Status</label>
-            <select class="form-control" id="postStatus" name="Status">
+            <select class="form-control" id="kindofproductStatus" name="Status">
                 <option value="enable">Enable</option>
                 <option value="disable">Disable</option>
             </select>

@@ -35,6 +35,7 @@
                                 <th>Title</th>
                                 <th>Content</th>
                                 <th>Slug</th>
+                                <th>Tags</th>
                                 <th>Image</th>
                                 <th>PostTime</th>
                                 <th>Status</th>
@@ -44,6 +45,8 @@
                         </thead>
 
                         <?php
+                        $aTagPost = new TagPost();
+                        $aTag = new Tag();
                         $i = ($this->data['currentPage'] - 1) *5 + 1;
                         foreach ($this->data['lstPosts'] as $row) {
                             ?>
@@ -54,6 +57,16 @@
                                     <td><?= substr($row['Title'], 0, 200); ?></td>
                                     <td><?= substr($row['Content'], 0, 200); ?></td>
                                     <td><?= $row['Slug']; ?></td>
+                                    <td>
+                                        <?php 
+                                            $Tags = "";
+                                            foreach($aTagPost->selectByIDPost($row['IDPost']) as $rowTagPost){
+                                                $TagName = $aTag->selectByID($rowTagPost['IDTag']);
+                                                $Tags = $Tags.$TagName['Name']."; ";
+                                            }
+                                            echo $Tags;
+                                        ?>
+                                    </td>
                                     <td><img id="image-content" src="<?= WEBROOT_PATH?>/img/upload/<?= $row['Image']; ?>"></td>
                                     <td><?= $row['PostTime']; ?></td>
                                     <td><?= $row['Status'] == 1? 'Enable' : 'Disable'; ?></td>

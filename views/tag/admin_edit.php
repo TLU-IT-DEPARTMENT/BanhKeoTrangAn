@@ -23,7 +23,13 @@
             <label for="">Description</label>
             <textarea class="form-control ckeditor" rows="10"  id="dataInput" placeholder="Description" name="Description"><?= $this->data['item']['Description']; ?></textarea>
         </div>
-        
+        <div class="form-group">
+            <label for="">Status</label>
+            <select class="form-control" id="tagStatus" name="Status">
+                <option value="enable" <?php if($this->data['item']['Status'] == 1) echo 'selected'?>>Enable</option>
+                <option value="disable" <?php if($this->data['item']['Status'] == 0) echo 'selected'?>>Disable</option>
+            </select>
+        </div>
     </div><!-- /.box-body -->
 
     <div class="box-footer">

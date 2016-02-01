@@ -36,6 +36,8 @@ class PostController extends Controller {
     }
 
     public function admin_add() {
+        $aTag = new Tag();
+        $this->data['listTag'] = $aTag->selectByStatus(1);
         $data = array();
         $r = 1;
         $method = $_SERVER['REQUEST_METHOD'];
@@ -64,8 +66,16 @@ class PostController extends Controller {
                 'r' => $r,
             );
 
-            $isAdded = $this->model->insert($data, $r);
-            if ($isAdded) {
+            $isAddedPost = $this->model->insert($data, $r);
+            if(is_array($isAddedPost)){
+                $aTagPost = new TagPost();
+                foreach ($_POST['Tags'] as $Tag){
+                    $data = array(
+                        'IDTag' => $Tag,
+                        'IDPost' => $isAddedPost[0]['LastPost']
+                    );
+                    $isAddedTagPost = $aTagPost->insert($data, $r);
+                }
                 Router::redirect(ADMIN_ROOT . "/post/list/page/1");
             }
         }

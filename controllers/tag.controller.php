@@ -43,10 +43,12 @@ class TagController extends Controller {
             $Name = $_POST['Name'];
             $Slug = $_POST['Slug'];
             $Description = $_POST['Description'];
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
             $data = array(
                 'Name' => $Name,
                 'Slug' => $Slug,
                 'Description' => $Description,
+                'Status' => $Status,
                 'r' => $r,
             );
 
@@ -69,10 +71,13 @@ class TagController extends Controller {
             $Name = $_POST['Name'];
             $Slug = $_POST['Slug'];
             $Description = $_POST['Description'];
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
             $data = array(
+                'IDTag' => $id,
                 'Name' => $Name,
                 'Slug' => $Slug,
                 'Description' => $Description,
+                'Status' => $Status,
                 'r' => $r,
             );
 

@@ -10,6 +10,11 @@ class Tag extends Model {
         $query = "select * from tag ";
         return $this->db->query($query);
     }
+    
+    public function selectByStatus($Status){
+        $query = "select * from tag where Status = {$Status}";
+        return $this->db->query($query);
+    }
 
     public function selectByID($id) {
         $query = "select * from tag where IDTag = '{$id}' ";
@@ -31,7 +36,7 @@ class Tag extends Model {
 
     public function insert($data, $r) {
         if ($r != 0) {
-            $query = "insert into tag(Name,Slug,Description) values ('{$data['Name']}','{$data['Slug']}','{$data['Description']}')";
+            $query = "insert into tag(Name,Slug,Description,Status) values ('{$data['Name']}','{$data['Slug']}','{$data['Description']}','{$data['Status']}')";
             return $this->db->query($query);
         } else {
             throw new Exception("failed to insert tag");
@@ -40,8 +45,8 @@ class Tag extends Model {
 
     public function update($data, $r) {
         if ($r != 0) {
-            $sql = "update tag set Name = '{$data['Name']}' , Slug = '{$data['Slug']}', Description = '{$data['Description']}' "
-                    . "where IDTag = '{$data['id']}' ";
+            $sql = "update tag set Name = '{$data['Name']}' , Slug = '{$data['Slug']}', Description = '{$data['Description']}', Status = '{$data['Status']}' "
+                    . "where IDTag = '{$data['IDTag']}' ";
             return $this->db->query($sql);
         } else {
             throw new Exception("failed to edit tag");

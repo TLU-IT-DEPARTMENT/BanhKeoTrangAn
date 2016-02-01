@@ -19,6 +19,13 @@
             <label for="">Description</label>
             <textarea class="form-control ckeditor" name="Description" rows="10" id="dataInput" placeholder="Description" ></textarea>
         </div>
+        <div class="form-group">
+            <label for="">Status</label>
+            <select class="form-control" id="tagStatus" name="Status">
+                <option value="enable">Enable</option>
+                <option value="disable">Disable</option>
+            </select>
+        </div>
     </div><!-- /.box-body -->
 
     <div class="box-footer">

@@ -11,10 +11,14 @@ class TagPost extends Model {
         return $this->db->query($query);
     }
 
-    public function selectTagPost() {
-        $query = "select * from tag inner join post ";
-        $data = $this->db->query($query);
-        return $data;
+    public function selectByIDTag($IDTag) {
+        $query = "select * from tag_post where IDTag = {$IDTag}";
+        return $this->db->query($query);
+    }
+
+    public function selectByIDPost($IDPost) {
+        $query = "select * from tag_post where IDPost = {$IDPost}";
+        return $this->db->query($query);
     }
 
     public function countAllRecord() {
@@ -29,9 +33,9 @@ class TagPost extends Model {
         return $this->db->query($sql);
     }
 
-    public function insert($IDTag,$IDPost, $r) {
+    public function insert($data, $r) {
         if ($r != 0) {
-            $query = "insert into tag_post(IDTag,IDPost) values ('{$IDTag}','{$IDPost}' )";
+            $query = "insert into tag_post(IDTag,IDPost) values ({$data['IDTag']},{$data['IDPost']} )";
             return $this->db->query($query);
         } else {
             throw new Exception("failed to insert tag_post");

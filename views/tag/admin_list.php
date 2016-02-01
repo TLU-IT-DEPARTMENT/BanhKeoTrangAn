@@ -35,6 +35,7 @@
                                 <th>Name</th>
                                 <th>Slug</th>
                                 <th>Description</th>
+                                <th>Status</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -51,6 +52,7 @@
                                     <td><?= $row['Name']; ?></td>
                                     <td><?= $row['Slug']; ?></td>
                                     <td><?= substr($row['Description'], 0, 200); ?></td>
+                                    <td><?= $row['Status'] == 1? 'Enable' : 'Disable'; ?></td>
                                     <td><a href="<?= ADMIN_ROOT ?>/tag/edit/<?= $row['IDTag']; ?>"><i class="fa fa-pencil"></i></a></td>
                                     <td><a onclick="return confirm('Do you want delete this record?');" href="<?= ADMIN_ROOT ?>/tag/delete/<?= $row['IDTag']; ?>"><i class="fa fa-trash"></i></a></td>
                                 </tr>
