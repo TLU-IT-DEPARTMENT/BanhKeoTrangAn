@@ -12,19 +12,14 @@
             <i class="fa fa-files-o"></i>
             <span>Catalog</span><i class="fa fa-angle-left pull-right"></i>
         </a>
-        <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i> Catagories<i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="<?= ADMIN_ROOT ?>/category/list/page/1"><i class="fa fa-circle-o"></i>Catagories</a></li>
-                </ul>
-
-            </li>
-
-        </ul>
+       
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-circle-o"></i> Products<i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Kind Of Posts</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i>Product</a></li>
+                </ul>
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i>Kind Of Product</a></li>
                 </ul>
             </li>
         </ul>
@@ -32,6 +27,9 @@
             <li><a href=""><i class="fa fa-circle-o"></i> Posts<i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="<?= ADMIN_ROOT ?>/post/list/page/1"><i class="fa fa-circle-o"></i>Posts</a></li>
+                </ul>
+                 <ul class="treeview-menu">
+                    <li><a href="<?= ADMIN_ROOT ?>/category/list/page/1"><i class="fa fa-circle-o"></i>Catagories</a></li>
                 </ul>
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o"></i>Catagories Posts</a></li>
