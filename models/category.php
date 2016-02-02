@@ -18,6 +18,24 @@ class Category extends Model {
         return $this->db->query($query);
     }
 
+    public function selectAncestorByIDCategory($IDCategory) {
+        $dataAncestor = array();
+        while (true) {
+            $data = $this->selectByIDCategory($IDCategory);
+            $temp = array(
+                'IDCategory' => $data[0]['IDCategory'],
+                'Name' => $data[0]['Name']
+            );
+            array_push($dataAncestor, $temp);
+            if ($data[0]['IDCategoryParent'] == null) {
+                break;
+            } else {
+                $IDCategory = $data[0]['IDCategoryParent'];
+            }
+        }
+        return $dataAncestor;
+    }
+
     public function selectByIDCategory($IDCategory) {
         if ($IDCategory == null) {
             return null;
@@ -29,6 +47,11 @@ class Category extends Model {
 
     public function selectByIDCategoryParent($IDCategoryParent) {
         $query = "select * from category where IDCategoryParent = {$IDCategoryParent}";
+        return $this->db->query($query);
+    }
+    
+    public function selectByStatus($Status){
+        $query = "select * from category where Status = {$Status}";
         return $this->db->query($query);
     }
 
@@ -51,8 +74,8 @@ class Category extends Model {
             throw new Exception("failed to update category");
         }
     }
-    
-    public function delete($data, $r){
+
+    public function delete($data, $r) {
         if ($r != 0) {
             $query = "delete from category where IDCategory = {$data}";
             return $this->db->query($query);
@@ -60,7 +83,7 @@ class Category extends Model {
             throw new Exception("failed to delete category");
         }
     }
-    
+
     public function countAllCategory() {
         $sql = "select count(*) as count from category";
         $result = $this->db->query($sql);
@@ -68,9 +91,48 @@ class Category extends Model {
     }
 
     public function paginate($page, $size) {
-        $start = ($page - 1) * $size ;
+        $start = ($page - 1) * $size;
         $sql = "select * from category limit {$start},{$size} ";
         return $this->db->query($sql);
+    }
+
+    public function processAncestorByIDCategory($IDCategory) {
+        $str = "";
+        $data = $this->selectAncestorByIDCategory($IDCategory);
+        for ($i = count($data) - 1; $i >= 0; $i--) {
+            if ($i != 0) {
+                $str = $str . $data[$i]['Name'] . " > ";
+            } else {
+                $str = $str . $data[$i]['Name'];
+            }
+        }
+        return $str;
+    }
+    
+    public function selectAllFormalName(){
+        $data = $this->selectAll();
+        $dataName = array();
+        foreach ($data as $temp){
+            $dataTemp = array(
+                'IDCategory' => $temp['IDCategory'],
+                'Name' => $this->processAncestorByIDCategory($temp['IDCategory'])
+            );
+            array_push($dataName, $dataTemp);
+        }
+        return $dataName;
+    }
+    
+    public function selectFormalNameByStatus($Status){
+        $data = $this->selectByStatus($Status);
+        $dataName = array();
+        foreach ($data as $temp){
+            $dataTemp = array(
+                'IDCategory' => $temp['IDCategory'],
+                'Name' => $this->processAncestorByIDCategory($temp['IDCategory'])
+            );
+            array_push($dataName, $dataTemp);
+        }
+        return $dataName;
     }
 
     public function getIDCategory() {

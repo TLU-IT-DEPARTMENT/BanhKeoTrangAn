@@ -38,6 +38,8 @@ class PostController extends Controller {
     public function admin_add() {
         $aTag = new Tag();
         $this->data['listTag'] = $aTag->selectByStatus(1);
+        $aCategory = new Category();
+        $this->data['listCategory'] = $aCategory->selectFormalNameByStatus(1);
         $data = array();
         $r = 1;
         $method = $_SERVER['REQUEST_METHOD'];
@@ -55,7 +57,7 @@ class PostController extends Controller {
                 move_uploaded_file($temp_name, $file_path);
                 $Image = $file_name;
             }
-            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0;
 
             $data = array(
                 'Title' => $Title,
@@ -67,14 +69,23 @@ class PostController extends Controller {
             );
 
             $isAddedPost = $this->model->insert($data, $r);
-            if(is_array($isAddedPost)){
+            if (is_array($isAddedPost)) {
                 $aTagPost = new TagPost();
-                foreach ($_POST['Tags'] as $Tag){
+                foreach ($_POST['Tags'] as $Tag) {
                     $data = array(
                         'IDTag' => $Tag,
                         'IDPost' => $isAddedPost[0]['LastPost']
                     );
                     $isAddedTagPost = $aTagPost->insert($data, $r);
+                }
+                
+                $aCategoryPost = new CategoryPost();
+                foreach ($_POST['Categories'] as $Category) {
+                    $data = array(
+                        'IDCategory' => $Category,
+                        'IDPost' => $isAddedPost[0]['LastPost']
+                    );
+                    $isAddedCategoryPost = $aCategoryPost->insert($data, $r);
                 }
                 Router::redirect(ADMIN_ROOT . "/post/list/page/1");
             }
@@ -103,7 +114,7 @@ class PostController extends Controller {
                 move_uploaded_file($temp_name, $file_path);
                 $Image = $file_name;
             }
-            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0;
 
             $data = array(
                 'id' => $id,
@@ -121,14 +132,15 @@ class PostController extends Controller {
             }
         }
     }
-    public function admin_delete(){
+
+    public function admin_delete() {
         $id = $this->params[0];
         $isDelete = $this->model->delete($id);
-        if($isDelete){
+        if ($isDelete) {
             Router::redirect(ADMIN_ROOT . "/post/list/page/1");
-        }
-        else{
+        } else {
             Session::setFlash("unable to delete user");
         }
     }
+
 }

@@ -20,6 +20,14 @@
             <textarea class="form-control ckeditor" rows="10" id="dataInput" placeholder="Content" name="Content"></textarea>
         </div>
         <div class="form-group">
+            <label for="">Categories</label><br>
+                <?php foreach ($this->data['listCategory'] as $row) {?>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="inlineCheckbox" name="Categories[]" value="<?= $row['IDCategory']; ?>"> <?= $row['Name']; ?>
+                </label>
+                <?php }?>
+        </div>
+        <div class="form-group">
             <label for="">Tags</label><br>
                 <?php foreach ($this->data['listTag'] as $row) {?>
                 <label class="checkbox-inline">

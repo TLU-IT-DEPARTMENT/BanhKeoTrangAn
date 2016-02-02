@@ -35,6 +35,7 @@
                                 <th>Title</th>
                                 <th>Content</th>
                                 <th>Slug</th>
+                                <th>Categories</th>
                                 <th>Tags</th>
                                 <th>Image</th>
                                 <th>PostTime</th>
@@ -46,7 +47,9 @@
 
                         <?php
                         $aTagPost = new TagPost();
+                        $aCategoryPost = new CategoryPost();
                         $aTag = new Tag();
+                        $aCategory = new Category();
                         $i = ($this->data['currentPage'] - 1) *5 + 1;
                         foreach ($this->data['lstPosts'] as $row) {
                             ?>
@@ -57,6 +60,16 @@
                                     <td><?= substr($row['Title'], 0, 200); ?></td>
                                     <td><?= substr($row['Content'], 0, 200); ?></td>
                                     <td><?= $row['Slug']; ?></td>
+                                    <td>
+                                        <?php 
+                                            $Categories = "";
+                                            foreach($aCategoryPost->selectByIDPost($row['IDPost']) as $rowCategoryPost){
+                                                $CategoryName = $aCategory->selectByIDCategory($rowCategoryPost['IDCategory']);
+                                                $Categories = $Categories.$CategoryName[0]['Name']."; ";
+                                            }
+                                            echo $Categories;
+                                        ?>
+                                    </td>
                                     <td>
                                         <?php 
                                             $Tags = "";
