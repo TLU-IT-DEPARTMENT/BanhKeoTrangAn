@@ -10,8 +10,13 @@ class Tag extends Model {
         $query = "select * from tag ";
         return $this->db->query($query);
     }
-    
-    public function selectByStatus($Status){
+
+    public function selectByIdStatus($id, $Status) {
+        $query = "select * from tag where Status = {$Status} and IDTag = '{$id}' ";
+        return $this->db->query($query);
+    }
+
+    public function selectByStatus($Status) {
         $query = "select * from tag where Status = {$Status}";
         return $this->db->query($query);
     }
