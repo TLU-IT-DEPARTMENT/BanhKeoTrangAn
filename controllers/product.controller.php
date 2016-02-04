@@ -2,7 +2,9 @@
 
 include_once '../models/tagproduct.php';
 include_once '../models/productdetail.php';
+include_once '../models/kindofproduct_product.php';
 include_once '../models/kindofproduct.php';
+
 class ProductController extends Controller {
 
     public function __construct($data = array()) {
@@ -32,7 +34,7 @@ class ProductController extends Controller {
             }
             $paging[] = $i;
         }
-        $KindOfProduct = new KindOfProduct();
+        
         $this->data['totalPage'] = $totalPage;
         $this->data['paging'] = $paging;
         $this->data['item'] = $this->model->paginate($currentPage, $maxSize);
@@ -197,6 +199,9 @@ class ProductController extends Controller {
     public function admin_add() {
         $aTag = new Tag();
         $this->data['listTag'] = $aTag->selectByStatus(1);
+        $aKindOfProduct = new KindOfProduct();
+        $this->data['listKop'] = $aKindOfProduct->selectByStatus(1);
+        $aKindOfProduct_Product = new KindOfProduct_Product();
         $data = array();
         $r = 1;
         $method = $_SERVER['REQUEST_METHOD'];
@@ -230,6 +235,14 @@ class ProductController extends Controller {
                         'IDProduct' => $isAdded[0]['LastPost']
                     );
                     $isAddedTagProduct = $aTag->insert($data, $r);
+                }
+                $aKindOfProduct_Product = new KindOfProduct_Product();
+                foreach ($_POST['Kop'] as $row) {
+                    $data = array(
+                        'IDKindOfProduct' => $row,
+                        'IDProduct' => $isAdded[0]['LastPost'],
+                    );
+                    $isAddedKopProduct = $aKindOfProduct_Product->insert($data, $r);
                 }
                 Router::redirect(ADMIN_ROOT . "/product/list/page/1");
             }

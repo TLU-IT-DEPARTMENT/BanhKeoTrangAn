@@ -63,5 +63,10 @@ class Product extends Model {
         $id = $this->db->query($query);
         return $id;
     }
+    public function selectByIDStatus($id,$Status) {
+        $query = "select * from product where IDProduct = '{$id}' and Status = {$Status} ";
+        $id = $this->db->query($query);
+        return $id;
+    }
 
 }

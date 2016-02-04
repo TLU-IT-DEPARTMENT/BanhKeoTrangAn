@@ -30,32 +30,24 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>TagID</th>
                                 <th>PostID</th>
                                 <th>Title</th>
-                                <th>Content</th>
-                                <th>Slug</th>
-                                <th>Image</th>
-                                <th>Tag</th>
-                                <th>Post Time</th>
+                                <th>TagID</th>
+                                <th>TagName</th>
                             </tr>
                         </thead>
 
                         <?php
-                        $i = ($this->data['currentPage'] - 1) * 5 + 1;
-                        foreach ($this->data['data'] as $row) {
+                        $i = ($this->data['currentPage'] - 1) * 10 + 1;
+                        foreach ($this->data['item'] as $row) {
                             ?>
                             <tbody>
                                 <tr>
                                     <td><?= $i++; ?></td>
-                                    <td><?= $row['IDTag']; ?></td>
                                     <td><?= $row['IDPost']; ?></td>
-                                    <td><?= substr($row['Title'], 0, 200); ?></td>
-                                    <td><?= substr($row['Content'], 0, 200); ?></td>
-                                    <td><?= $row['Slug']; ?></td>
-                                    <td><img id="image-content" src="<?= WEBROOT_PATH ?>/img/upload/<?= $row['Image']; ?>"></td>
-                                    <td><?= $row['Tag']; ?></td>
-                                    <td><?= $row['PostTime']; ?></td>
+                                    <td><?= $row['Title']; ?></td>
+                                    <td><?= $row['IDTag']; ?></td>
+                                    <td><?= $row['Name']; ?></td>
                                 </tr>
                             </tbody>
                         <?php } ?>
