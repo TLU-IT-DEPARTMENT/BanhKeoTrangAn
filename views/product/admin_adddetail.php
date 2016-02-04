@@ -10,7 +10,7 @@
         <div class="form-group">
             <h2>Add Detail Product</h2>
             <label for="">Product Name</label>
-            <input type="text" name="Name" value="<?= $this->data['ProductName'][0]['Name'] ?>" class="form-control " id="exampleInputEmail1" placeholder="Name" >
+            <input type="text" disable name="Name" value="<?= $this->data['ProductName'][0]['Name'] ?>" class="form-control " id="exampleInputEmail1" placeholder="Name" >
         </div>
         <div class="form-group">
             <label for="">Caption</label>

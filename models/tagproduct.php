@@ -41,10 +41,11 @@ class TagProduct extends Model {
             throw new Exception("failed to insert tag_product");
         }
     }
+
     public function update($data, $r) {
         if ($r != 0) {
             $query = "update tag_product set IDTag = {$data['IDTag']} where IDProduct = {$data['IDProduct']} ";
-          
+
             return $this->db->query($query);
         } else {
             throw new Exception("failed to update tag_product");

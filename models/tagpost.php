@@ -20,7 +20,10 @@ class TagPost extends Model {
         $query = "select * from tag_post where IDPost = {$IDPost}";
         return $this->db->query($query);
     }
-
+    public function selectByIDStatus($Id,$Status){
+         $query = "select * from tag_post where IDPost = {$IDPost} and Status = {$Status}";
+        return $this->db->query($query);
+    }
     public function countAllRecord() {
         $query = "select count(*) as count from tag_post";
         $result = $this->db->query($query);
@@ -32,7 +35,13 @@ class TagPost extends Model {
         $sql = "select * from tag_post limit {$start},{$size} ";
         return $this->db->query($sql);
     }
-
+    public function paginateJoin($page,$size){
+        $start = ($page - 1) * $size;
+        $sql = "select tag_post.*,tag.Name,post.Title from tag_post inner join post inner join tag "
+                . "on tag.IDTag = tag_post.IDTag and tag_post.IDPost = post.IDPost"
+                . " limit {$start},{$size} ";
+        return $this->db->query($sql);
+    }
     public function insert($data, $r) {
         if ($r != 0) {
             $query = "insert into tag_post(IDTag,IDPost) values ({$data['IDTag']},{$data['IDPost']} )";

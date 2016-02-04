@@ -9,7 +9,7 @@
     <div class="box-body">
         <div class="form-group">
             <label for="">Product Name</label><span class="red-require"><strong>*</strong></span>
-            <input type="text" name="Name" value="<?= $this->data['item'][0]['Name']; ?>" class="form-control" id="exampleInputEmail1" placeholder="Name" required>
+            <input type="text"disable name="Name" value="<?= $this->data['item'][0]['Name']; ?>" class="form-control" id="exampleInputEmail1" placeholder="Name" required>
         </div>
         <div class="form-group">
             <label for="">Slug</label><span class="red-require"><strong>*</strong></span>

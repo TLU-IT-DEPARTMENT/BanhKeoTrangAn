@@ -50,30 +50,45 @@
 
                         <?php
                         include_once '../models/tagproduct.php';
+                        include_once '../models/kindofproduct_product.php';
+                        include_once '../models/kindofproduct.php';
+
                         $tagProduct = new TagProduct();
                         $tag = new Tag();
+                        $KindOfProduct_ProductModel = new KindOfProduct_Product();
+
                         $i = ($this->data['currentPage'] - 1) * 10 + 1;
                         foreach ($this->data['item'] as $row) {
                             $aTag = $tagProduct->selectByIDProduct($row['IDProduct']);
+                            $KopName = $KindOfProduct_ProductModel->getProductNameByKind($row['IDProduct']);
+                           
                             ?>
                             <tbody>
                                 <tr>
                                     <td><?= $i++; ?></td>
                                     <td><?= $row['IDProduct']; ?></td>
                                     <td><?= substr($row['Name'], 0, 200); ?></td>
-                                    <td></td>
+                                    <td>
+                                        <?php
+                                        $Name = "";
+                                        foreach ($KopName as $rowNam) {
+                                            $Name = $Name . $rowNam['Name'] . "  ";
+                                        }
+                                        echo $Name;
+                                        ?>
+                                    </td>
                                     <td><?= substr($row['Slug'], 0, 200); ?></td>
                                     <td><?= $row['Model']; ?></td>
                                     <td><?= $row['UnitPrice']; ?></td>
                                     <td><?= substr($row['Description'], 0, 200); ?></td>
-                                     <td>
-                                        <?php 
-                                            $Tags = "";
-                                            foreach($aTag as $rowTag){
-                                                $TagName = $tag->selectByID($rowTag['IDTag']);
-                                                $Tags = $Tags.$TagName['Name']."; ";
-                                            }
-                                            echo $Tags;
+                                    <td>
+                                        <?php
+                                        $Tags = "";
+                                        foreach ($aTag as $rowTag) {
+                                            $TagName = $tag->selectByID($rowTag['IDTag']);
+                                            $Tags = $Tags . $TagName['Name'] . "; ";
+                                        }
+                                        echo $Tags;
                                         ?>
                                     </td>
                                     <td><?= $row['Rate']; ?></td>

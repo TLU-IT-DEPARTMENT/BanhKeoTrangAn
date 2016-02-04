@@ -32,6 +32,11 @@ class KindOfProduct extends Model {
         return $this->db->query($query);
     }
 
+    public function selectByStatus($Status) {
+        $query = "select * from kindofproduct where Status = {$Status}";
+        return $this->db->query($query);
+    }
+
     public function insert($data, $r) {
         if ($r != 0) {
             $query = "insert into kindofproduct(IDKindOfProductParent, Name, Slug, OrderKindOfProduct, Description, Status) values ({$data['IDKindOfProductParent']},"
@@ -51,8 +56,8 @@ class KindOfProduct extends Model {
             throw new Exception("failed to update kindofproduct");
         }
     }
-    
-    public function delete($data, $r){
+
+    public function delete($data, $r) {
         if ($r != 0) {
             $query = "delete from kindofproduct where IDKindOfProduct = {$data}";
             return $this->db->query($query);
@@ -60,7 +65,7 @@ class KindOfProduct extends Model {
             throw new Exception("failed to delete kindofproduct");
         }
     }
-    
+
     public function countAllKindOfProduct() {
         $sql = "select count(*) as count from kindofproduct";
         $result = $this->db->query($sql);
@@ -68,7 +73,7 @@ class KindOfProduct extends Model {
     }
 
     public function paginate($page, $size) {
-        $start = ($page - 1) * $size ;
+        $start = ($page - 1) * $size;
         $sql = "select * from kindofproduct limit {$start},{$size} ";
         return $this->db->query($sql);
     }
@@ -122,4 +127,3 @@ class KindOfProduct extends Model {
     }
 
 }
-

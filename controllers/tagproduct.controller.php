@@ -1,10 +1,10 @@
 <?php
 
-class TagPostController extends Controller {
+class TagProductController extends Controller {
 
     public function __construct($data = array()) {
         parent::__construct($data);
-        $this->model = new TagPost();
+        $this->model = new TagProduct();
     }
 
     public function admin_list() {
@@ -31,7 +31,7 @@ class TagPostController extends Controller {
         }
         $this->data['totalPage'] = $totalPage;
         $this->data['paging'] = $paging;
-        $this->data['item'] = $this->model->paginateJoin($currentPage, $maxSize);
+        $this->data['item'] = $this->model->paginate($currentPage, $maxSize);
 //        echo '<pre>';
 //        print_r($this->data['item']);
 //        echo '</pre>';

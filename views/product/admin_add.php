@@ -35,6 +35,14 @@
                 </label>
                 <?php }?>
         </div>
+         <div class="form-group">
+            <label for="">Kind Of Product</label><br>
+                <?php foreach ($this->data['listKop'] as $row) {?>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="inlineCheckbox" name="Kop[]" value="<?= $row['IDKindOfProduct']; ?>"> <?= $row['Name']; ?>
+                </label>
+                <?php }?>
+        </div>
         <div class="form-group">
             <label for="">Rate</label>
             <input type="text" name="Rate" class="form-control" id="exampleInputPassword1" placeholder="Rate">
