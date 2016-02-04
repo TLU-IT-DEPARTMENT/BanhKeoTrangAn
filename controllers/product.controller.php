@@ -2,7 +2,7 @@
 
 include_once '../models/tagproduct.php';
 include_once '../models/productdetail.php';
-
+include_once '../models/kindofproduct.php';
 class ProductController extends Controller {
 
     public function __construct($data = array()) {
@@ -15,7 +15,7 @@ class ProductController extends Controller {
         if (!$currentPage) {
             $currentPage = 1;
         }
-        $maxSize = 10;
+        $maxSize = 5;
         $maxShowPaging = 10;
         $countRecord = intval($this->model->countAllRecord());
         $totalPage = ceil($countRecord / $maxSize);
@@ -32,7 +32,7 @@ class ProductController extends Controller {
             }
             $paging[] = $i;
         }
-
+        $KindOfProduct = new KindOfProduct();
         $this->data['totalPage'] = $totalPage;
         $this->data['paging'] = $paging;
         $this->data['item'] = $this->model->paginate($currentPage, $maxSize);
@@ -41,15 +41,14 @@ class ProductController extends Controller {
 
     public function admin_detail() {
         $ProductDetail = new ProductDetail();
-        $idProduct = intval($this->params[3]);
-        $Product = $this->model->selectByID($idProduct);
-        $this->data['Product'] = $Product;
+        $idProduct = intval($this->params[0]);
 
-        $currentPage = $this->params[1];
+        $currentPage = intval($this->params[2]);
+
         if (!$currentPage) {
             $currentPage = 1;
         }
-        $maxSize = 10;
+        $maxSize = 5;
         $maxShowPaging = 10;
         $countRecord = intval($ProductDetail->countAllRecord());
         $totalPage = ceil($countRecord / $maxSize);
@@ -75,11 +74,11 @@ class ProductController extends Controller {
     }
 
     public function admin_AddDetail() {
-        $idProduct = intval($this->params[3]);
-        $id = $this->params[3];
+        $idProduct = intval($this->params[0]);
+        $id = $this->params[0];
         $ProductDetailModel = new ProductDetail();
         $this->data['ProductName'] = $this->model->selectByID($id);
-        
+
 
         $data = array();
 
@@ -107,6 +106,7 @@ class ProductController extends Controller {
                         continue; // Skip invalid file formats
                     } else { // No error found! Move uploaded files 
                         if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name)) {
+
                             $data = array(
                                 'IDProduct' => $IDProduct,
                                 'Image' => $name,
@@ -118,7 +118,7 @@ class ProductController extends Controller {
                                 Session::setFlash("$name can't insert");
                             }
                             $count++; // Number of successfully uploaded file
-                            Router::redirect(ADMIN_ROOT . "/product/detail/page/1/product/" . $id);
+                            Router::redirect(ADMIN_ROOT . "/product/detail/{$id}/page/1");
                         }
                     }
                 }
@@ -127,12 +127,14 @@ class ProductController extends Controller {
     }
 
     public function admin_EditDetail() {
-        $idProduct = intval($this->params[0]);
-        $id = $this->params[0];
+        $IdProductDetail = intval(($this->params[2]));
         $ProductDetailModel = new ProductDetail();
-        $this->data['ProductName'] = $this->model->selectByID($idProduct);
-        $data = array();
+        $ProductDetailEN = $ProductDetailModel->selectByID($IdProductDetail);
+        $this->data['ProductName'] = $this->model->selectByID($this->params[0]);
+        $IDProduct = $ProductDetailEN[0]['IDProduct'];
 
+        $data = array();
+        die;
         $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
         $max_file_size = 1024 * 300; //300 kb
         $path = "./img/upload/"; // Upload directory
@@ -157,7 +159,9 @@ class ProductController extends Controller {
                         continue; // Skip invalid file formats
                     } else { // No error found! Move uploaded files 
                         if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name)) {
+
                             $data = array(
+                                'id' => $ProductDetailEN[0]['IDProductDetail'],
                                 'IDProduct' => $IDProduct,
                                 'Image' => $name,
                                 'Caption' => $Caption,
@@ -165,10 +169,11 @@ class ProductController extends Controller {
                             );
                             $isInsert = $ProductDetailModel->update($data, $r);
                             if (!$isInsert) {
-                                Session::setFlash("$name can't update");
+                                Session::setFlash("$name can't insert");
                             }
+
                             $count++; // Number of successfully uploaded file
-                            Router::redirect(ADMIN_ROOT . "/product/detail/page/1/product/" . $id);
+                            Router::redirect(ADMIN_ROOT . "/product/detail/{$IDProduct}/page/1");
                         }
                     }
                 }
@@ -177,12 +182,13 @@ class ProductController extends Controller {
     }
 
     public function admin_DeleteDetail() {
-        $idProduct = intval($this->params[0]);
-        $id = $this->params[0];
+        $IdProductDetail = intval($this->params[2]);
         $ProductDetailModel = new ProductDetail();
-        $isDelete = $ProductDetailModel->delete($idProduct);
+        $ProductDetailEN = $ProductDetailModel->selectByID($IdProductDetail);
+        $IDProduct = $ProductDetailEN[0]['IDProduct'];
+        $isDelete = $ProductDetailModel->delete($IdProductDetail);
         if ($isDelete) {
-            Router::redirect(ADMIN_ROOT . "/product/detail/page/1/product/" . $id);
+            Router::redirect(ADMIN_ROOT . "/product/detail/{$IDProduct}/page/1");
         } else {
             Session::setFlash("unable to delete detail product");
         }

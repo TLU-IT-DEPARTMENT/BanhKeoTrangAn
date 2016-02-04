@@ -9,7 +9,7 @@
     <div class="box-body">
         <div class="form-group">
             <label for="">Product Name</label><span class="red-require">
-                <input type="text" name="Name" value="<?=$this->data['ProductName']['Name']?>" class="form-control " id="exampleInputEmail1" placeholder="Name" >
+                
                 </div>
                 <div class="form-group">
                     <label for="">Caption</label><span class="red-require">

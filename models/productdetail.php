@@ -18,7 +18,7 @@ class ProductDetail extends Model {
     public function update($data, $r) {
         if ($r != 0) {
             $sql = "update productdetail set IDProduct = '{$data['IDProduct']}' , Image = '{$data['Image']}', Caption = '{$data['Caption']}' "
-                    . "where IDProductDetail = '{$data['IDProduct']}' ";
+                    . "where IDProductDetail = {$data['id']} ";
 
             return $this->db->query($sql);
         } else {
@@ -27,7 +27,7 @@ class ProductDetail extends Model {
     }
 
     public function delete($id) {
-        $sql = "delete from productdetail where IDProductDetail = '{$id}' ";
+        $sql = "delete from productdetail where IDProductDetail = {$id} ";
         return $this->db->query($sql);
     }
 
@@ -37,11 +37,11 @@ class ProductDetail extends Model {
         return $result[0]['count'];
     }
 
-    public function paginate($id,$page, $size) {
+    public function paginate($id, $page, $size) {
         $start = ($page - 1) * $size;
-        $sql = "select * from product inner join productdetail on product.IDProduct = {$id} limit {$start},{$size} ";
-        
-        return $this->db->query($sql);
+        $query = "(select * from (select distinct product.*,productdetail.IDProductDetail,productdetail.Image , productdetail.Caption from productdetail join product on productdetail.IDProduct = product.IDProduct )AS R where IDProduct = {$id} limit {$start},{$size})";       
+
+        return $this->db->query($query);
     }
 
     public function selectAll() {
@@ -50,13 +50,15 @@ class ProductDetail extends Model {
     }
 
     public function selectByID($id) {
-        $query = "select * from productdetail where IDProductDetail = '{$id}' ";
-        $id = $this->db->query($query);
-        return $id[0];
-    }
-    public function selectByIDProduct($id) {
-        $query = "select * from productdetail where IDProduct = '{$id}' ";
+        $query = "select * from productdetail where IDProductDetail = {$id} ";
         $id = $this->db->query($query);
         return $id;
     }
+
+    public function selectByIDProduct($id) {
+        $query = "select * from productdetail where IDProduct = {$id} ";
+        $id = $this->db->query($query);
+        return $id;
+    }
+
 }

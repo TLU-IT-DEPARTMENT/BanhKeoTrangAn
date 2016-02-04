@@ -23,7 +23,7 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Product Detail </h3>
-                <a href="<?= ADMIN_ROOT ?>/product/adddetail/page/1/product/<?=$this->data['Product'][0]['IDProduct']; ?>" class="createpost"><i class="fa fa-plus fa-2x"></i></a>
+                <a href="<?= ADMIN_ROOT ?>/product/adddetail/<?=$this->data['item'][0]['IDProduct']; ?>/page/1" class="createpost"><i class="fa fa-plus fa-2x"></i></a>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="table-responsive">
@@ -47,7 +47,7 @@
                         include_once '../models/tagproduct.php';
                         $tagProduct = new TagProduct();
                         $tag = new Tag();
-                        $i = ($this->data['currentPage'] - 1) * 10 + 1;
+                        $i = ($this->data['currentPage'] - 1) * 5 + 1;
                         foreach ($this->data['item'] as $row) {
                             $aTag = $tagProduct->selectByIDProduct($row['IDProduct']);
                             ?>
@@ -70,8 +70,8 @@
                                     <td><img id="image-content" src="<?= WEBROOT_PATH ?>/img/upload/<?= isset($row['Image']) ? $row['Image'] : 'default.jpg'; ?>"></td>
                                     <td><?= substr($row['Caption'], 0, 200); ?></td>
                                     <td><?= $row['Status'] == 1 ? 'Enable' : 'Disable'; ?></td>
-                                    <td><a href="<?= ADMIN_ROOT ?>/product/editdetail/<?= $row['IDProduct']; ?>"><i class="fa fa-pencil"></i></a></td>
-                                    <td><a onclick="return confirm('Do you want delete this record?');" href="<?= ADMIN_ROOT ?>/product/deletedetail/<?= $row['IDProduct']; ?>"><i class="fa fa-trash"></i></a></td>
+                                    <td><a href="<?= ADMIN_ROOT ?>/product/editdetail/<?= $row['IDProduct']; ?>/productdetail/<?= $row['IDProductDetail']; ?>"><i class="fa fa-pencil"></i></a></td>
+                                    <td><a onclick="return confirm('Do you want delete this record?');" href="<?= ADMIN_ROOT ?>/product/deletedetail/<?= $row['IDProduct']; ?>/productdetail/<?= $row['IDProductDetail']; ?>"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                             </tbody>
                         <?php } ?>
@@ -84,12 +84,13 @@
 <?php ?>
 <div class="c-gray-box center">
     <ul class="pagination">
-        <li class="<?= $this->data['currentPage'] < 2 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/product/list/page/" . ($this->data['currentPage'] - 1); ?> ">&laquo;</a></li>
+        <li class="<?= $this->data['currentPage'] < 2 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/product/detail/".($this->data['item'][0]['IDProduct'])."/page/" . ($this->data['currentPage'] - 1);?> ">&laquo;</a></li>
         <?php
+        $paging = $this->data['item'];
         foreach ($this->data['paging'] as $page) {
-            echo "<li class='" . ($this->data['currentPage'] == $page ? "active" : "") . "'><a href='" . ADMIN_ROOT . "/product/list/page/$page" . "'>$page</a></li>";
+            echo "<li class='" . ($this->data['currentPage'] == $page ? "active" : "") . "'><a href='" . ADMIN_ROOT . "/product/detail/".$paging[0]['IDProduct']."/page/$page". "'>$page</a></li>";
         }
         ?>
-        <li class="<?= $this->data['currentPage'] > $this->data['currentPage'] - 1 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/product/list/page/" . ($this->data['currentPage'] + 1); ?>">&raquo;</a></li>
+        <li class="<?= $this->data['currentPage'] > $this->data['currentPage'] - 1 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/product/detail/".($this->data['item'][0]['IDProduct']). "/page/" . ($this->data['currentPage'] + 1);?>">&raquo;</a></li>
     </ul>
 </div>

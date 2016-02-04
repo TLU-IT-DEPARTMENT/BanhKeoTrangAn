@@ -79,7 +79,7 @@
                                     <td><?= $row['Rate']; ?></td>
                                     <td><?= $row['RatePeople']; ?></td>
                                     <td><?= $row['Status'] == 1 ? 'Enable' : 'Disable'; ?></td>
-                                    <td><a href="<?= ADMIN_ROOT ?>/product/detail/page/1/product/<?= $row['IDProduct']; ?>"><i class="fa fa-info"></i></a></td>
+                                    <td><a href="<?= ADMIN_ROOT ?>/product/detail/<?= $row['IDProduct']; ?>/page/1"><i class="fa fa-info"></i></a></td>
                                     <td><a href="<?= ADMIN_ROOT ?>/product/edit/<?= $row['IDProduct']; ?>"><i class="fa fa-pencil"></i></a></td>
                                     <td><a onclick="return confirm('Do you want delete this record?');" href="<?= ADMIN_ROOT ?>/product/delete/<?= $row['IDProduct']; ?>"><i class="fa fa-trash"></i></a></td>
                                 </tr>
