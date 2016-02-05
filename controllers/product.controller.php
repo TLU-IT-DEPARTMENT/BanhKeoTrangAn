@@ -102,6 +102,11 @@ class ProductController extends Controller {
 
         $aTagProduct = new TagProduct();
         $aTag = new Tag();
+        $aKindOfProduct = new KindOfProduct();
+        $this->data['listKop'] = $aKindOfProduct->selectAll();
+
+        $aKindOfProduct_Product = new KindOfProduct_Product();
+        $this->data['listKopExist'] = $aKindOfProduct_Product->getProductNameByKind(intval($id));
 
         $IDByProduct = $aTagProduct->selectByIDProduct($id);
 
@@ -143,21 +148,30 @@ class ProductController extends Controller {
                 'Status' => $Status,
                 'r' => $r,
             );
-            foreach ($_POST['Tags'] as $Tag) {
-                $dataEdit = array(
-                    'IDTag' => intval($Tag),
-                    'IDProduct' => $id,
-                    'r' => $r,
-                );
-                $isEditTag = $aTagProduct->update($dataEdit, $r);
-            }
-
-            if (!$isEditTag) {
-                Session::setFlash("unable to update tag_product");
-            }
             $isEdit = $this->model->update($data, $r);
-
             if ($isEdit) {
+
+                foreach ($_POST['Tags'] as $Tag) {
+                    $dataEdit = array(
+                        'IDTag' => intval($Tag),
+                        'IDProduct' => $id,
+                        'r' => $r,
+                    );
+                    $isEditTag = $aTagProduct->update($dataEdit, $r);
+                }
+                if (!$isEditTag) {
+                    Session::setFlash("unable to update tag_product");
+                }
+                foreach ($_POST['Kop'] as $row) {
+                    $data = array(
+                        'IDKindOfProduct' => $row,
+                        'IDProduct' => $this->params[0],
+                    );
+                    $isAddedKopProduct = $aKindOfProduct_Product->update($data, $r);
+                    if (!$isAddedKopProduct) {
+                        Session::setFlash("unable to update kindofproduct_product");
+                    }
+                }
                 Router::redirect(ADMIN_ROOT . "/product/list/page/1");
             }
         }

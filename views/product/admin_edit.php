@@ -37,6 +37,14 @@
 
         </div>
         <div class="form-group">
+            <label for="">Kind Of Product</label><span class="red-require"><strong>*</strong></span><br><br>
+            <?php foreach ($this->data['listKop'] as $row) { ?>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="inlineCheckbox"   name="Kop[]" <?php if ($row['Name'] == $this->data['listKopExist'][0]['Name']) echo 'checked'; ?> value="<?= $row['IDKindOfProduct']; ?>"> <?= isset($row['Name'])?$row['Name']:""; ?>
+                </label>
+            <?php } ?>
+        </div>
+        <div class="form-group">
             <label for="">Rate</label>
             <input type="text" name="Rate" value="<?= $this->data['item'][0]['Rate']; ?>" class="form-control" id="exampleInputPassword1" placeholder="Rate">
         </div>

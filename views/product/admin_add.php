@@ -36,10 +36,10 @@
                 <?php }?>
         </div>
          <div class="form-group">
-            <label for="">Kind Of Product</label><br>
+            <label for="">Kind Of Product</label><span class="red-require"><strong>*</strong></span><br>
                 <?php foreach ($this->data['listKop'] as $row) {?>
                 <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox" name="Kop[]" value="<?= $row['IDKindOfProduct']; ?>"> <?= $row['Name']; ?>
+                    <input type="checkbox" id="inlineCheckbox"  name="Kop[]" value="<?= $row['IDKindOfProduct']; ?>"> <?= $row['Name']; ?>
                 </label>
                 <?php }?>
         </div>

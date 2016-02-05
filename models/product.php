@@ -24,7 +24,7 @@ class Product extends Model {
                     . "UnitPrice = '{$data['UnitPrice']}', Description = '{$data['Description']}',Rate = '{$data['Rate']}',"
                     . "RatePeople = '{$data['RatePeople']}',Status = '{$data['Status']}' "
                     . "where IDProduct = '{$data['id']}' ";
-
+         
             return $this->db->query($sql);
         } else {
             throw new Exception("failed to edit user");
@@ -42,7 +42,6 @@ class Product extends Model {
         return $result[0]['count'];
     }
 
-   
     public function paginate($page, $size) {
         $start = ($page - 1) * $size;
         $sql = "select * from product limit {$start},{$size} ";

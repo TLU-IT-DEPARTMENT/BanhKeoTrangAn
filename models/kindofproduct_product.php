@@ -17,7 +17,7 @@ class KindOfProduct_Product extends Model {
 
     public function update($data, $r) {
         if ($r != 0) {
-            $query = "update kindofproduct_product set IDKindOfProduct = {$data['IDKindOfProduct']} , IDProduct = {$data['IDProduct']} where IDKindOfProduct = {$data['IDKindOfProduct']} ";
+            $query = "update kindofproduct_product set IDKindOfProduct = {$data['IDKindOfProduct']} , IDProduct = {$data['IDProduct']} where IDProduct = {$data['IDProduct']} ";
             return $this->db->query($query);
         } else {
             throw new Exception("failed to update kop");
