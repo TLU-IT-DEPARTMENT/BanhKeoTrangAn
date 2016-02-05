@@ -44,9 +44,9 @@ class ProductController extends Controller {
 
     public function admin_add() {
         $aTag = new Tag();
-        $this->data['listTag'] = $aTag->selectByStatus(1);
+        $this->data['listTag'] = $aTag->selectAll();
         $aKindOfProduct = new KindOfProduct();
-        $this->data['listKop'] = $aKindOfProduct->selectByStatus(1);
+        $this->data['listKop'] = $aKindOfProduct->selectAll();
         $aKindOfProduct_Product = new KindOfProduct_Product();
         $data = array();
         $r = 1;
