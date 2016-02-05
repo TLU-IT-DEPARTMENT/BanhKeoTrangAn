@@ -42,6 +42,7 @@ class Product extends Model {
         return $result[0]['count'];
     }
 
+   
     public function paginate($page, $size) {
         $start = ($page - 1) * $size;
         $sql = "select * from product limit {$start},{$size} ";
@@ -63,7 +64,8 @@ class Product extends Model {
         $id = $this->db->query($query);
         return $id;
     }
-    public function selectByIDStatus($id,$Status) {
+
+    public function selectByIDStatus($id, $Status) {
         $query = "select * from product where IDProduct = '{$id}' and Status = {$Status} ";
         $id = $this->db->query($query);
         return $id;

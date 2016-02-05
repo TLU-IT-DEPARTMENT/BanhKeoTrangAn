@@ -1,3 +1,6 @@
+
+<?php include_once ROOT . DS . 'lib/router.class.php'; ?>
+
 <style>
     .createpost{
         margin-left: 96% !important;
@@ -23,7 +26,7 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Product Detail </h3>
-                <a href="<?= ADMIN_ROOT ?>/product/adddetail/<?=$this->data['item'][0]['IDProduct']; ?>/page/1" class="createpost"><i class="fa fa-plus fa-2x"></i></a>
+                <a href="<?= ADMIN_ROOT ?>/product/adddetail/<?= $this->data['params'];?>/page/1" class="createpost"><i class="fa fa-plus fa-2x"></i></a>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="table-responsive">
@@ -84,13 +87,15 @@
 <?php ?>
 <div class="c-gray-box center">
     <ul class="pagination">
-        <li class="<?= $this->data['currentPage'] < 2 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/product/detail/".($this->data['item'][0]['IDProduct'])."/page/" . ($this->data['currentPage'] - 1);?> ">&laquo;</a></li>
+        <li class="<?= $this->data['currentPage'] < 2 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/product/detail/" . ($this->data['item'][0]['IDProduct']) . "/page/" . ($this->data['currentPage'] - 1); ?> ">&laquo;</a></li>
         <?php
-        $paging = $this->data['item'];
         foreach ($this->data['paging'] as $page) {
-            echo "<li class='" . ($this->data['currentPage'] == $page ? "active" : "") . "'><a href='" . ADMIN_ROOT . "/product/detail/".$paging[0]['IDProduct']."/page/$page". "'>$page</a></li>";
+            if (isset($this->data['item'][0]))
+                echo "<li class='" . ($this->data['currentPage'] == $page ? "active" : "") . "'><a href='" . ADMIN_ROOT . "/product/detail/" . $this->data['item'][0]['IDProduct'] . "/page/$page" . "'>$page</a></li>";
+            else
+                echo "";
         }
         ?>
-        <li class="<?= $this->data['currentPage'] > $this->data['currentPage'] - 1 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/product/detail/".($this->data['item'][0]['IDProduct']). "/page/" . ($this->data['currentPage'] + 1);?>">&raquo;</a></li>
+        <li class="<?= $this->data['currentPage'] > $this->data['currentPage'] - 1 ? "hide" : "" ?>"><a href="<?= ADMIN_ROOT . "/product/detail/" . ($this->data['item'][0]['IDProduct']) . "/page/" . ($this->data['currentPage'] + 1); ?>">&raquo;</a></li>
     </ul>
 </div>

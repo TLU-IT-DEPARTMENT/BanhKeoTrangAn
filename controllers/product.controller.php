@@ -34,166 +34,12 @@ class ProductController extends Controller {
             }
             $paging[] = $i;
         }
-        
+
         $this->data['totalPage'] = $totalPage;
         $this->data['paging'] = $paging;
         $this->data['item'] = $this->model->paginate($currentPage, $maxSize);
-        $this->data['currentPage'] = $currentPage;
-    }
-
-    public function admin_detail() {
-        $ProductDetail = new ProductDetail();
-        $idProduct = intval($this->params[0]);
-
-        $currentPage = intval($this->params[2]);
-
-        if (!$currentPage) {
-            $currentPage = 1;
-        }
-        $maxSize = 5;
-        $maxShowPaging = 10;
-        $countRecord = intval($ProductDetail->countAllRecord());
-        $totalPage = ceil($countRecord / $maxSize);
-        $paging = array();
-        $i = 1;
-        if ($currentPage >= $maxShowPaging) {
-            do {
-                $i = $i + $maxShowPaging - 1;
-            } while ($i + $maxShowPaging - 1 <= $currentPage);
-        }
-        for (; $i <= $totalPage; $i++) {
-            if (count($paging) >= $maxShowPaging) {
-                break;
-            }
-            $paging[] = $i;
-        }
-
-        $this->data['totalPage'] = $totalPage;
-        $this->data['paging'] = $paging;
-        $this->data['item'] = $ProductDetail->paginate($idProduct, $currentPage, $maxSize);
 
         $this->data['currentPage'] = $currentPage;
-    }
-
-    public function admin_AddDetail() {
-        $idProduct = intval($this->params[0]);
-        $id = $this->params[0];
-        $ProductDetailModel = new ProductDetail();
-        $this->data['ProductName'] = $this->model->selectByID($id);
-
-
-        $data = array();
-
-        $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
-        $max_file_size = 1024 * 300; //300 kb
-        $path = "./img/upload/"; // Upload directory
-        $count = 0;
-        $r = 1;
-        if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") {
-            $IDProduct = $idProduct;
-            $Caption = $_POST['Caption'];
-            // Loop $_FILES to exeicute all files
-            foreach ($_FILES['files']['name'] as $f => $name) {
-                if ($_FILES['files']['error'][$f] == 4) {
-                    continue; // Skip file if any error found
-                }
-                if ($_FILES['files']['error'][$f] == 0) {
-                    if ($_FILES['files']['size'][$f] > $max_file_size) {
-                        Session::setFlash("$name is too large!.");
-                        $r = 0;
-                        continue; // Skip large files
-                    } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
-                        Session::setFlash("$name is not a valid format");
-                        $r = 0;
-                        continue; // Skip invalid file formats
-                    } else { // No error found! Move uploaded files 
-                        if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name)) {
-
-                            $data = array(
-                                'IDProduct' => $IDProduct,
-                                'Image' => $name,
-                                'Caption' => $Caption,
-                                'r' => $r,
-                            );
-                            $isInsert = $ProductDetailModel->insert($data, $r);
-                            if (!$isInsert) {
-                                Session::setFlash("$name can't insert");
-                            }
-                            $count++; // Number of successfully uploaded file
-                            Router::redirect(ADMIN_ROOT . "/product/detail/{$id}/page/1");
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public function admin_EditDetail() {
-        $IdProductDetail = intval(($this->params[2]));
-        $ProductDetailModel = new ProductDetail();
-        $ProductDetailEN = $ProductDetailModel->selectByID($IdProductDetail);
-        $this->data['ProductName'] = $this->model->selectByID($this->params[0]);
-        $IDProduct = $ProductDetailEN[0]['IDProduct'];
-
-        $data = array();
-        die;
-        $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
-        $max_file_size = 1024 * 300; //300 kb
-        $path = "./img/upload/"; // Upload directory
-        $count = 0;
-        $r = 1;
-        if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") {
-            $IDProduct = $idProduct;
-            $Caption = $_POST['Caption'];
-            // Loop $_FILES to exeicute all files
-            foreach ($_FILES['files']['name'] as $f => $name) {
-                if ($_FILES['files']['error'][$f] == 4) {
-                    continue; // Skip file if any error found
-                }
-                if ($_FILES['files']['error'][$f] == 0) {
-                    if ($_FILES['files']['size'][$f] > $max_file_size) {
-                        Session::setFlash("$name is too large!.");
-                        $r = 0;
-                        continue; // Skip large files
-                    } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
-                        Session::setFlash("$name is not a valid format");
-                        $r = 0;
-                        continue; // Skip invalid file formats
-                    } else { // No error found! Move uploaded files 
-                        if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name)) {
-
-                            $data = array(
-                                'id' => $ProductDetailEN[0]['IDProductDetail'],
-                                'IDProduct' => $IDProduct,
-                                'Image' => $name,
-                                'Caption' => $Caption,
-                                'r' => $r,
-                            );
-                            $isInsert = $ProductDetailModel->update($data, $r);
-                            if (!$isInsert) {
-                                Session::setFlash("$name can't insert");
-                            }
-
-                            $count++; // Number of successfully uploaded file
-                            Router::redirect(ADMIN_ROOT . "/product/detail/{$IDProduct}/page/1");
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public function admin_DeleteDetail() {
-        $IdProductDetail = intval($this->params[2]);
-        $ProductDetailModel = new ProductDetail();
-        $ProductDetailEN = $ProductDetailModel->selectByID($IdProductDetail);
-        $IDProduct = $ProductDetailEN[0]['IDProduct'];
-        $isDelete = $ProductDetailModel->delete($IdProductDetail);
-        if ($isDelete) {
-            Router::redirect(ADMIN_ROOT . "/product/detail/{$IDProduct}/page/1");
-        } else {
-            Session::setFlash("unable to delete detail product");
-        }
     }
 
     public function admin_add() {
@@ -324,6 +170,221 @@ class ProductController extends Controller {
             Router::redirect(ADMIN_ROOT . "/product/list/page/1");
         } else {
             Session::setFlash("unable to delete product");
+        }
+    }
+
+    /* Detail  */
+
+    public function admin_detail() {
+        $ProductDetail = new ProductDetail();
+        $idProduct = intval($this->params[0]);
+
+        $currentPage = intval($this->params[2]);
+
+        if (!$currentPage) {
+            $currentPage = 1;
+        }
+        $maxSize = 5;
+        $maxShowPaging = 10;
+        $countRecord = intval($ProductDetail->countRecordWithID($idProduct));
+        $totalPage = ceil($countRecord / $maxSize);
+        if ($totalPage == 0) {
+            $totalPage = 1;
+        }
+        $paging = array();
+        $i = 1;
+        if ($currentPage >= $maxShowPaging) {
+            do {
+                $i = $i + $maxShowPaging - 1;
+            } while ($i + $maxShowPaging - 1 <= $currentPage);
+        }
+        for (; $i <= $totalPage; $i++) {
+            if (count($paging) >= $maxShowPaging) {
+                break;
+            }
+            $paging[] = $i;
+        }
+
+        $this->data['totalPage'] = $totalPage;
+        $this->data['paging'] = $paging;
+        $this->data['item'] = $ProductDetail->paginateJoin($idProduct, $currentPage, $maxSize);
+        $this->data['params'] = $this->params[0];
+        $this->data['currentPage'] = $currentPage;
+    }
+
+    public function admin_AddDetail() {
+        $idProduct = intval($this->params[0]);
+        $id = $this->params[0];
+        $ProductDetailModel = new ProductDetail();
+        $this->data['ProductName'] = $this->model->selectByID($id);
+
+
+        $data = array();
+
+        $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
+        $max_file_size = 1024 * 300; //300 kb
+        $path = "./img/upload/"; // Upload directory
+        $count = 0;
+        $r = 1;
+        if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") {
+            $IDProduct = $idProduct;
+            $Caption = $_POST['Caption'];
+            // Loop $_FILES to exeicute all files
+            foreach ($_FILES['files']['name'] as $f => $name) {
+                if ($_FILES['files']['error'][$f] == 4) {
+                    continue; // Skip file if any error found
+                }
+                if ($_FILES['files']['error'][$f] == 0) {
+                    if ($_FILES['files']['size'][$f] > $max_file_size) {
+                        Session::setFlash("$name is too large!.");
+                        $r = 0;
+                        continue; // Skip large files
+                    } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
+                        Session::setFlash("$name is not a valid format");
+                        $r = 0;
+                        continue; // Skip invalid file formats
+                    } else { // No error found! Move uploaded files 
+                        if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name)) {
+
+                            $data = array(
+                                'IDProduct' => $IDProduct,
+                                'Image' => $name,
+                                'Caption' => $Caption,
+                                'r' => $r,
+                            );
+                            $isInsert = $ProductDetailModel->insert($data, $r);
+                            if (!$isInsert) {
+                                Session::setFlash("$name can't insert");
+                            }
+                            $count++; // Number of successfully uploaded file
+                            Router::redirect(ADMIN_ROOT . "/product/detail/{$id}/page/1");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function admin_EditDetail() {
+        $idProduct = intval($this->params[0]);
+        $id = $this->params[0];
+        $ProductDetailModel = new ProductDetail();
+        $this->data['ProductName'] = $this->model->selectByID($id);
+
+        // id productdetail
+        $IDProductDetail = $this->params[2];
+        $data = array();
+
+        $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
+        $max_file_size = 1024 * 300; //300 kb
+        $path = "./img/upload/"; // Upload directory
+        $count = 0;
+        $r = 1;
+        if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") {
+            $IDProduct = $idProduct;
+            $Caption = $_POST['Caption'];
+            // Loop $_FILES to exeicute all files
+            foreach ($_FILES['files']['name'] as $f => $name) {
+                if ($_FILES['files']['error'][$f] == 4) {
+                    continue; // Skip file if any error found
+                }
+                if ($_FILES['files']['error'][$f] == 0) {
+                    if ($_FILES['files']['size'][$f] > $max_file_size) {
+                        Session::setFlash("$name is too large!.");
+                        $r = 0;
+                        continue; // Skip large files
+                    } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
+                        Session::setFlash("$name is not a valid format");
+                        $r = 0;
+                        continue; // Skip invalid file formats
+                    } else { // No error found! Move uploaded files 
+                        if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name)) {
+
+                            $data = array(
+                                'IDProductDetail' => $IDProductDetail,
+                                'IDProduct' => $IDProduct,
+                                'Image' => $name,
+                                'Caption' => $Caption,
+                                'r' => $r,
+                            );
+                            $isUpdate = $ProductDetailModel->update($data, $r);
+                            if (!$isUpdate) {
+                                Session::setFlash("$name can't update");
+                            }
+                            $count++; // Number of successfully uploaded file
+                            Router::redirect(ADMIN_ROOT . "/product/detail/{$id}/page/1");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+//    public function admin_EditDetail() {
+//        $IdProductDetail = intval(($this->params[2]));
+//        $ProductDetailModel = new ProductDetail();
+//        $ProductDetailEN = $ProductDetailModel->selectByID($IdProductDetail);
+//        $this->data['ProductName'] = $this->model->selectByID($this->params[0]);
+//        $IDProduct = $ProductDetailEN[0]['IDProduct'];
+//
+//        $data = array();
+//        die;
+//        $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
+//        $max_file_size = 1024 * 300; //300 kb
+//        $path = "./img/upload/"; // Upload directory
+//        $count = 0;
+//        $r = 1;
+//        if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") {
+//            $IDProduct = $idProduct;
+//            $Caption = $_POST['Caption'];
+//            // Loop $_FILES to exeicute all files
+//            foreach ($_FILES['files']['name'] as $f => $name) {
+//                if ($_FILES['files']['error'][$f] == 4) {
+//                    continue; // Skip file if any error found
+//                }
+//                if ($_FILES['files']['error'][$f] == 0) {
+//                    if ($_FILES['files']['size'][$f] > $max_file_size) {
+//                        Session::setFlash("$name is too large!.");
+//                        $r = 0;
+//                        continue; // Skip large files
+//                    } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
+//                        Session::setFlash("$name is not a valid format");
+//                        $r = 0;
+//                        continue; // Skip invalid file formats
+//                    } else { // No error found! Move uploaded files 
+//                        if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name)) {
+//
+//                            $data = array(
+//                                'id' => $ProductDetailEN[0]['IDProductDetail'],
+//                                'IDProduct' => $IDProduct,
+//                                'Image' => $name,
+//                                'Caption' => $Caption,
+//                                'r' => $r,
+//                            );
+//                            $isInsert = $ProductDetailModel->update($data, $r);
+//                            if (!$isInsert) {
+//                                Session::setFlash("$name can't insert");
+//                            }
+//
+//                            $count++; // Number of successfully uploaded file
+//                            Router::redirect(ADMIN_ROOT . "/product/detail/{$IDProduct}/page/1");
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+    public function admin_DeleteDetail() {
+        $IdProductDetail = intval($this->params[2]);
+        $ProductDetailModel = new ProductDetail();
+        $ProductDetailEN = $ProductDetailModel->selectByID($IdProductDetail);
+        $IDProduct = $ProductDetailEN[0]['IDProduct'];
+        $isDelete = $ProductDetailModel->delete($IdProductDetail);
+        if ($isDelete) {
+            Router::redirect(ADMIN_ROOT . "/product/detail/{$IDProduct}/page/1");
+        } else {
+            Session::setFlash("unable to delete detail product");
         }
     }
 

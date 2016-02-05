@@ -18,7 +18,7 @@ class ProductDetail extends Model {
     public function update($data, $r) {
         if ($r != 0) {
             $sql = "update productdetail set IDProduct = '{$data['IDProduct']}' , Image = '{$data['Image']}', Caption = '{$data['Caption']}' "
-                    . "where IDProductDetail = {$data['id']} ";
+                    . "where IDProductDetail = {$data['IDProductDetail']} ";
 
             return $this->db->query($sql);
         } else {
@@ -37,10 +37,23 @@ class ProductDetail extends Model {
         return $result[0]['count'];
     }
 
-    public function paginate($id, $page, $size) {
-        $start = ($page - 1) * $size;
-        $query = "(select * from (select distinct product.*,productdetail.IDProductDetail,productdetail.Image , productdetail.Caption from productdetail join product on productdetail.IDProduct = product.IDProduct )AS R where IDProduct = {$id} limit {$start},{$size})";       
+    public function countRecordWithID($IDProduct) {
+        $query = "select count(*) as count from productdetail where IDProduct = {$IDProduct}";
+        $result = $this->db->query($query);
+        return $result[0]['count'];
+    }
 
+    public function paginate($page, $size) {
+        $start = ($page - 1) * $size;
+        $query = "select * form productdetail limit {$start},{$size}";
+        return $this->db->query($query);
+    }
+
+    public function paginateJoin($id, $page, $size) {
+        $start = ($page - 1) * $size;
+        $query = "(select * from (select distinct product.*,productdetail.IDProductDetail,productdetail.Image , "
+                . "productdetail.Caption from productdetail join product on productdetail.IDProduct = product.IDProduct )AS R "
+                . "where IDProduct = {$id} limit {$start},{$size})";
         return $this->db->query($query);
     }
 
