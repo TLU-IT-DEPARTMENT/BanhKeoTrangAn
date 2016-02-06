@@ -9,7 +9,7 @@ class UserController extends Controller {
 
     public function admin_list() {
         $currentPage = $this->params[1];
-        if(!$currentPage){
+        if (!$currentPage) {
             $currentPage = 1;
         }
         $maxSize = 5;
@@ -31,7 +31,7 @@ class UserController extends Controller {
         }
         $this->data['totalPage'] = $totalPage;
         $this->data['paging'] = $paging;
-        $this->data['lstUsers'] = $this->model->paginate($currentPage,$maxSize);
+        $this->data['lstUsers'] = $this->model->paginate($currentPage, $maxSize);
         $this->data['currentPage'] = $currentPage;
     }
 
@@ -132,13 +132,13 @@ class UserController extends Controller {
             }
         }
     }
-    public function admin_delete(){
+
+    public function admin_delete() {
         $id = $this->params[0];
         $isDelete = $this->model->delete($id);
-        if($isDelete){
+        if ($isDelete) {
             Router::redirect(ADMIN_ROOT . "/user/list/page/1");
-        }
-        else{
+        } else {
             Session::setFlash("unable to delete user");
         }
     }

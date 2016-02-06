@@ -1,6 +1,4 @@
 
-<!-- http://localhost:8080/BanhKeoTrangAn/en/index -->
-
 <?php include_once '_layout/link.php'; ?>
 <body>
     <?php include_once '_layout/header.php'; ?>

@@ -8,7 +8,7 @@ define('WEBROOT_PATH', 'http://localhost:8080/BanhKeoTrangAn/webroot');
 define('ROOT_PATH', 'http://localhost:8080/BanhKeoTrangAn/');
 define('ADMIN_ROOT', 'http://localhost:8080/BanhKeoTrangAn/admin');
 define('DEFAULT_ROOT', 'http://localhost:8080/BanhKeoTrangAn/default');
-
+define('INDEX', 'http://localhost:8080/BanhKeoTrangAn/en/index');
 
 define('SLIDEBAR_MENU', dirname(dirname(__FILE__)) . DS . "views\_layout_admin\sidebar_menu.php");
 define('LAYOUT_ADMIN', dirname(dirname(__FILE__)) . DS . "views\_layout_admin");

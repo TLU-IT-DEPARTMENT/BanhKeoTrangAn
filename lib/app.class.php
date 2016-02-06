@@ -21,11 +21,13 @@ class App {
         $controller_method = strtolower(self::$router->getMethodPrefix() . self::$router->getAction());
 
         $layout = self::$router->getRoute();
+
         if ($layout == 'admin' && Session::get('role') != 1) {
-            if($controller_method != 'admin_login'){
+            if ($controller_method != 'admin_login') {
                 Router::redirect("admin/user/login");
             }
         }
+
         // Calling controller method
 
         $controller_object = new $controller_class();
@@ -38,7 +40,9 @@ class App {
         } else {
             throw new Exception('Method ' . $controller_method . ' of class ' . $controller_class . ' does not exist.');
         }
-
+        if ($layout == null) {
+            $layout = 'default';
+        }
         // $layout se load len trang chinh trong view
         $layout_path = VIEWS_PATH . DS . $layout . '.php';
         $layout_view_object = new View(compact('content'), $layout_path);

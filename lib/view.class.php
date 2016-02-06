@@ -24,7 +24,10 @@ class View {
             return false;
         }
         $controller_dir = $router->getController();
+        
         $template_name = $router->getMethodPrefix() . $router->getAction() . '.php';
+//        var_dump($template_name);
+//        die;
         return VIEWS_PATH . DS . $controller_dir . DS . $template_name;
     }
 

@@ -5,12 +5,12 @@ Config::set('site_name', 'Bánh Kẹo Tràng An');
 Config::set('languages', array('en', 'vn'));
 
 Config::set('routes',array(
-    'index' => '',
+    'default' => '',
     'admin' => 'admin_',
 ));
 
 Config::set('admin_route', 'admin');
-Config::set('default_route', 'index');
+Config::set('default_route', 'default');
 Config::set('default_language', 'en');
 Config::set('default_controller', 'home');
 Config::set('default_action', 'index');

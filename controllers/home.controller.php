@@ -10,6 +10,10 @@ class HomeController extends Controller {
         
     }
 
+    public function login() {
+       
+    }
+
     public function admin_index() {
         
     }
