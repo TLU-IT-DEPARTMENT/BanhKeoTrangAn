@@ -46,7 +46,8 @@ class App {
         // $layout se load len trang chinh trong view
         $layout_path = VIEWS_PATH . DS . $layout . '.php';
         $layout_view_object = new View(compact('content'), $layout_path);
-
+//        var_dump($view_object);
+//        die;
         echo $layout_view_object->render();
     }
 

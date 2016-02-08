@@ -163,6 +163,7 @@ class UserController extends Controller {
             echo json_encode($data);
         }
     }
+    
 
     public function admin_logout() {
         Session::destroy();

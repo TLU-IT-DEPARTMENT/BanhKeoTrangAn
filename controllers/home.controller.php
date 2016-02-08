@@ -7,11 +7,7 @@ class HomeController extends Controller {
     }
 
     public function index() {
-        
-    }
-
-    public function login() {
-       
+        $this->data['test'] = 'category';
     }
 
     public function admin_index() {

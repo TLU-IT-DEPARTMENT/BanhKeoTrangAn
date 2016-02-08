@@ -7,9 +7,13 @@ class CategoryController extends Controller {
         $this->model = new Category();
     }
 
+    public function category() {
+        $this->data['category'] = 'category'; 
+    }
+
     public function admin_list() {
         $currentPage = $this->params[1];
-        if(!$currentPage){
+        if (!$currentPage) {
             $currentPage = 1;
         }
         $maxSize = 10;
@@ -31,7 +35,7 @@ class CategoryController extends Controller {
         }
         $this->data['totalPage'] = $totalPage;
         $this->data['paging'] = $paging;
-        $this->data['listCategory'] = $this->model->paginate($currentPage,$maxSize);
+        $this->data['listCategory'] = $this->model->paginate($currentPage, $maxSize);
         $this->data['currentPage'] = $currentPage;
     }
 
@@ -44,7 +48,7 @@ class CategoryController extends Controller {
             $Slug = $_POST['Slug'];
             $OrderCategory = $_POST['OrderCategory'];
             $Desription = $_POST['Description'];
-            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0;
             $data = array(
                 'Name' => $Name,
                 'IDCategoryParent' => $IDCategoryParent,
@@ -72,7 +76,7 @@ class CategoryController extends Controller {
             $Slug = $_POST['Slug'];
             $OrderCategory = $_POST['OrderCategory'];
             $Desription = $_POST['Description'];
-            $Status = $_POST['Status'] == 'enable' ? 1 : 0 ;
+            $Status = $_POST['Status'] == 'enable' ? 1 : 0;
             $data = array(
                 'IDCategory' => $IDCategory,
                 'IDCategoryParent' => $IDCategoryParent,
