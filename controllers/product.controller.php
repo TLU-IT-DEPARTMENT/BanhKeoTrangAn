@@ -12,6 +12,35 @@ class ProductController extends Controller {
         $this->model = new Product();
     }
 
+    public function index() {
+        $currentPage = $this->params[1];
+        if (!$currentPage) {
+            $currentPage = 1;
+        }
+        $maxSize = 9;
+        $maxShowPaging = 10;
+        $countRecord = intval($this->model->countAllRecordEnable());
+        $totalPage = ceil($countRecord / $maxSize);
+        $paging = array();
+        $i = 1;
+        if ($currentPage >= $maxShowPaging) {
+            do {
+                $i = $i + $maxShowPaging - 1;
+            } while ($i + $maxShowPaging - 1 <= $currentPage);
+        }
+        for (; $i <= $totalPage; $i++) {
+            if (count($paging) >= $maxShowPaging) {
+                break;
+            }
+            $paging[] = $i;
+        }
+
+        $this->data['totalPage'] = $totalPage;
+        $this->data['paging'] = $paging;
+        $this->data['item'] = $this->model->paginateJoin($currentPage, $maxSize);
+        $this->data['currentPage'] = $currentPage;
+    }
+
     public function admin_list() {
         $currentPage = $this->params[1];
         if (!$currentPage) {
@@ -135,7 +164,7 @@ class ProductController extends Controller {
             $Description = $_POST['Description'];
             $Rate = $_POST['Rate'];
             $RatePeople = $_POST['RatePeople'];
-            $Status = $_POST['Status'] ;
+            $Status = $_POST['Status'];
             $data = array(
                 'id' => $id,
                 'Name' => $Name,
@@ -148,7 +177,7 @@ class ProductController extends Controller {
                 'Status' => $Status,
                 'r' => $r,
             );
-           
+
             $isEdit = $this->model->update($data, $r);
             if ($isEdit) {
 

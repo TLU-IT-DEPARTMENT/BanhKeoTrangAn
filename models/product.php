@@ -42,10 +42,24 @@ class Product extends Model {
         return $result[0]['count'];
     }
 
+    public function countAllRecordEnable() {
+        $query = "select count(*) as count from product where Status = 1";
+        $result = $this->db->query($query);
+        return $result[0]['count'];
+    }
+
     public function paginate($page, $size) {
         $start = ($page - 1) * $size;
         $sql = "select * from product limit {$start},{$size} ";
         return $this->db->query($sql);
+    }
+
+    public function paginateJoin($page, $size) {
+        $start = ($page - 1) * $size;
+        $query = "select product.*, productdetail.Image,productdetail.Caption "
+                . "from product inner join productdetail on product.IDProduct = productdetail.IDProduct and "
+                . "product.Status = 1 limit {$start},{$size} ";
+        return $this->db->query($query);
     }
 
     public function selectAll() {

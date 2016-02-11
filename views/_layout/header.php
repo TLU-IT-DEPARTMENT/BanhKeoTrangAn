@@ -1,80 +1,80 @@
 <style>
     @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic);
 
-body {font-family: 'Source Sans Pro', sans-serif; font-size: 14px; color: #666;}
+    body {font-family: 'Source Sans Pro', sans-serif; font-size: 14px; color: #666;}
 
-#lean_overlay {
-    position: fixed;
-    z-index:100;
-    top: 0px;
-    left: 0px;
-    height:100%;
-    width:100%;
-    background: #000;
-    display: none;
-}
+    #lean_overlay {
+        position: fixed;
+        z-index:100;
+        top: 0px;
+        left: 0px;
+        height:100%;
+        width:100%;
+        background: #000;
+        display: none;
+    }
 
-.popupContainer{
-	position:absolute;
-	width:330px;
-	height: auto;
-	left:45%;
-	top:80px;
-	background: #FFF;
-}
+    .popupContainer{
+        position:absolute;
+        width:330px;
+        height: auto;
+        left:45%;
+        top:80px;
+        background: #FFF;
+    }
 
-.btn {padding:10px 20px; background: #F4F4F2;}
-.btn_red {background: #ED6347; color: #FFF;}
+    .btn {padding:10px 20px; background: #F4F4F2;}
+    .btn_red {background: #ED6347; color: #FFF;}
 
-.btn:hover {background: #E4E4E2;}
-.btn_red:hover {background: #C12B05;}
+    .btn:hover {background: #E4E4E2;}
+    .btn_red:hover {background: #C12B05;}
 
-a.btn {color:#666; text-align: center; text-decoration: none;}
-a.btn_red {color: #FFF;}
+    a.btn {color:#666; text-align: center; text-decoration: none;}
+    a.btn_red {color: #FFF;}
 
-.one_half {width:50%; display: block; float:left;}
-.one_half.last {width:45%; margin-left:5%;}
+    .one_half {width:50%; display: block; float:left;}
+    .one_half.last {width:45%; margin-left:5%;}
 
-/* Popup Styles*/
-.popupHeader {font-size:16px; text-transform: uppercase;}
-.popupHeader {background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
-.popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
+    /* Popup Styles*/
+    .popupHeader {font-size:16px; text-transform: uppercase;}
+    .popupHeader {background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
+    .popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
 
-.popupBody {padding:20px;}
+    .popupBody {padding:20px;}
 
 
-/* Social Login Form */
-.social_login {}
-.social_login .social_box {display:block; clear:both; padding:10px; margin-bottom: 10px; background: #F4F4F2; overflow: hidden;}
-.social_login .icon {display:block; width:10px; padding:5px 10px; margin-right: 10px; float:left; color:#FFF; font-size:16px; text-align: center;} 
-.social_login .fb .icon {background:#3B5998;}
-.social_login .google .icon {background:#DD4B39;}
-.social_login .icon_title {display:block; padding:5px 0; float:left; font-weight: bold; font-size: 16px; color:#777;}
-.social_login .social_box:hover {background: #E4E4E2;}
+    /* Social Login Form */
+    .social_login {}
+    .social_login .social_box {display:block; clear:both; padding:10px; margin-bottom: 10px; background: #F4F4F2; overflow: hidden;}
+    .social_login .icon {display:block; width:10px; padding:5px 10px; margin-right: 10px; float:left; color:#FFF; font-size:16px; text-align: center;} 
+    .social_login .fb .icon {background:#3B5998;}
+    .social_login .google .icon {background:#DD4B39;}
+    .social_login .icon_title {display:block; padding:5px 0; float:left; font-weight: bold; font-size: 16px; color:#777;}
+    .social_login .social_box:hover {background: #E4E4E2;}
 
-.centeredText {text-align: center; margin: 20px 0; clear: both; overflow: hidden; text-transform: uppercase;}
+    .centeredText {text-align: center; margin: 20px 0; clear: both; overflow: hidden; text-transform: uppercase;}
 
-.action_btns {clear:both; overflow: hidden;}
-.action_btns a {display: block;}
+    .action_btns {clear:both; overflow: hidden;}
+    .action_btns a {display: block;}
 
-/* User Login Form */
-.user_login {display: none;}
-.user_login label {display: block; margin-bottom:5px;}
-.user_login input[type="text"], .user_login input[type="email"], .user_login input[type="password"] {display: block; width:90%; padding: 10px; border:1px solid #DDD; color:#666;}
-.user_login input[type="checkbox"] {float:left; margin-right:5px;}
-.user_login input[type="checkbox"]+label {float:left;}
+    /* User Login Form */
+    .user_login {display: none;}
+    .user_login label {display: block; margin-bottom:5px;}
+    .user_login input[type="text"], .user_login input[type="email"], .user_login input[type="password"] {display: block; width:90%; padding: 10px; border:1px solid #DDD; color:#666;}
+    .user_login input[type="checkbox"] {float:left; margin-right:5px;}
+    .user_login input[type="checkbox"]+label {float:left;}
 
-.user_login .checkbox {margin-bottom: 10px; clear: both; overflow: hidden;}
-.forgot_password {display:block; margin: 20px 0 10px; clear: both; overflow: hidden; text-decoration: none; color:#ED6347;}
+    .user_login .checkbox {margin-bottom: 10px; clear: both; overflow: hidden;}
+    .forgot_password {display:block; margin: 20px 0 10px; clear: both; overflow: hidden; text-decoration: none; color:#ED6347;}
 
-/* User Register Form */
-.user_register {display: none;}
-.user_register label {display: block; margin-bottom:5px;}
-.user_register input[type="text"], .user_register input[type="email"], .user_register input[type="password"] {display: block; width:90%; padding: 10px; border:1px solid #DDD; color:#666;}
-.user_register input[type="checkbox"] {float:left; margin-right:5px;}
-.user_register input[type="checkbox"]+label {float:left;}
+    /* User Register Form */
+    .user_register {display: none;}
+    .user_register label {display: block; margin-bottom:5px;}
+    .user_register input[type="text"], .user_register input[type="email"], .user_register input[type="password"] {display: block; width:90%; padding: 10px; border:1px solid #DDD; color:#666;}
+    .user_register input[type="checkbox"] {float:left; margin-right:5px;}
+    .user_register input[type="checkbox"]+label {float:left;}
 
-.user_register .checkbox {margin-bottom: 10px; clear: both; overflow: hidden;}
+    .user_register .checkbox {margin-bottom: 10px; clear: both; overflow: hidden;}
 </style>
 <header id="header"><!--header-->
     <div class="header_top"><!--header_top-->
@@ -108,7 +108,7 @@ a.btn_red {color: #FFF;}
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="<?= WEBROOT_PATH ?>/images/home/logo.png" alt="" /></a>
+                        <a href="<?= ROOT_PATH ?>"><img src="<?= WEBROOT_PATH ?>/images/home/logo.png" alt="" /></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">
@@ -158,10 +158,10 @@ a.btn_red {color: #FFF;}
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="<?= ROOT_PATH ?>" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="shop.html">Products</a></li>
+                                    <li><a href="en/product/index/page/1">Products</a></li>
                                     <li><a href="product-details.html">Product Details</a></li> 
                                     <li><a href="checkout.html">Checkout</a></li> 
                                     <li><a href="cart.html">Cart</a></li> 
@@ -173,7 +173,6 @@ a.btn_red {color: #FFF;}
                                     <li><a href="blog-single.html">Blog Single</a></li>
                                 </ul>
                             </li> 
-                            <li><a href="404.html">404</a></li>
                             <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
@@ -218,14 +217,14 @@ a.btn_red {color: #FFF;}
         <div class="social_login">
             <div class="">
                 <a href="#" class="social_box fb">
-                        <span class="icon"><i class="fa fa-facebook"></i></span>
-                        <span class="icon_title">Connect with Facebook</span>
+                    <span class="icon"><i class="fa fa-facebook"></i></span>
+                    <span class="icon_title">Connect with Facebook</span>
 
                 </a>
 
                 <a href="#" class="social_box google">
-                        <span class="icon"><i class="fa fa-google-plus"></i></span>
-                        <span class="icon_title">Connect with Google</span>
+                    <span class="icon"><i class="fa fa-google-plus"></i></span>
+                    <span class="icon_title">Connect with Google</span>
                 </a>
             </div>
 
@@ -297,32 +296,32 @@ a.btn_red {color: #FFF;}
 <script type="text/javascript" src="<?= WEBROOT_PATH ?>/js/jquery.leanModal.min.js"></script>
 
 <script type="text/javascript">
-	$("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $("#modal_trigger").leanModal({top: 200, overlay: 0.6, closeButton: ".modal_close"});
 
-	$(function(){
-		// Calling Login Form
-		$("#login_form").click(function(){
-			$(".social_login").hide();
-			$(".user_login").show();
-			return true;
-		});
+    $(function () {
+        // Calling Login Form
+        $("#login_form").click(function () {
+            $(".social_login").hide();
+            $(".user_login").show();
+            return true;
+        });
 
-		// Calling Register Form
-		$("#register_form").click(function(){
-			$(".social_login").hide();
-			$(".user_register").show();
-			$(".header_title").text('Register');
-			return true;
-		});
+        // Calling Register Form
+        $("#register_form").click(function () {
+            $(".social_login").hide();
+            $(".user_register").show();
+            $(".header_title").text('Register');
+            return true;
+        });
 
-		// Going back to Social Forms
-		$(".back_btn").click(function(){
-			$(".user_login").hide();
-			$(".user_register").hide();
-			$(".social_login").show();
-			$(".header_title").text('Login');
-			return true;
-		});
+        // Going back to Social Forms
+        $(".back_btn").click(function () {
+            $(".user_login").hide();
+            $(".user_register").hide();
+            $(".social_login").show();
+            $(".header_title").text('Login');
+            return true;
+        });
 
-	})
+    })
 </script>
