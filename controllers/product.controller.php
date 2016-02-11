@@ -135,7 +135,7 @@ class ProductController extends Controller {
             $Description = $_POST['Description'];
             $Rate = $_POST['Rate'];
             $RatePeople = $_POST['RatePeople'];
-            $Status = $_POST['Status'] == 'enable' ? 1 : 0;
+            $Status = $_POST['Status'] ;
             $data = array(
                 'id' => $id,
                 'Name' => $Name,
@@ -148,6 +148,7 @@ class ProductController extends Controller {
                 'Status' => $Status,
                 'r' => $r,
             );
+           
             $isEdit = $this->model->update($data, $r);
             if ($isEdit) {
 

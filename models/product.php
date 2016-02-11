@@ -24,7 +24,7 @@ class Product extends Model {
                     . "UnitPrice = '{$data['UnitPrice']}', Description = '{$data['Description']}',Rate = '{$data['Rate']}',"
                     . "RatePeople = '{$data['RatePeople']}',Status = '{$data['Status']}' "
                     . "where IDProduct = '{$data['id']}' ";
-         
+
             return $this->db->query($sql);
         } else {
             throw new Exception("failed to edit user");
@@ -68,6 +68,13 @@ class Product extends Model {
         $query = "select * from product where IDProduct = '{$id}' and Status = {$Status} ";
         $id = $this->db->query($query);
         return $id;
+    }
+
+    public function selectJoin() {
+        $query = "select product.*, productdetail.Image,productdetail.Caption "
+                . "from product inner join productdetail on product.IDProduct = productdetail.IDProduct and "
+                . "product.Status = 1 limit 6 ";
+        return $this->db->query($query);
     }
 
 }

@@ -7,7 +7,14 @@ class HomeController extends Controller {
     }
 
     public function index() {
+        // category
         $this->data['category'] = $this->category();
+        // list product
+        $this->data['product'] = $this->showProduct();
+//        echo '<pre>';
+//        print_r($this->data['product']);
+//        echo '</pre>';
+//        die;
     }
 
     public function category() {
@@ -33,6 +40,11 @@ class HomeController extends Controller {
         }
 
         return $results;
+    }
+
+    public function showProduct() {
+        $product = new Product();
+        return $product->selectJoin();
     }
 
     public function admin_index() {

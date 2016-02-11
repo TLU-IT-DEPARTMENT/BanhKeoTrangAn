@@ -55,8 +55,8 @@
         <div class="form-group">
             <label for="">Status</label><span class="red-require"><strong>*</strong></span>
             <select class="form-control" id="postStatus" name="Status">
-                <option value="<?php if ($this->data['item'][0]['Status'] == 1) echo 'selected' ?>">Enable</option>
-                <option value="<?php if ($this->data['item'][0]['Status'] == 0) echo 'selected' ?>">Disable</option>
+                <option value="1" <?php if ($this->data['item'][0]['Status'] == 1) echo 'selected' ?>>Enable</option>
+                <option value="0" <?php if ($this->data['item'][0]['Status'] == 0) echo 'selected' ?>>Disable</option>
             </select>
         </div>
     </div><!-- /.box-body -->
