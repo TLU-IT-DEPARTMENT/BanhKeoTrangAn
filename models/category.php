@@ -49,8 +49,8 @@ class Category extends Model {
         $query = "select * from category where IDCategoryParent = {$IDCategoryParent}";
         return $this->db->query($query);
     }
-    
-    public function selectByStatus($Status){
+
+    public function selectByStatus($Status) {
         $query = "select * from category where Status = {$Status}";
         return $this->db->query($query);
     }
@@ -108,11 +108,11 @@ class Category extends Model {
         }
         return $str;
     }
-    
-    public function selectAllFormalName(){
+
+    public function selectAllFormalName() {
         $data = $this->selectAll();
         $dataName = array();
-        foreach ($data as $temp){
+        foreach ($data as $temp) {
             $dataTemp = array(
                 'IDCategory' => $temp['IDCategory'],
                 'Name' => $this->processAncestorByIDCategory($temp['IDCategory'])
@@ -121,11 +121,11 @@ class Category extends Model {
         }
         return $dataName;
     }
-    
-    public function selectFormalNameByStatus($Status){
+
+    public function selectFormalNameByStatus($Status) {
         $data = $this->selectByStatus($Status);
         $dataName = array();
-        foreach ($data as $temp){
+        foreach ($data as $temp) {
             $dataTemp = array(
                 'IDCategory' => $temp['IDCategory'],
                 'Name' => $this->processAncestorByIDCategory($temp['IDCategory'])
