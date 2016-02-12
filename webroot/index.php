@@ -16,6 +16,7 @@ define('LAYOUT_ADMIN', dirname(dirname(__FILE__)) . DS . "views\_layout_admin");
 require_once (ROOT . DS . 'lib' . DS . 'init.php');
 
 session_start();
-
+//print_r($_SERVER['REQUEST_URI']);
+//die;
 App::run($_SERVER['REQUEST_URI']);
 
