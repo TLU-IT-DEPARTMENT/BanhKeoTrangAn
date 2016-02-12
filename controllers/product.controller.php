@@ -41,6 +41,43 @@ class ProductController extends Controller {
         $this->data['currentPage'] = $currentPage;
     }
 
+    public function detail() {
+        $productDetail = new ProductDetail();
+        $IDProduct = $this->params[0];
+        $this->data['category'] = $this->category();
+        $this->data['recommend'] = $productDetail->selectProductDetailRecommend();
+        $this->data['item'] = $productDetail->selectProductDetail($IDProduct);
+//        echo '<pre>';
+//        print_r($this->data['item']);
+//         echo '</pre>';
+//        die;
+    }
+
+    public function category() {
+        $category = new Category();
+        $data = $category->selectByStatus(1);
+        $result = $this->createNested($data);
+//        echo '<pre>';
+//        print_r($result);
+//        echo '</pre>';
+//        die;
+        return $result;
+    }
+
+    function createNested($categories, $parentId = null) {
+        $results = [];
+        foreach ($categories as $category) {
+            if ($parentId == $category['IDCategoryParent']) {
+                $nextParentId = $category['IDCategory'];
+                $category['children'] = $this->createNested($categories, $nextParentId);
+
+                $results[] = $category;
+            }
+        }
+
+        return $results;
+    }
+
     public function admin_list() {
         $currentPage = $this->params[1];
         if (!$currentPage) {

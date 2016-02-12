@@ -11,6 +11,9 @@ class HomeController extends Controller {
         $this->data['category'] = $this->category();
         // list product
         $this->data['product'] = $this->showProduct();
+        //recommend
+        $productDetail = new ProductDetail();
+        $this->data['recommend'] = $productDetail->selectProductDetailRecommend();
 //        echo '<pre>';
 //        print_r($this->data['product']);
 //        echo '</pre>';

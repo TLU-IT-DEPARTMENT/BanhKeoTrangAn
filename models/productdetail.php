@@ -74,4 +74,18 @@ class ProductDetail extends Model {
         return $id;
     }
 
+    public function selectProductDetail($IDProduct) {
+        $query = "select product.*, productdetail.Image,productdetail.Caption, productdetail.IDProductDetail "
+                . "from product inner join productdetail on {$IDProduct} = productdetail.IDProduct and "
+                . "product.Status = 1 ORDER BY IDProductDetail DESC limit 1 ";
+        return $this->db->query($query);
+    }
+
+    public function selectProductDetailRecommend() {
+        $query = "select product.*, productdetail.Image,productdetail.Caption, productdetail.IDProductDetail "
+                . "from product inner join productdetail on product.IDProduct = productdetail.IDProduct and "
+                . "product.Status = 1 ORDER BY IDProductDetail DESC limit 3 ";
+        return $this->db->query($query);
+    }
+
 }

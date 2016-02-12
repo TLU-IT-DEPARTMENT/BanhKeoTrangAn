@@ -90,5 +90,5 @@ class Product extends Model {
                 . "product.Status = 1 limit 6 ";
         return $this->db->query($query);
     }
-
+    
 }
