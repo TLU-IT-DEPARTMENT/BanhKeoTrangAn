@@ -108,7 +108,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="<?= ROOT_PATH ?>"><img src="<?= WEBROOT_PATH ?>/images/home/logo.png" alt="" /></a>
+                        <a href="<?= ROOT_PATH ?>"><img style="width: 139px; height: 79px;" src="<?= WEBROOT_PATH ?>/img/logo/trang_an.gif" alt="trang_an" /></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">

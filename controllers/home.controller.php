@@ -4,6 +4,7 @@ class HomeController extends Controller {
 
     public function __construct($data = array()) {
         parent::__construct($data);
+        $this->model = new Home();
     }
 
     public function index() {
@@ -14,10 +15,9 @@ class HomeController extends Controller {
         //recommend
         $productDetail = new ProductDetail();
         $this->data['recommend'] = $productDetail->selectProductDetailRecommend();
-//        echo '<pre>';
-//        print_r($this->data['product']);
-//        echo '</pre>';
-//        die;
+
+        // kind of product
+        $this->data['kindofproduct'] = $this->model->showKindOfProduct();
     }
 
     public function category() {
@@ -30,7 +30,7 @@ class HomeController extends Controller {
 //        die;
         return $result;
     }
-
+    /* tree view */
     function createNested($categories, $parentId = null) {
         $results = [];
         foreach ($categories as $category) {
