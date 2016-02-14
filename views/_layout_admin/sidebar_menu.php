@@ -12,16 +12,16 @@
             <i class="fa fa-files-o"></i>
             <span>Catalog</span><i class="fa fa-angle-left pull-right"></i>
         </a>
-       
+
         <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-circle-o"></i> Product<i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="<?= ADMIN_ROOT ?>/product/list/page/1"><i class="fa fa-circle-o"></i>Product</a></li>
                 </ul>
-                 <ul class="treeview-menu">
+                <ul class="treeview-menu">
                     <li><a href="<?= ADMIN_ROOT ?>/kindofproduct/list/page/1"><i class="fa fa-circle-o"></i>Kind Of Product</a></li>
                 </ul>
-               
+
             </li>
         </ul>
         <ul class="treeview-menu">
@@ -29,11 +29,11 @@
                 <ul class="treeview-menu">
                     <li><a href="<?= ADMIN_ROOT ?>/post/list/page/1"><i class="fa fa-circle-o"></i>Posts</a></li>
                 </ul>
-                 <ul class="treeview-menu">
+                <ul class="treeview-menu">
                     <li><a href="<?= ADMIN_ROOT ?>/category/list/page/1"><i class="fa fa-circle-o"></i>Catagories</a></li>
                 </ul>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Catagories Posts</a></li>
+                    <li><a href="<?= ADMIN_ROOT ?>/categorypost/index/page/1"><i class="fa fa-circle-o"></i>Catagories Posts</a></li>
                 </ul>
             </li>
         </ul>
@@ -57,15 +57,10 @@
             <i class="fa fa-shopping-cart"></i> <span>Sales</span> </i><i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i> Receipts<i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Receipts</a></li>
-                </ul>
-
-            </li>
+            <li><a href="<?= ADMIN_ROOT ?>/receipt/index/page/1"><i class="fa fa-circle-o"></i> Receipts</a></li>
         </ul>
         <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i> Carts</a></li>
+            <li><a href="<?= ADMIN_ROOT ?>/cart/index/page/1"><i class="fa fa-circle-o"></i> Carts</a></li>
         </ul>
     </li>
     <li class="active treeview" >
