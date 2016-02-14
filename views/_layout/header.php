@@ -137,11 +137,12 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+                            <li><a href="#"><i class="fa fa-user"></i> <?php if (Session::get("Name")) echo Session::get("Name");
+else echo "Account"; ?></a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            <li><a id="modal_trigger" class="btn" href="#modal"><i class="fa fa-lock"></i>Login</a></li> 
+                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>                  
+                            <li><a id="modal_trigger" class="btn <?php if (Session::get("Name")) echo "hidden"; ?>" href="#modal"><i class="fa fa-lock"></i>Login</a></li> 
                         </ul>
                     </div>
                 </div>
@@ -205,93 +206,113 @@
     </div>
 </div>-->
 
+<form  method="post" action="">
+    <div id="modal" class="popupContainer" style="display:none;">
+        <header class="popupHeader">
+            <span class="header_title">Login</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
 
-<div id="modal" class="popupContainer" style="display:none;">
-    <header class="popupHeader">
-        <span class="header_title">Login</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
+        <section class="popupBody">
+            <!-- Social Login -->
+            <div class="social_login">
+                <div class="">
+                    <a href="#" class="social_box fb">
+                        <span class="icon"><i class="fa fa-facebook"></i></span>
+                        <span class="icon_title">Connect with Facebook</span>
 
-    <section class="popupBody">
-        <!-- Social Login -->
-        <div class="social_login">
-            <div class="">
-                <a href="#" class="social_box fb">
-                    <span class="icon"><i class="fa fa-facebook"></i></span>
-                    <span class="icon_title">Connect with Facebook</span>
+                    </a>
 
-                </a>
+                    <a href="#" class="social_box google">
+                        <span class="icon"><i class="fa fa-google-plus"></i></span>
+                        <span class="icon_title">Connect with Google</span>
+                    </a>
+                </div>
 
-                <a href="#" class="social_box google">
-                    <span class="icon"><i class="fa fa-google-plus"></i></span>
-                    <span class="icon_title">Connect with Google</span>
-                </a>
-            </div>
-
-            <div class="centeredText">
-                <span>Or use your Email address</span>
-            </div>
-
-            <div class="action_btns">
-                <div class="one_half"><a href="#" id="login_form" class="btn">Login</a></div>
-                <div class="one_half last"><a href="#" id="register_form" class="btn">Sign up</a></div>
-            </div>
-        </div>
-
-        <!-- Username & Password Login form -->
-        <div class="user_login">
-            <form>
-                <label>Email / Username</label>
-                <input type="text" />
-                <br />
-
-                <label>Password</label>
-                <input type="password" />
-                <br />
-
-                <div class="checkbox">
-                    <input id="remember" type="checkbox" />
-                    <label for="remember">Remember me on this computer</label>
+                <div class="centeredText">
+                    <span>Or use your Email address</span>
                 </div>
 
                 <div class="action_btns">
-                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>
+                    <div class="one_half"><a href="#" id="login_form" class="btn">Login</a></div>
+                    <div class="one_half last"><a href="#" id="register_form" class="btn">Sign up</a></div>
                 </div>
-            </form>
+            </div>
+            <?php
+            if ($_POST && isset($_POST['username']) && isset($_POST['password'])) {
+                $data = array();
+                $userModel = new User();
+                $user = $userModel->getByLogin($_POST['username']);
+                $hash = md5(Config::get('salt') . $_POST['password']);
+                if ($user && $user['Status'] == 0 && $hash == $user['Password']) {
+                    Session::set('Name', $user['Name']);
+                    Session::set('role', $user['Status']);
 
-            <a href="#" class="forgot_password">Forgot password?</a>
-        </div>
+                    $data = array(
+                        'name' => $user['Name'],
+                        'status' => 'success',
+                    );
+                    // role = 1 : admin
+                    // role = 0 : member 
+                    Router::redirect(ROOT_PATH);
+                }
+                echo json_encode($data);
+            }
+            ?>
+            <!-- Username & Password Login form -->
+            <div class="user_login">
+                <form method="post" action="">
+                    <label>Email / Username</label>
+                    <input type="text" name="username" />
+                    <br />
 
-        <!-- Register Form -->
-        <div class="user_register">
-            <form>
-                <label>Full Name</label>
-                <input type="text" />
-                <br />
+                    <label>Password</label>
+                    <input type="password" name="password" />
+                    <br />
 
-                <label>Email Address</label>
-                <input type="email" />
-                <br />
+                    <div class="checkbox">
+                        <input id="remember" type="checkbox" />
+                        <label for="remember">Remember me on this computer</label>
+                    </div>
 
-                <label>Password</label>
-                <input type="password" />
-                <br />
+                    <div class="action_btns">
+                        <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                        <div class="one_half last"><button class="btn btn_red" type="submit" name="login" >Login</button></div>
+                    </div>
+                </form>
 
-                <div class="checkbox">
-                    <input id="send_updates" type="checkbox" />
-                    <label for="send_updates">Send me occasional email updates</label>
-                </div>
+                <a href="#" class="forgot_password">Forgot password?</a>
+            </div>
 
-                <div class="action_btns">
-                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a href="#" class="btn btn_red">Register</a></div>
-                </div>
-            </form>
-        </div>
-    </section>
-</div>
+            <!-- Register Form -->
+            <div class="user_register">
+                <form method="post" action="">
+                    <label>Full Name</label>
+                    <input type="text" name="fullname" />
+                    <br />
 
+                    <label>Email Address</label>
+                    <input type="email" name="email" />
+                    <br />
+
+                    <label>Password</label>
+                    <input type="password" name="password"/>
+                    <br />
+
+                    <div class="checkbox">
+                        <input id="send_updates" type="checkbox" />
+                        <label for="send_updates">Send me occasional email updates</label>
+                    </div>
+
+                    <div class="action_btns">
+                        <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                        <div class="one_half last"><button  class="btn btn_red" type="submit" name="register">Register</button></div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</form>
 <script type="text/javascript" src="<?= WEBROOT_PATH ?>/js/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="<?= WEBROOT_PATH ?>/js/jquery.leanModal.min.js"></script>
 

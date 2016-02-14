@@ -30,7 +30,9 @@ class HomeController extends Controller {
 //        die;
         return $result;
     }
+
     /* tree view */
+
     function createNested($categories, $parentId = null) {
         $results = [];
         foreach ($categories as $category) {
@@ -48,6 +50,11 @@ class HomeController extends Controller {
     public function showProduct() {
         $product = new Product();
         return $product->selectJoin();
+    }
+
+    public function SignIn() {
+
+      
     }
 
     public function admin_index() {
