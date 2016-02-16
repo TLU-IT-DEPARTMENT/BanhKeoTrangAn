@@ -90,5 +90,10 @@ class Product extends Model {
                 . "product.Status = 1 limit 6 ";
         return $this->db->query($query);
     }
-    
+    public function selectJoinByIDProduct($IDProduct) {
+        $query = "select * from (select product.*, productdetail.Image,productdetail.Caption "
+                . "from product inner join productdetail on product.IDProduct = productdetail.IDProduct and "
+                . "product.Status = 1)AS T where T.IDProduct = {$IDProduct}  ";
+        return $this->db->query($query);
+    }
 }

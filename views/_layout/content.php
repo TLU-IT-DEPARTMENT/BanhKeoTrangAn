@@ -26,7 +26,7 @@
                                         <div class="overlay-content">
                                             <h2><?= $item['UnitPrice'] ?></h2>
                                             <p><?= $item['Name'] ?></p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="<?=ROOT_PATH?>en/home/addtocart/<?=$item['IDProduct']?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
                                     </div>
                                 </div>
