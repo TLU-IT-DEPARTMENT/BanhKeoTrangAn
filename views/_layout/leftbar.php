@@ -15,15 +15,15 @@
                                         </a>
                                     </h4>
                                 </div>
-                                <?php foreach ($item['children'] as $row) { ?>
                                     <div id="<?= $item['Slug']?>" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <ul>
-                                                <li><?= $row['Name']; ?></li>                                                                   
+                                                <?php foreach ($item['children'] as $row) { ?>
+                                                <li><a href="#"><?= $row['Name']; ?></a></li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </div>
-                                <?php } ?>
                             <?php }
                             ?>
                         </div>
@@ -45,15 +45,15 @@
                                         </a>
                                     </h4>
                                 </div>
-                                <?php foreach ($item['children'] as $row) { ?>
                                     <div id="<?= $item['Slug']?>" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <ul>
-                                                <li><?= $row['Name']; ?></li>                                                                   
+                                                <?php foreach ($item['children'] as $row) { ?>
+                                                <li><a href=""><?= $row['Name']; ?></a></li>  
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </div>
-                                <?php } ?>
                             <?php }
                             ?>
                         </div>
