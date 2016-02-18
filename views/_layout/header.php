@@ -134,69 +134,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-8">
-                    <form method="post">
-                        <div class="shop-menu pull-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-user"></i> <?php
-                                        if (Session::get("UserName"))
-                                            echo Session::get("UserName");
-                                        else
-                                            echo "Account";
-                                        ?></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>                  
-                                <li><a id="modal_trigger" class="btn <?php if (Session::get("UserName")) echo "hidden"; ?>" href="#modal"><i class="fa fa-lock"></i>Login</a></li>
-                                <?php if (Session::get("UserName")) echo "<li><button id='logout' class='btn flat' name='logout' onmouseover='changeColor(this);'><i class='fa fa-lock'></i>Logout</button></li>"; ?>
-                                <?php
-                                if (isset($_POST['logout'])) {
-                                    Session::destroy();
-                                    Router::redirect(ROOT_PATH);
-                                }
-                                ?>
-                                <style>
-                                    #logout{
-                                        background: transparent;
-                                        border: none !important;
-                                    }
-                                </style>
-                                <script type="text/javascript" language="javascript">
-
-                                    window.onload = function () {
-                                        document.getElementById("logout").onmouseover = function ()
-                                        {
-                                            this.style.backgroundColor = "#FF9933";
-                                        }
-
-                                        document.getElementById("logout").onmouseout = function ()
-                                        {
-                                            this.style.backgroundColor = "#FFFFFF";
-                                        }
-                                    }
-                                </script>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-                <style>
-                    .cart-o{
-                        margin-top: 10px !important; 
-                    }
-                    .text-center{
-
-                    }
-                </style>
-                <div class="col-sm-3 col-sm-offset-5 cart-o">
-                    <div id="cart" class="btn-group btn-block">
-                        <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="btn btn-inverse btn-block btn-lg dropdown-toggle"><i class="fa fa-shopping-cart"></i> <span id="cart-total"><?php if (isset($this->data['cart'])) echo count($this->data['cart']); ?> item(s) - $<?= isset($this->data['price']) ? $this->data['price'] : 0 ?></span></button>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <p class="text-center">Your shopping cart is empty!</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- menu-bar -->
+                <?php include VIEWS_PATH . '/_layout/menubar.php'; ?>
+                <!-- shopping - cart -->
+                <?php include VIEWS_PATH . '/_layout/cart/cart.php'; ?>
 
             </div>
         </div>
@@ -209,26 +150,8 @@
                     <div class="navbar-header">
 
                     </div>
-                    <div class="mainmenu pull-left">
-                        <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="<?= ROOT_PATH ?>" class="active">Home</a></li>
-                            <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="<?= ROOT_PATH ?>en/product/index/page/1">Products</a></li>
-                                    <li><a href="<?= ROOT_PATH ?>product-details.html">Product Details</a></li> 
-                                    <li><a href="<?= ROOT_PATH ?>checkout.html">Checkout</a></li> 
-                                    <li><a href="<?= ROOT_PATH ?>cart.html">Cart</a></li> 
-                                </ul>
-                            </li> 
-                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="blog.html">Blog List</a></li>
-                                    <li><a href="blog-single.html">Blog Single</a></li>
-                                </ul>
-                            </li> 
-                            <li><a href="contact-us.html">Contact</a></li>
-                        </ul>
-                    </div>
+                   <!-- navbar -->
+                    <?php include VIEWS_PATH . '/_layout/navbar.php'; ?>
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
@@ -290,78 +213,10 @@
                     <div class="one_half last"><a href="#" id="register_form" class="btn">Sign up</a></div>
                 </div>
             </div>
-            <?php
-            if ($_POST && isset($_POST['username']) && isset($_POST['password'])) {
-                $data = array();
-                $userModel = new User();
-                $user = $userModel->getByLogin($_POST['username']);
-                $hash = md5(Config::get('salt') . $_POST['password']);
-                if ($user && $user['Status'] == 0 && $hash == $user['Password']) {
-                    Session::set('UserName', $user['Name']);
-                    Session::set('UserRole', $user['Status']);
-
-                    $data = array(
-                        'username' => $user['Name'],
-                        'status' => 'success',
-                    );
-                    // role = 1 : admin
-                    // role = 0 : member 
-                    Router::redirect(ROOT_PATH);
-                }
-                echo json_encode($data);
-            }
-            ?>
-            <!-- Username & Password Login form -->
-            <div class="user_login">
-                <form method="post" action="">
-                    <label>Email / Username</label>
-                    <input type="text" name="username" />
-                    <br />
-
-                    <label>Password</label>
-                    <input type="password" name="password" />
-                    <br />
-
-                    <div class="checkbox">
-                        <input id="remember" type="checkbox" />
-                        <label for="remember">Remember me on this computer</label>
-                    </div>
-
-                    <div class="action_btns">
-                        <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                        <div class="one_half last"><button class="btn btn_red" type="submit" name="login" >Login</button></div>
-                    </div>
-                </form>
-
-                <a href="#" class="forgot_password">Forgot password?</a>
-            </div>
-
+           <!-- Login form -->
+           <?php include VIEWS_PATH . '/_layout/login.php'; ?>
             <!-- Register Form -->
-            <div class="user_register">
-                <form method="post" action="">
-                    <label>Full Name</label>
-                    <input type="text" name="fullname" />
-                    <br />
-
-                    <label>Email Address</label>
-                    <input type="email" name="email" />
-                    <br />
-
-                    <label>Password</label>
-                    <input type="password" name="password"/>
-                    <br />
-
-                    <div class="checkbox">
-                        <input id="send_updates" type="checkbox" />
-                        <label for="send_updates">Send me occasional email updates</label>
-                    </div>
-
-                    <div class="action_btns">
-                        <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                        <div class="one_half last"><button  class="btn btn_red" type="submit" name="register">Register</button></div>
-                    </div>
-                </form>
-            </div>
+            <?php include VIEWS_PATH . '/_layout/register.php'; ?>
         </section>
     </div>
 </form>

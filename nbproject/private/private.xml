@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/BanhKeoTrangAn/controllers/product.controller.php</file>
-            <file>file:/C:/xampp/htdocs/BanhKeoTrangAn/controllers/user.controller.php</file>
-            <file>file:/C:/xampp/htdocs/BanhKeoTrangAn/views/_layout/leftbar.php</file>
             <file>file:/C:/xampp/htdocs/BanhKeoTrangAn/models/home.php</file>
             <file>file:/C:/xampp/htdocs/BanhKeoTrangAn/views/_layout/content.php</file>
-            <file>file:/C:/xampp/htdocs/BanhKeoTrangAn/controllers/cart.controller.php</file>
-            <file>file:/C:/xampp/htdocs/BanhKeoTrangAn/views/_layout/header.php</file>
             <file>file:/C:/xampp/htdocs/BanhKeoTrangAn/controllers/home.controller.php</file>
         </group>
     </open-files>
