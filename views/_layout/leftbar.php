@@ -1,53 +1,29 @@
-        <div class="col-sm-3">
-                <div class="left-sidebar">
-                    <h2>Kind Of Product</h2>
+<div class="col-sm-3">
+    <div class="left-sidebar">
+        <h2>Kind Of Product</h2>
 
-                    <div class="panel-group category-products" id="accordian">
-                        <div class="panel panel-default">
-                            <?php
-                            foreach ($this->data['kindofproductLeftbar'] as $item) {
-                                ?>
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#<?= $item['Slug']?>">
-                                            <?php if (!empty($item['children'])) echo "<span class='badge pull-right'><i class='fa fa-plus'></i></span>"; ?>
-                                            <?= $item['Name']; ?>
-                                        </a>
-                                    </h4>
-                                </div>
-                                    <div id="<?= $item['Slug']?>" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <ul>
+        <div class="panel-group category-products" id="accordian">
+            <div class="panel panel-default">
+                <?php
+                foreach ($this->data['kindofproductLeftbar'] as $item) {
+                    ?>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordian" href="#<?= $item['Slug'] ?>">
+                                <?php if (!empty($item['children'])) echo "<span class='badge pull-right'><i class='fa fa-plus'></i></span>"; ?>
+                                <?= $item['Name']; ?>
+                            </a>
+                        </h4>
                     </div>
-                    
-                    <h2>Category</h2>
-
-                    <div class="panel-group category-products" id="accordian2">
-                        <div class="panel panel-default">
-                            <?php
-                            foreach ($this->data['categoryLeftbar'] as $item) {
-                                ?>
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian2" href="#<?= $item['Slug']?>">
-                                            <?php if (!empty($item['children'])) echo "<span class='badge pull-right'><i class='fa fa-plus'></i></span>"; ?>
-                                            <?= $item['Name']; ?>
-                                        </a>
-                                    </h4>
-                                </div>
-                                    <div id="<?= $item['Slug']?>" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <ul>
-                                                <?php foreach ($item['children'] as $row) { ?>
-                                                <li><a href=""><?= $row['Name']; ?></a></li>  
-                                                <?php } ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                            <?php }
-                            ?>
+                    <div id="<?= $item['Slug'] ?>" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <?php foreach ($item['children'] as $row) { ?>
+                                    <li><a href="#"><?= $row['Name']; ?></a></li>
+                                <?php } ?>
+                            </ul>
                         </div>
-                    <?php } ?>
+                    </div>
                 <?php }
                 ?>
             </div>
@@ -69,18 +45,17 @@
                             </a>
                         </h4>
                     </div>
-                    <?php foreach ($item['children'] as $row) { ?>
-                        <div id="<?= $item['Slug'] ?>" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul>
-                                    <li><?= $row['Name']; ?></li>                                                                   
-                                </ul>
-                            </div>
+                    <div id="<?= $item['Slug'] ?>" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <?php foreach ($item['children'] as $row) { ?>
+                                    <li><a href=""><?= $row['Name']; ?></a></li>  
+                                <?php } ?>
+                            </ul>
                         </div>
-                    <?php } ?>
+                    </div>
                 <?php }
                 ?>
-
             </div>
 
         </div>
@@ -97,26 +72,20 @@
                     <li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
                     <li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
                 </ul>
-
             </div>
+        </div><!--/brands_products-->
 
-        </div>
+        <div class="price-range"><!--price-range-->
+            <h2>Price Range</h2>
+            <div class="well text-center">
+                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
+                <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
+            </div>
+        </div><!--/price-range-->
 
-    </div><!-- end.collapse -->
+        <div class="shipping text-center"><!--shipping-->
+            <img src="<?= WEBROOT_PATH ?>/images/home/shipping.jpg" alt="" />
+        </div><!--/shipping-->
 
-
-
-    <div class="price-range"><!--price-range-->
-        <h2>Price Range</h2>
-        <div class="well text-center">
-            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-            <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-        </div>
-    </div><!--/price-range-->
-
-    <div class="shipping text-center"><!--shipping-->
-        <img src="<?= WEBROOT_PATH ?>/images/home/shipping.jpg" alt="" />
-    </div><!--/shipping-->
-
-</div>
+    </div>
 </div>

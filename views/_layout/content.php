@@ -56,35 +56,7 @@
                         </ul>
                     </div>
                     <!--content  -->
-                    <?php
-                    foreach ($this->data['kindofproduct'] as $key => $row) {
-                        $homeModel = new Home();
-                        $data = $homeModel->showProductByKind($row['IDKindOfProduct']);
-                        foreach ($data as $key1 => $row1) {
-                            ?>
-                            <div <?php
-                            if ($key1 == 0)
-                                echo " class='tab-pane fade active in' ";
-                            else
-                                echo " class='tab-pane fade ' ";
-                            ?> id="kind<?= $row1['IDProduct'] ?>" >
 
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img class="imgProduct" src="<?= WEBROOT_PATH ?>/img/upload/<?= $row1['Image'] ?>" alt="" />
-                                                <h2>$<?= $row1['UnitPrice'] ?></h2>
-                                                <p><?= substr($row1['Description'], 0, 50) ?></p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        <?php }
-                    } ?>
                 </div><!--/category-tab-->
 
                 <div class="recommended_items"><!--recommended_items-->
@@ -139,7 +111,7 @@
                                         </div>
                                     </div> 
                                 </div>
-<?php } ?>
+                            <?php } ?>
                         </div>
 
                         <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
