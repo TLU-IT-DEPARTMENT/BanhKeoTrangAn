@@ -18,6 +18,10 @@ class HomeController extends Controller {
 
         // kind of product
         $this->data['kindofproduct'] = $this->model->showKindOfProduct();
+//        echo '<pre>';
+//       print_r($this->data['kindofproduct']);
+//        echo '</pre>';
+//       die;
         // cart
         if (isset($_SESSION['cart'])) {
             $this->data['cart'] = $_SESSION['cart'];

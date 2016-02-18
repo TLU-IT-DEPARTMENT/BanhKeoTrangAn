@@ -6,14 +6,14 @@ class Home extends Model {
         parent::__construct();
     }
 
-    /* hiển thị loại sản phẩm  */
+    /* hiển thị loại sản phẩm ở index */
 
     public function showKindOfProduct() {
         $query = "select * from kindofproduct order by IDKindOfProduct ASC limit 5";
         return $this->db->query($query);
     }
 
-    /* hiển thị sản phẩm theo loai */
+    /* hiển thị sản phẩm theo loai ở index */
 
     public function showProductByKind($Kind = 1) {
         $query = "select product.*,productdetail.Image,productdetail.Caption from "

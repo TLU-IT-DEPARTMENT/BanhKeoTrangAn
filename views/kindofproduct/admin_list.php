@@ -40,7 +40,7 @@
                         </thead>
 
                         <?php
-                        $i = ($this->data['currentPage'] - 1) *5 + 1;
+                        $i = ($this->data['currentPage'] - 1) *10 + 1;
                         foreach ($this->data['listKindOfProduct'] as $row) {
                             ?>
                             <tbody>

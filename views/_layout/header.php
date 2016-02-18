@@ -139,16 +139,16 @@
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
                                 <li><a href="#"><i class="fa fa-user"></i> <?php
-                                        if (Session::get("Name"))
-                                            echo Session::get("Name");
+                                        if (Session::get("UserName"))
+                                            echo Session::get("UserName");
                                         else
                                             echo "Account";
                                         ?></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>                  
-                                <li><a id="modal_trigger" class="btn <?php if (Session::get("Name")) echo "hidden"; ?>" href="#modal"><i class="fa fa-lock"></i>Login</a></li>
-                                <?php if (Session::get("Name")) echo "<li><button id='logout' class='btn flat' name='logout' onmouseover='changeColor(this);'><i class='fa fa-lock'></i>Logout</button></li>"; ?>
+                                <li><a id="modal_trigger" class="btn <?php if (Session::get("UserName")) echo "hidden"; ?>" href="#modal"><i class="fa fa-lock"></i>Login</a></li>
+                                <?php if (Session::get("UserName")) echo "<li><button id='logout' class='btn flat' name='logout' onmouseover='changeColor(this);'><i class='fa fa-lock'></i>Logout</button></li>"; ?>
                                 <?php
                                 if (isset($_POST['logout'])) {
                                     Session::destroy();
@@ -297,11 +297,11 @@
                 $user = $userModel->getByLogin($_POST['username']);
                 $hash = md5(Config::get('salt') . $_POST['password']);
                 if ($user && $user['Status'] == 0 && $hash == $user['Password']) {
-                    Session::set('Name', $user['Name']);
-                    Session::set('role', $user['Status']);
+                    Session::set('UserName', $user['Name']);
+                    Session::set('UserRole', $user['Status']);
 
                     $data = array(
-                        'name' => $user['Name'],
+                        'username' => $user['Name'],
                         'status' => 'success',
                     );
                     // role = 1 : admin

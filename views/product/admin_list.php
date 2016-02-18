@@ -57,7 +57,7 @@
                         $tag = new Tag();
                         $KindOfProduct_ProductModel = new KindOfProduct_Product();
 
-                        $i = ($this->data['currentPage'] - 1) * 10 + 1;
+                        $i = ($this->data['currentPage'] - 1) * 5 + 1;
                         foreach ($this->data['item'] as $row) {
                             $aTag = $tagProduct->selectByIDProduct($row['IDProduct']);
                             $KopName = $KindOfProduct_ProductModel->getProductNameByKind($row['IDProduct']);
