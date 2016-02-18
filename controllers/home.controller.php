@@ -9,7 +9,8 @@ class HomeController extends Controller {
 
     public function index() {
         // category
-        $this->data['category'] = $this->category();
+        $this->data['categoryLeftbar'] = $this->categoryLeftbar();
+        $this->data['kindofproductLeftbar'] = $this->kindofproductLeftbar();
         // list product
         $this->data['product'] = $this->showProduct();
         //recommend
@@ -22,34 +23,47 @@ class HomeController extends Controller {
         if (isset($_SESSION['cart'])) {
             $this->data['cart'] = $_SESSION['cart'];
         }
-        if(isset($_SESSION['price']))
-        $this->data['price'] = $_SESSION['price'];
+        if (isset($_SESSION['price']))
+            $this->data['price'] = $_SESSION['price'];
     }
 
-    public function category() {
+    public function categoryLeftbar() {
         $category = new Category();
         $data = $category->selectByStatus(1);
-        $result = $this->createNested($data);
-//        echo '<pre>';
-//        print_r($result);
-//        echo '</pre>';
-//        die;
+        $result = $this->createCategoryNested($data);
         return $result;
     }
 
     /* tree view */
 
-    function createNested($categories, $parentId = null) {
+    function createCategoryNested($categories, $parentId = null) {
         $results = [];
         foreach ($categories as $category) {
             if ($parentId == $category['IDCategoryParent']) {
                 $nextParentId = $category['IDCategory'];
-                $category['children'] = $this->createNested($categories, $nextParentId);
-
+                $category['children'] = $this->createCategoryNested($categories, $nextParentId);
                 $results[] = $category;
             }
         }
+        return $results;
+    }
 
+    public function kindofproductLeftbar() {
+        $kindofproduct = new KindOfProduct();
+        $data = $kindofproduct->selectByStatus(1);
+        $result = $this->createKindOfProductNested($data);
+        return $result;
+    }
+
+    function createKindOfProductNested($kindofproduct, $parentID = null) {
+        $results = [];
+        foreach ($kindofproduct as $item) {
+            if ($parentID == $item['IDKindOfProductParent']) {
+                $nextParentID = $item['IDKindOfProduct'];
+                $item['children'] = $this->createKindOfProductNested($kindofproduct, $nextParentID);
+                $results[] = $item;
+            }
+        }
         return $results;
     }
 

@@ -1,22 +1,22 @@
         <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>Category</h2>
+                    <h2>Kind Of Product</h2>
 
                     <div class="panel-group category-products" id="accordian">
                         <div class="panel panel-default">
                             <?php
-                            foreach ($this->data['category'] as $item) {
+                            foreach ($this->data['kindofproductLeftbar'] as $item) {
                                 ?>
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+                                        <a data-toggle="collapse" data-parent="#accordian" href="#<?= $item['Slug']?>">
                                             <?php if (!empty($item['children'])) echo "<span class='badge pull-right'><i class='fa fa-plus'></i></span>"; ?>
                                             <?= $item['Name']; ?>
                                         </a>
                                     </h4>
                                 </div>
                                 <?php foreach ($item['children'] as $row) { ?>
-                                    <div id="sportswear" class="panel-collapse collapse">
+                                    <div id="<?= $item['Slug']?>" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <ul>
                                                 <li><?= $row['Name']; ?></li>                                                                   
@@ -28,7 +28,38 @@
                             ?>
                         </div>
 
-                    </div>       
+                    </div>
+                    
+                    <h2>Category</h2>
+
+                    <div class="panel-group category-products" id="accordian2">
+                        <div class="panel panel-default">
+                            <?php
+                            foreach ($this->data['categoryLeftbar'] as $item) {
+                                ?>
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordian2" href="#<?= $item['Slug']?>">
+                                            <?php if (!empty($item['children'])) echo "<span class='badge pull-right'><i class='fa fa-plus'></i></span>"; ?>
+                                            <?= $item['Name']; ?>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <?php foreach ($item['children'] as $row) { ?>
+                                    <div id="<?= $item['Slug']?>" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><?= $row['Name']; ?></li>                                                                   
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php }
+                            ?>
+                        </div>
+
+                    </div>
+                    
                     <div class="brands_products"><!--brands_products-->
                         <h2>Brands</h2>
                         <div class="brands-name">
