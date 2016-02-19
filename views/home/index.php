@@ -1,4 +1,4 @@
-
+<html>
 <?php include VIEWS_PATH.'/_layout/link.php'; ?>
 <body>
     <?php include VIEWS_PATH.'/_layout/header.php'; ?>
