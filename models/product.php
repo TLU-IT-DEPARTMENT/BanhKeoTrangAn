@@ -8,7 +8,7 @@ class Product extends Model {
 
     public function insert($data, $r) {
         if ($r != 0) {
-            $sql = "insert into product(Name,Slug,Model,UnitPrice,Description,Rate,RatePeople,Status) values ('{$data['Name']}','{$data['Slug']}','{$data['Model']}',"
+            $sql = "insert into product(Name,Slug,Model,UnitPrice,Image,Description,Rate,RatePeople,Status) values ('{$data['Name']}','{$data['Slug']}','{$data['Model']}',"
                     . "'{$data['UnitPrice']}','{$data['Description']}','{$data['Rate']}','{$data['RatePeople']}','{$data['Status']}')";
             $this->db->query($sql);
             $query = "select LAST_INSERT_ID() as LastPost";
@@ -21,7 +21,7 @@ class Product extends Model {
     public function update($data, $r) {
         if ($r != 0) {
             $sql = "update product set Name = '{$data['Name']}' , Slug = '{$data['Slug']}', Model = '{$data['Model']}',"
-                    . "UnitPrice = '{$data['UnitPrice']}', Description = '{$data['Description']}',Rate = '{$data['Rate']}',"
+                    . "UnitPrice = '{$data['UnitPrice']}', Image = '{$data['Image']}', Description = '{$data['Description']}',Rate = '{$data['Rate']}',"
                     . "RatePeople = '{$data['RatePeople']}',Status = '{$data['Status']}' "
                     . "where IDProduct = '{$data['id']}' ";
 
@@ -68,12 +68,32 @@ class Product extends Model {
     }
 
     public function selectByStatus($Status) {
-        $query = "select * from product where Status = {$Status}";
+        $count = $this->countAllRecordEnable();
+        if (((int) $count % 3) == 1) {
+            $count--;
+        } else {
+            if (((int) $count % 3) == 2) {
+                $count-=2;
+            }
+        }
+        $query = "select * from product where Status = {$Status} limit 0, $count";
         return $this->db->query($query);
     }
 
-    public function selectByID($id) {
+    public function selectByIDProduct($id) {
         $query = "select * from product where IDProduct = '{$id}' ";
+        $id = $this->db->query($query);
+        return $id;
+    }
+    
+    public function selectBySlug($Slug) {
+        $query = "select * from product where Slug = '{$Slug}' ";
+        $id = $this->db->query($query);
+        return $id;
+    }
+    
+    public function selectIDBySlug($Slug) {
+        $query = "select IDProduct from product where Slug = '{$Slug}' ";
         $id = $this->db->query($query);
         return $id;
     }
@@ -84,16 +104,9 @@ class Product extends Model {
         return $id;
     }
 
-    public function selectJoin() {
-        $query = "select product.*, productdetail.Image,productdetail.Caption "
-                . "from product inner join productdetail on product.IDProduct = productdetail.IDProduct and "
-                . "product.Status = 1 limit 6 ";
+    public function selectAll_Limit($limit) {
+        $query = "select * from product limit {$limit}";
         return $this->db->query($query);
     }
-    public function selectJoinByIDProduct($IDProduct) {
-        $query = "select * from (select product.*, productdetail.Image,productdetail.Caption "
-                . "from product inner join productdetail on product.IDProduct = productdetail.IDProduct and "
-                . "product.Status = 1)AS T where T.IDProduct = {$IDProduct}  ";
-        return $this->db->query($query);
-    }
+
 }

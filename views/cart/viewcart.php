@@ -28,11 +28,11 @@
                             foreach ($_SESSION['cart'] as $key => $row) {
                                 $id = $row['id'];
                                 $productModel = new Product();
-                                $product = $productModel->selectJoinByIDProduct($id);
+                                $product = $productModel->selectByIDProduct($id);
                                 ?>
                                 <tr>
                                     <td class="cart_product">
-                                        <a href="#"><img src="<?= ROOT_PATH ?>img/ipload/<?= $product[0]['Image'] ?>" alt="<?= $product[0]['Name'] ?>"></a>
+                                        <a href="#"><img src="<?= ROOT_PATH ?>img/upload/<?= $product[0]['Image'] ?>" alt="<?= $product[0]['Name'] ?>"></a>
                                     </td>
                                     <td class="cart_description">
                                         <h4><a href="#"><?= substr($product[0]['Description'], 0, 20) ?></a></h4>
@@ -98,5 +98,10 @@
 <style>
     #do_action{
         margin-bottom: -20px;
+    }
+    .cart_product img{
+        width: 80px !important;
+        height: 65px !important;
+        padding: 10px 5px !important ;
     }
 </style>

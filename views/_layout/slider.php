@@ -44,11 +44,11 @@
                                     <h1 style="font-family: Segoe UI Light !important;"><span><?= $row['Title']; ?></span></h1>
                                     <h2><?= $row['Header']; ?></h2>
                                     <p><?= $row['Content']; ?></p>
-                                    <button onclick="location.href = '<?= ADMIN_ROOT . DS . $row['Link']; ?>';" type="button" id="btn-getitnow" class="btn btn-default get-it-now">Get it now</button>
+                                    <button onclick="location.href = '<?= ADMIN_ROOT . "/" . $row['Link']; ?>';" type="button" id="btn-getitnow" class="btn btn-default get-it-now">Get it now</button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img  class="slider-image" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $row['Image'] ?>" class="girl img-responsive" alt="" />
-                                    <img src="<?= WEBROOT_PATH . DS ?>img/logo/sale.png" class="pricing" alt="" style="margin-top: -232px; margin-right: -207px;"/>
+                                    <img  class="slider-image" src="<?= WEBROOT_PATH?>/img/upload/<?= $row['Image'] ?>" class="girl img-responsive" alt="" />
+                                    <img src="<?= WEBROOT_PATH?>/img/logo/sale.png" class="pricing" alt="" style="margin-top: -232px; margin-right: -207px;"/>
                                 </div>
                             </div>
                         <?php } ?>

@@ -34,45 +34,23 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>ProductID</th>
-                                <th>Product Name</th>
-                                <th>Model</th>
-                                <th>Tag</th>
+                                <th>IDProductDetail</th>
                                 <th>Image</th>
                                 <th>Caption</th>
-                                <th>Status</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
 
                         <?php
-                        include_once '../models/tagproduct.php';
-                        $tagProduct = new TagProduct();
-                        $tag = new Tag();
                         $i = ($this->data['currentPage'] - 1) * 5 + 1;
-                        foreach ($this->data['item'] as $row) {
-                            $aTag = $tagProduct->selectByIDProduct($row['IDProduct']);
-                            ?>
+                        foreach ($this->data['item'] as $row) {?>
                             <tbody>
                                 <tr>
                                     <td><?= $i++; ?></td>
-                                    <td><?= $row['IDProduct']; ?></td>
-                                    <td><?= substr($row['Name'], 0, 200); ?></td>
-                                    <td><?= $row['Model']; ?></td>
-                                    <td>
-                                        <?php
-                                        $Tags = "";
-                                        foreach ($aTag as $rowTag) {
-                                            $TagName = $tag->selectByID($rowTag['IDTag']);
-                                            $Tags = $Tags . $TagName['Name'] . "; ";
-                                        }
-                                        echo $Tags;
-                                        ?>
-                                    </td>
+                                    <td><?=$row['IDProductDetail'];?></td>
                                     <td><img id="image-content" src="<?= WEBROOT_PATH ?>/img/upload/<?= isset($row['Image']) ? $row['Image'] : 'default.jpg'; ?>"></td>
                                     <td><?= substr($row['Caption'], 0, 200); ?></td>
-                                    <td><?= $row['Status'] == 1 ? 'Enable' : 'Disable'; ?></td>
                                     <td><a href="<?= ADMIN_ROOT ?>/product/editdetail/<?= $row['IDProduct']; ?>/productdetail/<?= $row['IDProductDetail']; ?>"><i class="fa fa-pencil"></i></a></td>
                                     <td><a onclick="return confirm('Do you want delete this record?');" href="<?= ADMIN_ROOT ?>/product/deletedetail/<?= $row['IDProduct']; ?>/productdetail/<?= $row['IDProductDetail']; ?>"><i class="fa fa-trash"></i></a></td>
                                 </tr>

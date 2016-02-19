@@ -69,7 +69,7 @@
                             foreach ($_SESSION['cart'] as $key => $row) {
                                 $id = $row['id'];
                                 $productModel = new Product();
-                                $product = $productModel->selectJoinByIDProduct($id);
+                                $product = $productModel->selectByIDProduct($id);
                                 ?>
                                 <tr>
                                     <td class="text-center">

@@ -40,7 +40,7 @@ class CartController extends Controller {
         $IDProduct = $this->params[0];
         $quantity = 0;
         $productModel = new Product();
-        $product = $productModel->selectJoinByIDProduct($IDProduct);
+        $product = $productModel->selectByIDProduct($IDProduct);
 
         if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
             $count = count($_SESSION['cart']);
@@ -103,54 +103,4 @@ class CartController extends Controller {
         
     }
 
-//    public function addtocart() {
-//
-//        $IDProduct = $this->params[0];
-//        $quantity = 1;
-//        $price = 0;
-//        $productModel = new Product();
-//        $product = $productModel->selectJoinByIDProduct($IDProduct);
-//
-//        $itemArray = array(
-//            $product[0]["IDProduct"] => array(
-//                'name' => $product[0]["Name"],
-//                'code' => $product[0]["IDProduct"],
-//                'quantity' => 1,
-//                'price' => $product[0]["UnitPrice"],
-//                'image' => $product[0]['Image']
-//            )
-//        );
-//
-////        echo '<pre>';
-////        print_r($itemArray);
-////        echo '</pre>';
-////        die;
-//        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
-//            $count = count($_SESSION['cart']);
-//            $flag = FALSE;
-//            for ($i = 0; $i < $count; $i++) {
-//                if ($_SESSION['cart'][$i]['id'] == $IDProduct) {
-//                    $_SESSION['cart'][$i]['quantity'] += 1;
-//                    $flag = TRUE; // neu gio hang da co san pham
-//                    break;
-//                }
-//            }
-//            // gio hang chua cos san pham
-//            if ($flag == FALSE) {
-//                $_SESSION['cart'][$count]['id'] = $IDProduct;
-//                $_SESSION['cart'][$count]['quantity'] = 1;
-//            }
-//        } else {
-//            $_SESSION['cart'] = array();
-//            $_SESSION['cart'][0]['id'] = $IDProduct;
-//            $_SESSION['cart'][0]['quantity'] = 1;
-//        }
-//
-////        echo '<pre>';
-////        print_r($quantity);
-////        echo '</pre>';
-////        die;
-//
-//        Router::redirect(ROOT_PATH);
-//    }
 }

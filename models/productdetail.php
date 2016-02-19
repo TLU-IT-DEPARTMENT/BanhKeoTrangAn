@@ -49,11 +49,9 @@ class ProductDetail extends Model {
         return $this->db->query($query);
     }
 
-    public function paginateJoin($id, $page, $size) {
+    public function paginateByIDProduct($id, $page, $size) {
         $start = ($page - 1) * $size;
-        $query = "(select * from (select distinct product.*,productdetail.IDProductDetail,productdetail.Image , "
-                . "productdetail.Caption from productdetail join product on productdetail.IDProduct = product.IDProduct )AS R "
-                . "where IDProduct = {$id} limit {$start},{$size})";
+        $query = "select * from productdetail where IDProduct = {$id} limit {$start},{$size}";
         return $this->db->query($query);
     }
 
@@ -68,24 +66,10 @@ class ProductDetail extends Model {
         return $id;
     }
 
-    public function selectByIDProduct($id) {
-        $query = "select * from productdetail where IDProduct = {$id} ";
+    public function selectByIDProduct($IDProduct) {
+        $query = "select * from productdetail where IDProduct = {$IDProduct} ORDER BY IDProductDetail DESC";
         $id = $this->db->query($query);
         return $id;
-    }
-
-    public function selectProductDetail($IDProduct) {
-        $query = "select product.*, productdetail.Image,productdetail.Caption, productdetail.IDProductDetail "
-                . "from product inner join productdetail on {$IDProduct} = productdetail.IDProduct and "
-                . "product.Status = 1 ORDER BY IDProductDetail DESC limit 1 ";
-        return $this->db->query($query);
-    }
-
-    public function selectProductDetailRecommend() {
-        $query = "select product.*, productdetail.Image,productdetail.Caption, productdetail.IDProductDetail "
-                . "from product inner join productdetail on product.IDProduct = productdetail.IDProduct and "
-                . "product.Status = 1 ORDER BY IDProductDetail DESC limit 3 ";
-        return $this->db->query($query);
     }
 
 }

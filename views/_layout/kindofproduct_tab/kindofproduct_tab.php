@@ -29,7 +29,7 @@
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
-                                                        <img src="<?= WEBROOT_PATH ?>/img/upload/<?= $row2['Image'] ?>" alt="" />
+                                                        <img src="<?= WEBROOT_PATH ?>/img/upload/<?= isset($row2['Image'])?$row2['Image']:'default.jpg' ?>" alt="" />
                                                         <h2>$<?= $row2['UnitPrice'] ?></h2>
                                                         <p><?= substr($row2['Description'], 0, 30) ?></p>
                                                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>

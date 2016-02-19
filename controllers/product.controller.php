@@ -37,17 +37,19 @@ class ProductController extends Controller {
 
         $this->data['totalPage'] = $totalPage;
         $this->data['paging'] = $paging;
-        $this->data['item'] = $this->model->paginateJoin($currentPage, $maxSize);
+        $this->data['item'] = $this->model->paginate($currentPage, $maxSize);
         $this->data['currentPage'] = $currentPage;
     }
 
     public function detail() {
         $productDetail = new ProductDetail();
-        $IDProduct = $this->params[0];
+        $Slug = $this->params[0];
         $this->data['categoryLeftbar'] = $this->categoryLeftbar();
         $this->data['kindofproductLeftbar'] = $this->kindofproductLeftbar();
-        $this->data['recommend'] = $productDetail->selectProductDetailRecommend();
-        $this->data['item'] = $productDetail->selectProductDetail($IDProduct);
+        $homeController = new HomeController();
+        $this->data['recommend'] = $homeController->showProduct();
+        $this->data['product'] = $this->model->selectBySlug($Slug);
+        $this->data['item'] = $productDetail->selectByIDProduct($this->model->selectIDBySlug($Slug)[0]['IDProduct']);
     }
 
     public function categoryLeftbar() {
@@ -298,7 +300,7 @@ class ProductController extends Controller {
 
         $this->data['totalPage'] = $totalPage;
         $this->data['paging'] = $paging;
-        $this->data['item'] = $ProductDetail->paginateJoin($idProduct, $currentPage, $maxSize);
+        $this->data['item'] = $ProductDetail->paginateByIDProduct($idProduct, $currentPage, $maxSize);
         $this->data['params'] = $this->params[0];
         $this->data['currentPage'] = $currentPage;
     }

@@ -37,6 +37,7 @@
                                 <th>Slug</th>
                                 <th>Model</th>
                                 <th>Price</th>
+                                <th>Image</th>
                                 <th>Description</th>
                                 <th>Tag</th>
                                 <th>Rate</th>
@@ -80,6 +81,7 @@
                                     <td><?= substr($row['Slug'], 0, 200); ?></td>
                                     <td><?= $row['Model']; ?></td>
                                     <td><?= $row['UnitPrice']; ?></td>
+                                    <td><img id="image-content" src="<?= WEBROOT_PATH?>/img/upload/<?= $row['Image']; ?>"></td>
                                     <td><?= substr($row['Description'], 0, 200); ?></td>
                                     <td>
                                         <?php

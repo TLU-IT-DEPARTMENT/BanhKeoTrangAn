@@ -13,7 +13,7 @@
                 <div class="product-details"><!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <img class="photoView" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt="" />
+                            <img class="photoView" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt="" />
                             <h3>ZOOM</h3>
                         </div>
                         <div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -21,19 +21,19 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
-                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
-                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
+                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
+                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
+                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
                                 </div>
                                 <div class="item">
-                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
-                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
-                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
+                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
+                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
+                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
                                 </div>
                                 <div class="item">
-                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
-                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
-                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
+                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
+                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
+                                    <a href=""><img class="icon-slider" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['item'][0]['Image'] ?>" alt=""></a>
                                 </div>
 
                             </div>
@@ -51,11 +51,11 @@
                     <div class="col-sm-7">
                         <div class="product-information"><!--/product-information-->
                             <img src="<?= WEBROOT_PATH . DS ?>images/product-details/new.jpg" class="newarrival" alt="" />
-                            <h2><?= $this->data['item'][0]['Name'] ?></h2>
-                            <p>Web ID: <?= $this->data['item'][0]['IDProductDetail'] ?></p>
+                            <h2><?= $this->data['product'][0]['Name'] ?></h2>
+                            <p>Web ID: <?= $this->data['product'][0]['IDProduct'] ?></p>
                             <img src="<?= WEBROOT_PATH . DS ?>images/product-details/rating.png" alt="" />
                             <span>
-                                <span>US $<?= $this->data['item'][0]['UnitPrice'] ?></span>
+                                <span>US $<?= $this->data['product'][0]['UnitPrice'] ?></span>
                                 <label>Quantity:</label>
                                 <input type="text" value="1" />
                                 <button type="button" class="btn btn-fefault cart">
@@ -241,7 +241,7 @@
                                     <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
                                     <li><a href=""><i class="fa fa-calendar-o"></i>12 Fer 2016</a></li>
                                 </ul>
-                                <p><?= $this->data['item'][0]['Description'] ?></p> <br/>
+                                <p><?= $this->data['product'][0]['Description'] ?></p> <br/>
                                 <p><b>Write Your Review</b></p> <br/>
 
                                 <form action="#">
@@ -273,7 +273,7 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img class="recommend-img" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $item['Image'] ?>" alt="" />
+                                                    <img class="recommend-img" src="<?= WEBROOT_PATH?>/img/upload/<?= $item['Image'] ?>" alt="" />
                                                     <h2>$<?= $item['UnitPrice'] ?></h2>
                                                     <p><?= $item['Name'] ?></p>
                                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -289,7 +289,7 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img class="recommend-img" src="<?= WEBROOT_PATH . DS ?>img/upload/<?= $item['Image'] ?>" alt="" />
+                                                    <img class="recommend-img" src="<?= WEBROOT_PATH?>/img/upload/<?= $item['Image'] ?>" alt="" />
                                                     <h2>$<?= $item['UnitPrice'] ?></h2>
                                                     <p><?= $item['Name'] ?></p>
                                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>

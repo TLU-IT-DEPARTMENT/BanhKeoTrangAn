@@ -14,10 +14,9 @@ class HomeController extends Controller {
         $this->data['categoryLeftbar'] = $this->categoryLeftbar();
         $this->data['kindofproductLeftbar'] = $this->kindofproductLeftbar();
         // list product
-        $this->data['product'] = $this->showProduct();
+        $this->data['product'] = $this->showProduct_Limit();
         //recommend
-        $productDetail = new ProductDetail();
-        $this->data['recommend'] = $productDetail->selectProductDetailRecommend();
+        $this->data['recommend'] = $this->showProduct();
 
         // kind of product
         $this->data['kindofproduct'] = $this->model->showKindOfProduct();
@@ -77,9 +76,14 @@ class HomeController extends Controller {
         return $results;
     }
 
+    public function showProduct_Limit() {
+        $product = new Product();
+        return $product->selectAll_Limit(6);
+    }
+    
     public function showProduct() {
         $product = new Product();
-        return $product->selectJoin();
+        return $product->selectByStatus(1);
     }
 
 //    public function SignIn() {
