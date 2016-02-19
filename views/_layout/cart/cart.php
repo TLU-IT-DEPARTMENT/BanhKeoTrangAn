@@ -1,6 +1,7 @@
 <style>
     .cart-o{
-        margin-top: 10px !important; 
+
+       margin-top: -45px !important;  
 
         font-family: 'Open Sans', sans-serif;
         font-weight: 400;
@@ -39,7 +40,7 @@
         margin-left: 100px !important;
     }
 </style>
-<div class="col-sm-3 col-sm-offset-5 cart-o">
+<div class="col-sm-3 col-sm-offset-9 cart-o">
     <div id="cart" class="btn-group btn-block">
         <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="btn btn-inverse btn-block btn-lg dropdown-toggle drp">
             <i class="fa fa-shopping-cart"></i>
