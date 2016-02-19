@@ -128,8 +128,34 @@ class ProductController extends Controller {
         $aKindOfProduct_Product = new KindOfProduct_Product();
         $data = array();
         $r = 1;
+
+        $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
+        $max_file_size = 1024 * 300; //300 kb
+        $path = "./img/upload/"; // Upload directory
+
         $method = $_SERVER['REQUEST_METHOD'];
         if ($method == "POST") {
+            foreach ($_FILES['files']['name'] as $f => $name) {
+                if ($_FILES['files']['error'][$f] == 4) {
+                    continue; // Skip file if any error found
+                }
+                if ($_FILES['files']['error'][$f] == 0) {
+                    if ($_FILES['files']['size'][$f] > $max_file_size) {
+                        Session::setFlash("$name is too large!.");
+                        $r = 0;
+                        continue; // Skip large files
+                    } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
+                        Session::setFlash("$name is not a valid format");
+                        $r = 0;
+                        continue; // Skip invalid file formats
+                    } else { // No error found! Move uploaded files 
+                        if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name)) {
+                            $Image = $name;
+                        }
+                    }
+                }
+            }
+
             $Name = $_POST['Name'];
             $Slug = $_POST['Slug'];
             $Model = $_POST['Model'];
@@ -144,6 +170,7 @@ class ProductController extends Controller {
                 'Model' => $Model,
                 'UnitPrice' => $UnitPrice,
                 'Description' => $Description,
+                'Image' => $Image,
                 'Rate' => $Rate,
                 'RatePeople' => $RatePeople,
                 'Status' => $Status,
@@ -175,7 +202,7 @@ class ProductController extends Controller {
 
     public function admin_edit() {
         $id = $this->params[0];
-        $item = $this->model->selectByID($id);
+        $item = $this->model->selectByIDProduct($id);
         $this->data['item'] = $item;
 
         $aTagProduct = new TagProduct();
@@ -206,52 +233,80 @@ class ProductController extends Controller {
         $r = 1;
         $method = $_SERVER['REQUEST_METHOD'];
         if ($method == "POST") {
-            $Name = $_POST['Name'];
-            $Slug = $_POST['Slug'];
-            $Model = $_POST['Model'];
-            $UnitPrice = $_POST['UnitPrice'];
-            $Description = $_POST['Description'];
-            $Rate = $_POST['Rate'];
-            $RatePeople = $_POST['RatePeople'];
-            $Status = $_POST['Status'];
-            $data = array(
-                'id' => $id,
-                'Name' => $Name,
-                'Slug' => $Slug,
-                'Model' => $Model,
-                'UnitPrice' => $UnitPrice,
-                'Description' => $Description,
-                'Rate' => $Rate,
-                'RatePeople' => $RatePeople,
-                'Status' => $Status,
-                'r' => $r,
-            );
+            $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
+            $max_file_size = 1024 * 300; //300 kb
+            $path = "./img/upload/"; // Upload directory
 
-            $isEdit = $this->model->update($data, $r);
-            if ($isEdit) {
-
-                foreach ($_POST['Tags'] as $Tag) {
-                    $dataEdit = array(
-                        'IDTag' => intval($Tag),
-                        'IDProduct' => $id,
-                        'r' => $r,
-                    );
-                    $isEditTag = $aTagProduct->update($dataEdit, $r);
-                }
-                if (!$isEditTag) {
-                    Session::setFlash("unable to update tag_product");
-                }
-                foreach ($_POST['Kop'] as $row) {
-                    $data = array(
-                        'IDKindOfProduct' => $row,
-                        'IDProduct' => $this->params[0],
-                    );
-                    $isAddedKopProduct = $aKindOfProduct_Product->update($data, $r);
-                    if (!$isAddedKopProduct) {
-                        Session::setFlash("unable to update kindofproduct_product");
+            $method = $_SERVER['REQUEST_METHOD'];
+            if ($method == "POST") {
+                foreach ($_FILES['files']['name'] as $f => $name) {
+                    if ($_FILES['files']['error'][$f] == 4) {
+                        continue; // Skip file if any error found
+                    }
+                    if ($_FILES['files']['error'][$f] == 0) {
+                        if ($_FILES['files']['size'][$f] > $max_file_size) {
+                            Session::setFlash("$name is too large!.");
+                            $r = 0;
+                            continue; // Skip large files
+                        } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
+                            Session::setFlash("$name is not a valid format");
+                            $r = 0;
+                            continue; // Skip invalid file formats
+                        } else { // No error found! Move uploaded files 
+                            if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name)) {
+                                $Image = $name;
+                            }
+                        }
                     }
                 }
-                Router::redirect(ADMIN_ROOT . "/product/list/page/1");
+                $Name = $_POST['Name'];
+                $Slug = $_POST['Slug'];
+                $Model = $_POST['Model'];
+                $UnitPrice = $_POST['UnitPrice'];
+                $Description = $_POST['Description'];
+                $Rate = $_POST['Rate'];
+                $RatePeople = $_POST['RatePeople'];
+                $Status = $_POST['Status'];
+                $data = array(
+                    'id' => $id,
+                    'Name' => $Name,
+                    'Slug' => $Slug,
+                    'Model' => $Model,
+                    'UnitPrice' => $UnitPrice,
+                    'Description' => $Description,
+                    'Image' => $Image,
+                    'Rate' => $Rate,
+                    'RatePeople' => $RatePeople,
+                    'Status' => $Status,
+                    'r' => $r,
+                );
+
+                $isEdit = $this->model->update($data, $r);
+                if ($isEdit) {
+
+                    foreach ($_POST['Tags'] as $Tag) {
+                        $dataEdit = array(
+                            'IDTag' => intval($Tag),
+                            'IDProduct' => $id,
+                            'r' => $r,
+                        );
+                        $isEditTag = $aTagProduct->update($dataEdit, $r);
+                    }
+                    if (!$isEditTag) {
+                        Session::setFlash("unable to update tag_product");
+                    }
+                    foreach ($_POST['Kop'] as $row) {
+                        $data = array(
+                            'IDKindOfProduct' => $row,
+                            'IDProduct' => $this->params[0],
+                        );
+                        $isAddedKopProduct = $aKindOfProduct_Product->update($data, $r);
+                        if (!$isAddedKopProduct) {
+                            Session::setFlash("unable to update kindofproduct_product");
+                        }
+                    }
+                    Router::redirect(ADMIN_ROOT . "/product/list/page/1");
+                }
             }
         }
     }
@@ -309,7 +364,7 @@ class ProductController extends Controller {
         $idProduct = intval($this->params[0]);
         $id = $this->params[0];
         $ProductDetailModel = new ProductDetail();
-        $this->data['ProductName'] = $this->model->selectByID($id);
+        $this->data['ProductName'] = $this->model->selectByIDProduct($id);
 
 
         $data = array();
@@ -362,7 +417,7 @@ class ProductController extends Controller {
         $idProduct = intval($this->params[0]);
         $id = $this->params[0];
         $ProductDetailModel = new ProductDetail();
-        $this->data['ProductName'] = $this->model->selectByID($id);
+        $this->data['ProductName'] = $this->model->selectByIDProduct($id);
 
         // id productdetail
         $IDProductDetail = $this->params[2];
@@ -471,7 +526,7 @@ class ProductController extends Controller {
     public function admin_DeleteDetail() {
         $IdProductDetail = intval($this->params[2]);
         $ProductDetailModel = new ProductDetail();
-        $ProductDetailEN = $ProductDetailModel->selectByID($IdProductDetail);
+        $ProductDetailEN = $ProductDetailModel->selectByIDProduct($IdProductDetail);
         $IDProduct = $ProductDetailEN[0]['IDProduct'];
         $isDelete = $ProductDetailModel->delete($IdProductDetail);
         if ($isDelete) {

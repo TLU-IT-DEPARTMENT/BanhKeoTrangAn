@@ -81,7 +81,7 @@
                                     <td><?= substr($row['Slug'], 0, 200); ?></td>
                                     <td><?= $row['Model']; ?></td>
                                     <td><?= $row['UnitPrice']; ?></td>
-                                    <td><img id="image-content" src="<?= WEBROOT_PATH?>/img/upload/<?= $row['Image']; ?>"></td>
+                                    <td><img id="image-content" src="<?= WEBROOT_PATH?>/img/upload/<?= isset($row['Image'])?$row['Image']:"default.jpg"; ?>"></td>
                                     <td><?= substr($row['Description'], 0, 200); ?></td>
                                     <td>
                                         <?php

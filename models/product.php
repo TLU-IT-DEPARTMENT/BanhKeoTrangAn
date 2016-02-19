@@ -9,7 +9,7 @@ class Product extends Model {
     public function insert($data, $r) {
         if ($r != 0) {
             $sql = "insert into product(Name,Slug,Model,UnitPrice,Image,Description,Rate,RatePeople,Status) values ('{$data['Name']}','{$data['Slug']}','{$data['Model']}',"
-                    . "'{$data['UnitPrice']}','{$data['Description']}','{$data['Rate']}','{$data['RatePeople']}','{$data['Status']}')";
+                    . "'{$data['UnitPrice']}','{$data['Image']}','{$data['Description']}','{$data['Rate']}','{$data['RatePeople']}','{$data['Status']}')";
             $this->db->query($sql);
             $query = "select LAST_INSERT_ID() as LastPost";
             return $this->db->query($query);
