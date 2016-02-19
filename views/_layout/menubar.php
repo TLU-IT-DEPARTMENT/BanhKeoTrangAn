@@ -1,4 +1,4 @@
-<div class="col-sm-8">
+<div class="col-sm-7">
     <form method="post">
         <div class="shop-menu pull-right">
             <ul class="nav navbar-nav">

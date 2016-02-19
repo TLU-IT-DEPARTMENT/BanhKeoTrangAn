@@ -615,6 +615,10 @@ ul.sub-menu {
   margin-top: 10px;
 }
 
+.item h2 span {
+	color:#FE980F;
+}
+
 .item  p {
 	color:#363432;
 	font-size:16px;
@@ -623,7 +627,7 @@ ul.sub-menu {
 }
 
 .get {
-  background: #FE980F;
+  background: #C2C2C1;
   border: 0 none;
   border-radius: 0;
   color: #FFFFFF;

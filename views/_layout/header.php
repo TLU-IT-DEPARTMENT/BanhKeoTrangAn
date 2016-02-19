@@ -106,9 +106,9 @@
     <div class="header-middle"><!--header-middle-->
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <div class="logo pull-left">
-                        <a href="<?= ROOT_PATH ?>"><img style="width: 139px; height: 79px;" src="<?= WEBROOT_PATH ?>/img/logo/trang_an.gif" alt="trang_an" /></a>
+                        <a href="<?= ROOT_PATH ?>"><img style="width: 200px; height: 120px;" src="<?= WEBROOT_PATH ?>/img/logo/trang_an.jpg" alt="trang_an" /></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">

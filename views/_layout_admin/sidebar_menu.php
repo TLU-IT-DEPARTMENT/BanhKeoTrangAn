@@ -51,6 +51,10 @@
             </li>
 
         </ul>
+        <ul class="treeview-menu">
+            <li><a href="<?= ADMIN_ROOT ?>/slider/list/page/1"><i class="fa fa-circle-o"></i> Slider<i class="fa fa-angle-left pull-right"></i></a>
+            </li>
+        </ul>
     </li>
     <li class="treeview">
         <a href="#">

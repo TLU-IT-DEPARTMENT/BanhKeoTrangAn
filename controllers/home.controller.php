@@ -8,6 +8,8 @@ class HomeController extends Controller {
     }
 
     public function index() {
+        // slider
+        $this->data['sliderShow'] = $this->sliderShow();
         // category
         $this->data['categoryLeftbar'] = $this->categoryLeftbar();
         $this->data['kindofproductLeftbar'] = $this->kindofproductLeftbar();
@@ -29,6 +31,11 @@ class HomeController extends Controller {
         }
         if (isset($_SESSION['price']))
             $this->data['price'] = $_SESSION['price'];
+    }
+    
+    function sliderShow(){
+        $slider = new Slider();
+        return $slider->selectByStatus(1);
     }
 
     public function categoryLeftbar() {
