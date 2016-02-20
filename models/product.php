@@ -54,6 +54,20 @@ class Product extends Model {
         return $this->db->query($sql);
     }
 
+    public function selectBySlugKindOfProduct($slug) {
+        $result = [];
+        $kindofproduct = new KindOfProduct();
+        $kindofproduct_product = new KindOfProduct_Product();
+        $temp = $kindofproduct->selectBySlug($slug);
+        $temp = $kindofproduct_product->selectIDProductByIDKindOfProduct($temp[0]['IDKindOfProduct']);
+        foreach ($temp as $item) {
+            $sql = "select * from product where IDProduct = {$item['IDProduct']}";
+            array_push($result, $this->db->query($sql)[0]);
+        }
+
+        return $result;
+    }
+
     public function paginateJoin($page, $size) {
         $start = ($page - 1) * $size;
         $query = "select product.*, productdetail.Image,productdetail.Caption "
@@ -85,13 +99,13 @@ class Product extends Model {
         $id = $this->db->query($query);
         return $id;
     }
-    
+
     public function selectBySlug($Slug) {
         $query = "select * from product where Slug = '{$Slug}' ";
         $id = $this->db->query($query);
         return $id;
     }
-    
+
     public function selectIDBySlug($Slug) {
         $query = "select IDProduct from product where Slug = '{$Slug}' ";
         $id = $this->db->query($query);

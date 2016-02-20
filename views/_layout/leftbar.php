@@ -7,7 +7,7 @@
         <?php include VIEWS_PATH . '/_layout/category_leftbar/category.php'; ?>
 
         <!--/brands_products-->
-        <?php include VIEWS_PATH . '/_layout/brands_products/brands_products.php'; ?>
+        <?php //include VIEWS_PATH . '/_layout/brands_products/brands_products.php'; ?>
 
         <!--/price-range-->
         <?php include VIEWS_PATH . '/_layout/price-range/price-range.php'; ?>

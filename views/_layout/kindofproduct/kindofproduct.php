@@ -17,7 +17,7 @@
                 <div class="panel-body">
                     <ul>
                         <?php foreach ($item['children'] as $row) { ?>
-                            <li><a href="#"><?= $row['Name']; ?></a></li>
+                        <li><a href="<?= ROOT_PATH?>en/product/kindofproduct/<?= $row['Slug']?>/page/1"><?= $row['Name']; ?></a></li>
                         <?php } ?>
                     </ul>
                 </div>

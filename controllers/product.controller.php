@@ -13,6 +13,8 @@ class ProductController extends Controller {
     }
 
     public function index() {
+        $this->data['categoryLeftbar'] = $this->categoryLeftbar();
+        $this->data['kindofproductLeftbar'] = $this->kindofproductLeftbar();
         $currentPage = $this->params[1];
         if (!$currentPage) {
             $currentPage = 1;
@@ -41,6 +43,39 @@ class ProductController extends Controller {
         $this->data['currentPage'] = $currentPage;
     }
 
+    public function kindofproduct() {
+        $this->data['categoryLeftbar'] = $this->categoryLeftbar();
+        $this->data['kindofproductLeftbar'] = $this->kindofproductLeftbar();
+        $slugKindOfProduct = $this->params[0];
+        $currentPage = $this->params[2];
+        if (!$currentPage) {
+            $currentPage = 1;
+        }
+        $maxSize = 9;
+        $maxShowPaging = 10;
+        $countRecord = intval($this->model->countAllRecordEnable());
+        $totalPage = ceil($countRecord / $maxSize);
+        $paging = array();
+        $i = 1;
+        if ($currentPage >= $maxShowPaging) {
+            do {
+                $i = $i + $maxShowPaging - 1;
+            } while ($i + $maxShowPaging - 1 <= $currentPage);
+        }
+        for (; $i <= $totalPage; $i++) {
+            if (count($paging) >= $maxShowPaging) {
+                break;
+            }
+            $paging[] = $i;
+        }
+
+        $this->data['slugPage'] = $slugKindOfProduct;
+        $this->data['totalPage'] = $totalPage;
+        $this->data['paging'] = $paging;
+        $this->data['item'] = $this->kindofproductShow($slugKindOfProduct, $currentPage, $maxSize);
+        $this->data['currentPage'] = $currentPage;
+    }
+
     public function detail() {
         $productDetail = new ProductDetail();
         $Slug = $this->params[0];
@@ -56,6 +91,17 @@ class ProductController extends Controller {
         $category = new Category();
         $data = $category->selectByStatus(1);
         $result = $this->createCategoryNested($data);
+        return $result;
+    }
+
+    public function kindofproductShow($slugKindOfProduct, $currentPage, $maxSize) {
+        $result = [];
+        $start = ($currentPage - 1) * $maxSize;
+        $input = $this->model->selectBySlugKindOfProduct($slugKindOfProduct);
+        for ($i = $start; $i < $start + $maxSize; $i++) {
+            if(isset($input[$i]))
+                array_push($result, $input[$i]);
+        }
         return $result;
     }
 
