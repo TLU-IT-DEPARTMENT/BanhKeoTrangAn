@@ -36,6 +36,11 @@ class KindOfProduct extends Model {
         $query = "select * from kindofproduct where Status = {$Status}";
         return $this->db->query($query);
     }
+    
+    public function selectBySlug($Slug) {
+        $query = "select * from kindofproduct where Slug = '{$Slug}'";
+        return $this->db->query($query);
+    }
 
     public function insert($data, $r) {
         if ($r != 0) {

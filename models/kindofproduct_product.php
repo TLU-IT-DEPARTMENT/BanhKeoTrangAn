@@ -39,6 +39,11 @@ class KindOfProduct_Product extends Model {
         $id = $this->db->query($query);
         return $id[0];
     }
+    
+    public function selectIDProductByIDKindOfProduct($id) {
+        $query = "select IDProduct from kindofproduct_product where IDKindOfProduct = {$id} ";
+        return $this->db->query($query);
+    }
 
     /**
      * Function to get Name kind of product by $IDProduct
