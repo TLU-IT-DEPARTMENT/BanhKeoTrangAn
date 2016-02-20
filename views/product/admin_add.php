@@ -28,11 +28,11 @@
             <textarea class="form-control ckeditor" rows="10" id="dataInput" placeholder="Description" name="Description"></textarea>
         </div>
          <div class="form-group">
-            <label for="exampleInputFile">Upload Image</label>
-            <input type="file" id="file" name="files[]" multiple accept="image/*">
+            <label for="exampleInputFile">Upload Image</label><span class="red-require"><strong>*</strong></span>
+            <input type="file" id="file" name="files[]" multiple accept="image/*" required>
         </div>
          <div class="form-group">
-            <label for="">Tags</label><br>
+            <label for="">Tags</label><br/>
                 <?php foreach ($this->data['listTag'] as $row) {?>
                 <label class="checkbox-inline">
                     <input type="checkbox" id="inlineCheckbox" name="Tags[]" value="<?= $row['IDTag']; ?>"> <?= $row['Name']; ?>
@@ -40,7 +40,7 @@
                 <?php }?>
         </div>
          <div class="form-group">
-            <label for="">Kind Of Product</label><span class="red-require"><strong>*</strong></span><br>
+            <label for="">Kind Of Product</label><br/>
                 <?php foreach ($this->data['listKop'] as $row) {?>
                 <label class="checkbox-inline">
                     <input type="checkbox" id="inlineCheckbox"  name="Kop[]" value="<?= $row['IDKindOfProduct']; ?>"> <?= $row['Name']; ?>
@@ -57,7 +57,7 @@
         </div>
         <div class="form-group">
             <label for="">Status</label><span class="red-require"><strong>*</strong></span>
-            <select class="form-control" id="postStatus" name="Status">
+            <select class="form-control" id="postStatus" name="Status" required>
                 <option value="enable">Enable</option>
                 <option value="disable">Disable</option>
             </select>

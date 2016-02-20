@@ -124,7 +124,8 @@ class ProductController extends Controller {
         $aTag = new Tag();
         $this->data['listTag'] = $aTag->selectAll();
         $aKindOfProduct = new KindOfProduct();
-        $this->data['listKop'] = $aKindOfProduct->selectAll();
+        $listKop = $aKindOfProduct->selectAll();
+        $this->data['listKop'] = $this->createKindOfProductNested($listKop);
         $aKindOfProduct_Product = new KindOfProduct_Product();
         $data = array();
         $r = 1;
@@ -157,7 +158,7 @@ class ProductController extends Controller {
             }
 
             $Name = $_POST['Name'];
-            $Slug = $_POST['Slug'];
+            $Slug = strval($_POST['Slug']);
             $Model = $_POST['Model'];
             $UnitPrice = $_POST['UnitPrice'];
             $Description = $_POST['Description'];
@@ -178,6 +179,25 @@ class ProductController extends Controller {
             );
             $isAdded = $this->model->insert($data, $r);
             if (is_array($isAdded)) {
+                $ExtraSlugID = strval($this->model->getLastID());
+                $SlugExt = strval(trim($Slug . "-" . $ExtraSlugID));
+//                var_dump($SlugExt);
+//                die;
+                $dataUpdate = array(
+                    'id' => intval($ExtraSlugID),
+                    'Name' => $Name,
+                    'Slug' => $SlugExt,
+                    'Model' => $Model,
+                    'UnitPrice' => $UnitPrice,
+                    'Description' => $Description,
+                    'Image' => $Image,
+                    'Rate' => $Rate,
+                    'RatePeople' => $RatePeople,
+                    'Status' => $Status,
+                    'r' => $r,
+                );
+
+                $isUpdate = $this->model->update($dataUpdate, $r);
 
                 $aTag = new TagProduct();
                 foreach ($_POST['Tags'] as $Tag) {
@@ -188,6 +208,7 @@ class ProductController extends Controller {
                     $isAddedTagProduct = $aTag->insert($data, $r);
                 }
                 $aKindOfProduct_Product = new KindOfProduct_Product();
+
                 foreach ($_POST['Kop'] as $row) {
                     $data = array(
                         'IDKindOfProduct' => $row,
@@ -195,6 +216,7 @@ class ProductController extends Controller {
                     );
                     $isAddedKopProduct = $aKindOfProduct_Product->insert($data, $r);
                 }
+
                 Router::redirect(ADMIN_ROOT . "/product/list/page/1");
             }
         }
@@ -208,11 +230,12 @@ class ProductController extends Controller {
         $aTagProduct = new TagProduct();
         $aTag = new Tag();
         $aKindOfProduct = new KindOfProduct();
-        $this->data['listKop'] = $aKindOfProduct->selectAll();
+        $listKop = $aKindOfProduct->selectAll();
+        $this->data['listKop'] = $this->createKindOfProductNested($listKop);
 
         $aKindOfProduct_Product = new KindOfProduct_Product();
         $this->data['listKopExist'] = $aKindOfProduct_Product->getProductNameByKind(intval($id));
-
+        
         $IDByProduct = $aTagProduct->selectByIDProduct($id);
 
         if (!empty($IDByProduct)) {

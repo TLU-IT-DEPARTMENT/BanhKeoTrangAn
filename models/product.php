@@ -1,9 +1,12 @@
 <?php
 
 class Product extends Model {
-
+    
+    public $id;
+    
     public function __construct() {
         parent::__construct();
+        $this->id = 1;
     }
 
     public function insert($data, $r) {
@@ -12,7 +15,10 @@ class Product extends Model {
                     . "'{$data['UnitPrice']}','{$data['Image']}','{$data['Description']}','{$data['Rate']}','{$data['RatePeople']}','{$data['Status']}')";
             $this->db->query($sql);
             $query = "select LAST_INSERT_ID() as LastPost";
-            return $this->db->query($query);
+            
+            $result = $this->db->query($query);
+            $this->id= $result[0]['LastPost'];
+            return $result;
         } else {
             throw new Exception("Failed to insert product");
         }
@@ -85,13 +91,13 @@ class Product extends Model {
         $id = $this->db->query($query);
         return $id;
     }
-    
+
     public function selectBySlug($Slug) {
         $query = "select * from product where Slug = '{$Slug}' ";
         $id = $this->db->query($query);
         return $id;
     }
-    
+
     public function selectIDBySlug($Slug) {
         $query = "select IDProduct from product where Slug = '{$Slug}' ";
         $id = $this->db->query($query);
@@ -107,6 +113,10 @@ class Product extends Model {
     public function selectAll_Limit($limit) {
         $query = "select * from product limit {$limit}";
         return $this->db->query($query);
+    }
+
+    public function getLastID() {
+        return $this->id;
     }
 
 }
