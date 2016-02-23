@@ -2,9 +2,12 @@
 
 class CartController extends Controller {
 
+    public  $CartID;
+
     public function __construct($data = array()) {
         parent::__construct($data);
         $this->model = new Cart();
+        $this->CartID = null;
     }
 
     public function admin_index() {
@@ -93,14 +96,54 @@ class CartController extends Controller {
             }
         }
         if ($action == "index") {
+
+
             Router::redirect(ROOT_PATH);
         } else if ($action == "viewcart") {
-            Router::redirect(ROOT_PATH."en/cart/viewcart");
+
+            Router::redirect(ROOT_PATH . "en/cart/viewcart");
         }
     }
 
     public function viewcart() {
-        
+        //code
+    }
+
+    public function checkout() {
+        $data = array();
+        if (!isset($_SESSION['UserName']) && !isset($_SESSION['UserRole'])) {
+            // phai dang nhap moi su dung duoc chuc nang checkout
+            Router::redirect(ROOT_PATH);
+        } else {
+            if (isset($_SESSION['cart'])) {
+                for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+                    $id = $_SESSION['UserID'];
+                    $product_id = $_SESSION['cart'][$i]['id'];
+                    $quantity = $_SESSION['cart'][$i]['quantity'];
+                    $status = 0;
+                    $data = array(
+                        'IDUser' => $id,
+                        'IDProduct' => $product_id,
+                        'Quantity' => $quantity,
+                        'Status' => $status,
+                    );
+                    //add to cart table
+
+                    $isInsert = $this->model->insert($data, 1);
+                    //last id
+                    $this->CartID[$i] = $isInsert[0]['LastID'];
+                }
+                $_SESSION['CartID'] = $this->getCartID();
+//                var_dump($_SESSION['CartID']);
+//                die;
+                //payment
+                Router::redirect(ROOT_PATH . "en/payment/payment");
+            }
+        }
+    }
+
+    public function getCartID() {
+        return $this->CartID;
     }
 
 }

@@ -7,8 +7,9 @@
                 if ($user && $user['Status'] == 0 && $hash == $user['Password']) {
                     Session::set('UserName', $user['Name']);
                     Session::set('UserRole', $user['Status']);
-
+                    Session::set('UserID', $user['IDUser']);
                     $data = array(
+                        'id' => $user['IDUser'],
                         'username' => $user['Name'],
                         'status' => 'success',
                     );

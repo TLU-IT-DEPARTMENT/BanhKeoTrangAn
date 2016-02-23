@@ -4,7 +4,7 @@
     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
 
         <div class="carousel-inner">
-            <?php for ($i=0; $i < count($this->data['recommend']); $i++) {
+            <?php for ($i = 0; $i < count($this->data['recommend']); $i++) {
                 ?>
                 <div <?php
                 if ($i == 0)
@@ -17,10 +17,10 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img class="recommend-img" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['recommend'][$i]['Image'] ?>" alt="" />
+                                    <img class="recommend-img" src="<?= WEBROOT_PATH ?>/img/upload/<?= $this->data['recommend'][$i]['Image'] ?>" alt="" />
                                     <h2>$<?= $this->data['recommend'][$i]['UnitPrice'] ?></h2>
                                     <p><?= $this->data['recommend'][$i]['Name'] ?></p>
-                                    <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                    <a href="<?= ROOT_PATH ?>en/cart/addtocart/<?= $item['IDProduct'] ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                             </div>
                         </div>
@@ -30,10 +30,10 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img class="recommend-img" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['recommend'][$i]['Image'] ?>" alt="" />
+                                    <img class="recommend-img" src="<?= WEBROOT_PATH ?>/img/upload/<?= $this->data['recommend'][$i]['Image'] ?>" alt="" />
                                     <h2>$<?= $this->data['recommend'][$i]['UnitPrice'] ?></h2>
                                     <p><?= $this->data['recommend'][$i]['Name'] ?></p>
-                                    <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                    <a href="<?= ROOT_PATH ?>en/cart/addtocart/<?= $item['IDProduct'] ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                             </div>
                         </div>
@@ -43,10 +43,10 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img class="recommend-img" src="<?= WEBROOT_PATH?>/img/upload/<?= $this->data['recommend'][$i]['Image'] ?>" alt="" />
+                                    <img class="recommend-img" src="<?= WEBROOT_PATH ?>/img/upload/<?= $this->data['recommend'][$i]['Image'] ?>" alt="" />
                                     <h2>$<?= $this->data['recommend'][$i]['UnitPrice'] ?></h2>
                                     <p><?= $this->data['recommend'][$i]['Name'] ?></p>
-                                    <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                    <a href="<?= ROOT_PATH ?>en/cart/addtocart/<?= $item['IDProduct'] ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                             </div>
                         </div>

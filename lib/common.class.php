@@ -22,3 +22,14 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
+
+function sendMail($email_to, $name, $subject, $message) {
+    $to = $email_to;
+    $subject = $subject;
+    $message = $message;
+    $headers = 'From: webmaster@example.com' . "\r\n" .
+            'Reply-To: webmaster@example.com' . "\r\n" .
+            "Dear ," . $name;
+
+    mail($to, $subject, $message, $headers);
+}
