@@ -8,8 +8,10 @@ class Cart extends Model {
 
     public function insert($data, $r) {
         if ($r != 0) {
-            $query = "insert into cart (IDUser,IDProduct,CartTime,Quantity,Status) values "
-                    . "({$data['IDUser']},{$data['IDProduct']},'{$data['CartTime']}',{$data['Quantity']},{$data['Status']}) ";
+            $query = "insert into cart (IDUser,IDProduct,Quantity,Status) values "
+                    . "({$data['IDUser']},{$data['IDProduct']},{$data['Quantity']},{$data['Status']}) ";
+            $this->db->query($query);
+            $query = "select LAST_INSERT_ID() as LastID";
             return $this->db->query($query);
         } else {
             throw new Exception;
@@ -19,7 +21,18 @@ class Cart extends Model {
     public function update($data, $r) {
         if ($r != 0) {
             $query = "update cart set IDUser = {$data['IDUser']} , IDProduct = {$data['IDProduct']} , "
-                    . "CartTime = '{$data['CartTime']}' , Quantity = {$data['Quantity']} , Status = {$data['Status']} "
+                    . "Quantity = {$data['Quantity']} , Status = {$data['Status']} "
+                    . "where IDCart = {$data['IDCart']} ";
+            return $this->db->query($query);
+        } else {
+            throw new Exception;
+        }
+    }
+
+    public function paid($data, $r) {
+        if ($r != 0) {
+            $query = "update cart set "
+                    . "Status = {$data['Status']} "
                     . "where IDCart = {$data['IDCart']} ";
             return $this->db->query($query);
         } else {

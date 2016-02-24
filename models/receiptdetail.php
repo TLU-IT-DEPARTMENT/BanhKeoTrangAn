@@ -6,6 +6,16 @@ class ReceiptDetail extends Model {
         parent::__construct();
     }
 
+    public function insert($data, $r) {
+        if ($r != 0) {
+            $query = "insert into receiptdetail (IDReceipt,IDCart,SaleUnitPrice,Quantity) values "
+                    . "( {$data['IDReceipt']} , {$data['IDCart']} , {$data['SaleUnitPrice']} , {$data['Quantity']} ) ";
+            return $this->db->query($query);
+        } else {
+            throw new Exception;
+        }
+    }
+
     public function selectAll() {
         $query = "select * from receiptdetail ";
         return $this->db->query($query);

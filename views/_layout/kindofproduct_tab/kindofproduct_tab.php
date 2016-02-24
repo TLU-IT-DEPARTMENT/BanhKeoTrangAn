@@ -31,8 +31,8 @@
                                                     <div class="productinfo text-center">
                                                         <img src="<?= WEBROOT_PATH ?>/img/upload/<?= isset($row2['Image'])?$row2['Image']:'default.jpg' ?>" alt="" />
                                                         <h2>$<?= $row2['UnitPrice'] ?></h2>
-                                                        <p><?= $row2['Name'] ?></p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        <p><?= substr($row2['Description'], 0, 30) ?></p>
+                                                        <a href="<?= ROOT_PATH ?>en/cart/addtocart/<?= $item['IDProduct'] ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                     </div>
                                                 </div>
                                             </div>
